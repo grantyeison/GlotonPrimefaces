@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRestauranteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resNit}" for="resNit" />
+                    <h:inputText id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.CreateRestauranteTitle_resNit}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resNombre}" for="resNombre" />
+                    <h:inputText id="resNombre" value="#{restauranteController.selected.resNombre}" title="#{bundle.CreateRestauranteTitle_resNombre}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resDireccion}" for="resDireccion" />
+                    <h:inputText id="resDireccion" value="#{restauranteController.selected.resDireccion}" title="#{bundle.CreateRestauranteTitle_resDireccion}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resTelefono}" for="resTelefono" />
+                    <h:inputText id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.CreateRestauranteTitle_resTelefono}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resLogo}" for="resLogo" />
+                    <h:inputText id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.CreateRestauranteTitle_resLogo}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resEstado}" for="resEstado" />
+                    <h:inputText id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.CreateRestauranteTitle_resEstado}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resLatitud}" for="resLatitud" />
+                    <h:inputText id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.CreateRestauranteTitle_resLatitud}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_tesLongitud}" for="tesLongitud" />
+                    <h:inputText id="tesLongitud" value="#{restauranteController.selected.tesLongitud}" title="#{bundle.CreateRestauranteTitle_tesLongitud}" />
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_resId}" for="resId" />
+                    <h:inputText id="resId" value="#{restauranteController.selected.resId}" title="#{bundle.CreateRestauranteTitle_resId}" required="true" requiredMessage="#{bundle.CreateRestauranteRequiredMessage_resId}"/>
+                    <h:outputLabel value="#{bundle.CreateRestauranteLabel_tblUsuariodueid}" for="tblUsuariodueid" />
+                    <h:selectOneMenu id="tblUsuariodueid" value="#{restauranteController.selected.tblUsuariodueid}" title="#{bundle.CreateRestauranteTitle_tblUsuariodueid}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{restauranteController.create}" value="#{bundle.CreateRestauranteSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{restauranteController.prepareList}" value="#{bundle.CreateRestauranteShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRestauranteIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
