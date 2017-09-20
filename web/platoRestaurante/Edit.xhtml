@@ -3,16 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.EditPlatoRestauranteTitle}"></h:outputText>
+            <h:outputText value="Editar Plato"></h:outputText>
         </ui:define>
         <ui:define name="body">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
+            
+            <!-- menu bar -->
+            
+            <h:form>
+                <p:tabMenu activeIndex="1">
+                    <p:menuitem value="Home" outcome="/platoRestaurante/List" icon="ui-icon-home">
+                        <f:param name="i" value="0" />
+                    </p:menuitem>
+                    <p:menuitem value="Editar Plato" action="#{platoRestauranteController.prepareCreate}" icon="ui-icon-plusthick">
+                        <f:param name="i" value="1" />
+                    </p:menuitem>
+                    <p:menuitem outcome="/promociones/List" value="Gestionar Promociones">
+                        <f:param name="i" value="2" />
+                    </p:menuitem>
+                    <p:menuitem outcome="/promocioneslPlatoRestaurante/List" value="PromocioneslPlatoRestaurante">
+                        <f:param name="i" value="3" />
+                    </p:menuitem>
+                    <p:menuitem outcome="/index" value="#{bundle.ListPlatoRestauranteIndexLink}" icon="ui-icon-close">
+                        <f:param name="i" value="4" />
+                    </p:menuitem>
+                </p:tabMenu>
+            </h:form>
+            <!-- fin menu bar-->  
+            
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platIngredientes}" for="platIngredientes" />
@@ -35,14 +60,7 @@
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{platoRestauranteController.update}" value="#{bundle.EditPlatoRestauranteSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditPlatoRestauranteViewLink}"/>
-                <br />
-                <h:commandLink action="#{platoRestauranteController.prepareList}" value="#{bundle.EditPlatoRestauranteShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditPlatoRestauranteIndexLink}" />
+               
             </h:form>
         </ui:define>
     </ui:composition>
