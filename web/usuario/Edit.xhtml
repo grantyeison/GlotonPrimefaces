@@ -58,9 +58,7 @@
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_dueEstado}" for="dueEstado" />
                     <h:inputText id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_dueFechaRegistro}" for="dueFechaRegistro" />
-                    <h:inputText id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
+                    <p:calendar id="popup" value="#{usuarioController.selected.dueFechaRegistro}" />
                 </h:panelGrid>
                 <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
                 <br />

@@ -47,9 +47,8 @@
                     <h:outputLabel value="#{bundle.CreatePromocionesLabel_promoDescripcion}" for="promoDescripcion" />
                     <h:inputText id="promoDescripcion" value="#{promocionesController.selected.promoDescripcion}" title="#{bundle.CreatePromocionesTitle_promoDescripcion}" />
                     <h:outputLabel value="#{bundle.CreatePromocionesLabel_promoFecha}" for="promoFecha" />
-                    <h:inputText id="promoFecha" value="#{promocionesController.selected.promoFecha}" title="#{bundle.CreatePromocionesTitle_promoFecha}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
+                    <p:calendar id="popup" value="#{promocionesController.selected.promoFecha}" />
+                   
                     <h:outputLabel value="#{bundle.CreatePromocionesLabel_promoDuracion}" for="promoDuracion" />
                     <h:inputText id="promoDuracion" value="#{promocionesController.selected.promoDuracion}" title="#{bundle.CreatePromocionesTitle_promoDuracion}" />
                 </h:panelGrid>

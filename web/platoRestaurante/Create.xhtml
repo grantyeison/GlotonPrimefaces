@@ -20,7 +20,7 @@
                     <p:menuitem outcome="/platoRestaurante/List" value="Home" icon="ui-icon-home">
                         <f:param name="i" value="0" />
                     </p:menuitem>
-                    <p:menuitem value="Agregar Promocion" action="#" icon="ui-icon-plusthick">
+                    <p:menuitem value="Agregar Plato" action="#" icon="ui-icon-plusthick">
                         <f:param name="i" value="1" />
                     </p:menuitem>
                     <p:menuitem outcome="/promociones/List" value="Gestionar Promociones">
@@ -51,8 +51,6 @@
                     <h:inputText id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.CreatePlatoRestauranteTitle_platPrecio}" />
                     <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platEstado}" for="platEstado" />
                     <h:inputText id="platEstado" value="#{platoRestauranteController.selected.platEstado}" title="#{bundle.CreatePlatoRestauranteTitle_platEstado}" />
-                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platId}" for="platId" />
-                    <h:inputText id="platId" value="#{platoRestauranteController.selected.platId}" title="#{bundle.CreatePlatoRestauranteTitle_platId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_platId}"/>
                     <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_tblPlatoplaId}" for="tblPlatoplaId" />
                     <h:selectOneMenu id="tblPlatoplaId" value="#{platoRestauranteController.selected.tblPlatoplaId}" title="#{bundle.CreatePlatoRestauranteTitle_tblPlatoplaId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_tblPlatoplaId}">
                         <f:selectItems value="#{platoController.itemsAvailableSelectOne}"/>
@@ -63,7 +61,7 @@
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{platoRestauranteController.create}" value="#{bundle.CreatePlatoRestauranteSaveLink}" />
+                <h:commandButton class="btn btn-primary" action="#{platoRestauranteController.create}" value="#{bundle.CreatePlatoRestauranteSaveLink}" />
                                 
             </h:form>
         </ui:define>

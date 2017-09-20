@@ -1,12 +1,28 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+         <style>
+            body{
+                background-image: url("#{resource['/images/textura2.png']}");
+                width:100%;
+                height:100%;
+                background-repeat: no-repeat; 
+                background-attachment:fixed;            
+            }
+        </style>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"></link>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
         
@@ -14,7 +30,7 @@
         
         <h:form>            
             <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                <p:commandButton value="Login" icon="ui-icon-person" />
+                <p:commandButton value="Login" icon="ui-icon-person"/>
             </h:outputLink>
 
             <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
@@ -49,11 +65,13 @@
         
         <!-- fin Login -->
         
-        Hello from Facelets
+        <h1 class="page-header">GlotOn Web</h1>
         <br />
-        <h:link outcome="/platoRestaurante/List" value="Propietario"/>
-        <br />        
-        <h:link outcome="/categoria/List" value="Administrador"/>
+        <div class="btn-group">
+            <h:button outcome="/platoRestaurante/List" value="Propietario" class="btn btn-primary"/>
+            <h:button outcome="/categoria/List" value="Administrador" class="btn btn-primary"/>
+        </div>
+                
         
         <!--
         <h:link outcome="/calificacion/List" value="Show All Calificacion Items"/>
