@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListGrupoEmpty}" rendered="#{grupoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{grupoController.items.rowCount > 0}">
+                    <h:outputText value="#{grupoController.pagination.pageFirstItem + 1}..#{grupoController.pagination.pageLastItem + 1}/#{grupoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{grupoController.previous}" value="#{bundle.Previous} #{grupoController.pagination.pageSize}" rendered="#{grupoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{grupoController.next}" value="#{bundle.Next} #{grupoController.pagination.pageSize}" rendered="#{grupoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{grupoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGrupoTitle_grupId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grupId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGrupoTitle_grupdescripciouserLoginTaskCallbackn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grupdescripciouserLoginTaskCallbackn}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{grupoController.prepareView}" value="#{bundle.ListGrupoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{grupoController.prepareEdit}" value="#{bundle.ListGrupoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{grupoController.destroy}" value="#{bundle.ListGrupoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{grupoController.prepareCreate}" value="#{bundle.ListGrupoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListGrupoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewGrupoLabel_grupId}"/>
+                    <h:outputText value="#{grupoController.selected.grupId}" title="#{bundle.ViewGrupoTitle_grupId}"/>
+                    <h:outputText value="#{bundle.ViewGrupoLabel_grupdescripciouserLoginTaskCallbackn}"/>
+                    <h:outputText value="#{grupoController.selected.grupdescripciouserLoginTaskCallbackn}" title="#{bundle.ViewGrupoTitle_grupdescripciouserLoginTaskCallbackn}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{grupoController.destroyAndView}" value="#{bundle.ViewGrupoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewGrupoEditLink}"/>
+                <br />
+                <h:commandLink action="#{grupoController.prepareCreate}" value="#{bundle.ViewGrupoCreateLink}" />
+                <br />
+                <h:commandLink action="#{grupoController.prepareList}" value="#{bundle.ViewGrupoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewGrupoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

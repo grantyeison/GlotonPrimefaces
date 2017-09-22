@@ -26,22 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_restaurante")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Restaurante.findAll", query = "SELECT r FROM Restaurante r")
-    , @NamedQuery(name = "Restaurante.findByResNit", query = "SELECT r FROM Restaurante r WHERE r.resNit = :resNit")
-    , @NamedQuery(name = "Restaurante.findByResNombre", query = "SELECT r FROM Restaurante r WHERE r.resNombre = :resNombre")
-    , @NamedQuery(name = "Restaurante.findByResDireccion", query = "SELECT r FROM Restaurante r WHERE r.resDireccion = :resDireccion")
-    , @NamedQuery(name = "Restaurante.findByResTelefono", query = "SELECT r FROM Restaurante r WHERE r.resTelefono = :resTelefono")
-    , @NamedQuery(name = "Restaurante.findByResLogo", query = "SELECT r FROM Restaurante r WHERE r.resLogo = :resLogo")
-    , @NamedQuery(name = "Restaurante.findByResEstado", query = "SELECT r FROM Restaurante r WHERE r.resEstado = :resEstado")
-    , @NamedQuery(name = "Restaurante.findByResLatitud", query = "SELECT r FROM Restaurante r WHERE r.resLatitud = :resLatitud")
-    , @NamedQuery(name = "Restaurante.findByTesLongitud", query = "SELECT r FROM Restaurante r WHERE r.tesLongitud = :tesLongitud")
-    , @NamedQuery(name = "Restaurante.findByResId", query = "SELECT r FROM Restaurante r WHERE r.resId = :resId")})
+    @NamedQuery(name = "Restaurante.findAll", query = "SELECT r FROM Restaurante r"),
+    @NamedQuery(name = "Restaurante.findByResNit", query = "SELECT r FROM Restaurante r WHERE r.resNit = :resNit"),
+    @NamedQuery(name = "Restaurante.findByResNombre", query = "SELECT r FROM Restaurante r WHERE r.resNombre = :resNombre"),
+    @NamedQuery(name = "Restaurante.findByResDireccion", query = "SELECT r FROM Restaurante r WHERE r.resDireccion = :resDireccion"),
+    @NamedQuery(name = "Restaurante.findByResTelefono", query = "SELECT r FROM Restaurante r WHERE r.resTelefono = :resTelefono"),
+    @NamedQuery(name = "Restaurante.findByResLogo", query = "SELECT r FROM Restaurante r WHERE r.resLogo = :resLogo"),
+    @NamedQuery(name = "Restaurante.findByResEstado", query = "SELECT r FROM Restaurante r WHERE r.resEstado = :resEstado"),
+    @NamedQuery(name = "Restaurante.findByResLatitud", query = "SELECT r FROM Restaurante r WHERE r.resLatitud = :resLatitud"),
+    @NamedQuery(name = "Restaurante.findByTesLongitud", query = "SELECT r FROM Restaurante r WHERE r.tesLongitud = :tesLongitud"),
+    @NamedQuery(name = "Restaurante.findByResId", query = "SELECT r FROM Restaurante r WHERE r.resId = :resId")})
 public class Restaurante implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,10 +73,10 @@ public class Restaurante implements Serializable {
     @Basic(optional = false)
     @Column(name = "res_id")
     private Integer resId;
-    @JoinColumn(name = "tbl_Usuario_due_id", referencedColumnName = "due_id")
+    @JoinColumn(name = "tbl_usuario_due_id", referencedColumnName = "due_id")
     @ManyToOne
-    private Usuario tblUsuariodueid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblRestauranteresid")
+    private Usuario tblUsuarioDueId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblRestauranteResId")
     private List<PlatoRestaurante> platoRestauranteList;
 
     public Restaurante() {
@@ -158,12 +158,12 @@ public class Restaurante implements Serializable {
         this.resId = resId;
     }
 
-    public Usuario getTblUsuariodueid() {
-        return tblUsuariodueid;
+    public Usuario getTblUsuarioDueId() {
+        return tblUsuarioDueId;
     }
 
-    public void setTblUsuariodueid(Usuario tblUsuariodueid) {
-        this.tblUsuariodueid = tblUsuariodueid;
+    public void setTblUsuarioDueId(Usuario tblUsuarioDueId) {
+        this.tblUsuarioDueId = tblUsuarioDueId;
     }
 
     @XmlTransient

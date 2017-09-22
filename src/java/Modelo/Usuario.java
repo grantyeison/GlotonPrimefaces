@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,21 +27,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByDueId", query = "SELECT u FROM Usuario u WHERE u.dueId = :dueId")
-    , @NamedQuery(name = "Usuario.findByDueNombre", query = "SELECT u FROM Usuario u WHERE u.dueNombre = :dueNombre")
-    , @NamedQuery(name = "Usuario.findByDueEmail", query = "SELECT u FROM Usuario u WHERE u.dueEmail = :dueEmail")
-    , @NamedQuery(name = "Usuario.findByDueRol", query = "SELECT u FROM Usuario u WHERE u.dueRol = :dueRol")
-    , @NamedQuery(name = "Usuario.findByDueUsuario", query = "SELECT u FROM Usuario u WHERE u.dueUsuario = :dueUsuario")
-    , @NamedQuery(name = "Usuario.findByDuePass", query = "SELECT u FROM Usuario u WHERE u.duePass = :duePass")
-    , @NamedQuery(name = "Usuario.findByDueEstado", query = "SELECT u FROM Usuario u WHERE u.dueEstado = :dueEstado")
-    , @NamedQuery(name = "Usuario.findByDueFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.dueFechaRegistro = :dueFechaRegistro")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findByDueId", query = "SELECT u FROM Usuario u WHERE u.dueId = :dueId"),
+    @NamedQuery(name = "Usuario.findByDueNombre", query = "SELECT u FROM Usuario u WHERE u.dueNombre = :dueNombre"),
+    @NamedQuery(name = "Usuario.findByDueEmail", query = "SELECT u FROM Usuario u WHERE u.dueEmail = :dueEmail"),
+    @NamedQuery(name = "Usuario.findByDueRol", query = "SELECT u FROM Usuario u WHERE u.dueRol = :dueRol"),
+    @NamedQuery(name = "Usuario.findByDueUsuario", query = "SELECT u FROM Usuario u WHERE u.dueUsuario = :dueUsuario"),
+    @NamedQuery(name = "Usuario.findByDuePass", query = "SELECT u FROM Usuario u WHERE u.duePass = :duePass"),
+    @NamedQuery(name = "Usuario.findByDueEstado", query = "SELECT u FROM Usuario u WHERE u.dueEstado = :dueEstado"),
+    @NamedQuery(name = "Usuario.findByDueFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.dueFechaRegistro = :dueFechaRegistro")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,8 +71,10 @@ public class Usuario implements Serializable {
     @Column(name = "due_Fecha_Registro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dueFechaRegistro;
-    @OneToMany(mappedBy = "tblUsuariodueid")
+    @OneToMany(mappedBy = "tblUsuarioDueId")
     private List<Restaurante> restauranteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usugrupDueId")
+    private List<UsuarioGrupo> usuarioGrupoList;
 
     public Usuario() {
     }
@@ -151,6 +154,15 @@ public class Usuario implements Serializable {
 
     public void setRestauranteList(List<Restaurante> restauranteList) {
         this.restauranteList = restauranteList;
+    }
+
+    @XmlTransient
+    public List<UsuarioGrupo> getUsuarioGrupoList() {
+        return usuarioGrupoList;
+    }
+
+    public void setUsuarioGrupoList(List<UsuarioGrupo> usuarioGrupoList) {
+        this.usuarioGrupoList = usuarioGrupoList;
     }
 
     @Override

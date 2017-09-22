@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateGrupoLabel_grupId}" for="grupId" />
+                    <h:inputText id="grupId" value="#{grupoController.selected.grupId}" title="#{bundle.CreateGrupoTitle_grupId}" required="true" requiredMessage="#{bundle.CreateGrupoRequiredMessage_grupId}"/>
+                    <h:outputLabel value="#{bundle.CreateGrupoLabel_grupdescripciouserLoginTaskCallbackn}" for="grupdescripciouserLoginTaskCallbackn" />
+                    <h:inputText id="grupdescripciouserLoginTaskCallbackn" value="#{grupoController.selected.grupdescripciouserLoginTaskCallbackn}" title="#{bundle.CreateGrupoTitle_grupdescripciouserLoginTaskCallbackn}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{grupoController.create}" value="#{bundle.CreateGrupoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{grupoController.prepareList}" value="#{bundle.CreateGrupoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateGrupoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

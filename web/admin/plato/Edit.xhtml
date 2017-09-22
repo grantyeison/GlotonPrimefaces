@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPlatoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPlatoLabel_plaNombre}" for="plaNombre" />
+                    <h:inputText id="plaNombre" value="#{platoController.selected.plaNombre}" title="#{bundle.EditPlatoTitle_plaNombre}" />
+                    <h:outputLabel value="#{bundle.EditPlatoLabel_plaImagen}" for="plaImagen" />
+                    <h:inputText id="plaImagen" value="#{platoController.selected.plaImagen}" title="#{bundle.EditPlatoTitle_plaImagen}" />
+                    <h:outputLabel value="#{bundle.EditPlatoLabel_plaEstado}" for="plaEstado" />
+                    <h:inputText id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.EditPlatoTitle_plaEstado}" />
+                    <h:outputLabel value="#{bundle.EditPlatoLabel_plaId}" for="plaId" />
+                    <h:inputText id="plaId" value="#{platoController.selected.plaId}" title="#{bundle.EditPlatoTitle_plaId}" required="true" requiredMessage="#{bundle.EditPlatoRequiredMessage_plaId}"/>
+                    <h:outputLabel value="#{bundle.EditPlatoLabel_tblcategoriacatId}" for="tblcategoriacatId" />
+                    <h:selectOneMenu id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.EditPlatoTitle_tblcategoriacatId}" required="true" requiredMessage="#{bundle.EditPlatoRequiredMessage_tblcategoriacatId}">
+                        <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{platoController.update}" value="#{bundle.EditPlatoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPlatoViewLink}"/>
+                <br />
+                <h:commandLink action="#{platoController.prepareList}" value="#{bundle.EditPlatoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPlatoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -21,14 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_promocionesl_plato_restaurante")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PromocioneslPlatoRestaurante.findAll", query = "SELECT p FROM PromocioneslPlatoRestaurante p")
-    , @NamedQuery(name = "PromocioneslPlatoRestaurante.findById", query = "SELECT p FROM PromocioneslPlatoRestaurante p WHERE p.id = :id")})
+    @NamedQuery(name = "PromocioneslPlatoRestaurante.findAll", query = "SELECT p FROM PromocioneslPlatoRestaurante p"),
+    @NamedQuery(name = "PromocioneslPlatoRestaurante.findById", query = "SELECT p FROM PromocioneslPlatoRestaurante p WHERE p.id = :id")})
 public class PromocioneslPlatoRestaurante implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +40,9 @@ public class PromocioneslPlatoRestaurante implements Serializable {
     @JoinColumn(name = "Promociones_Combos_promo_id", referencedColumnName = "promo_id")
     @ManyToOne
     private Promociones promocionesCombospromoid;
-    @JoinColumn(name = "tbl_Plato_Restaurante_plat_Id", referencedColumnName = "plat_Id")
+    @JoinColumn(name = "tbl_plato_restaurante_plat_Id", referencedColumnName = "plat_Id")
     @ManyToOne
-    private PlatoRestaurante tblPlatoRestauranteplatId;
+    private PlatoRestaurante tblplatorestauranteplatId;
 
     public PromocioneslPlatoRestaurante() {
     }
@@ -67,12 +67,12 @@ public class PromocioneslPlatoRestaurante implements Serializable {
         this.promocionesCombospromoid = promocionesCombospromoid;
     }
 
-    public PlatoRestaurante getTblPlatoRestauranteplatId() {
-        return tblPlatoRestauranteplatId;
+    public PlatoRestaurante getTblplatorestauranteplatId() {
+        return tblplatorestauranteplatId;
     }
 
-    public void setTblPlatoRestauranteplatId(PlatoRestaurante tblPlatoRestauranteplatId) {
-        this.tblPlatoRestauranteplatId = tblPlatoRestauranteplatId;
+    public void setTblplatorestauranteplatId(PlatoRestaurante tblplatorestauranteplatId) {
+        this.tblplatorestauranteplatId = tblplatorestauranteplatId;
     }
 
     @Override

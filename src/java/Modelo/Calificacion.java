@@ -22,16 +22,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_calificacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Calificacion.findAll", query = "SELECT c FROM Calificacion c")
-    , @NamedQuery(name = "Calificacion.findByCalId", query = "SELECT c FROM Calificacion c WHERE c.calId = :calId")
-    , @NamedQuery(name = "Calificacion.findByCalPuntuacion", query = "SELECT c FROM Calificacion c WHERE c.calPuntuacion = :calPuntuacion")
-    , @NamedQuery(name = "Calificacion.findByCalUsuario", query = "SELECT c FROM Calificacion c WHERE c.calUsuario = :calUsuario")})
+    @NamedQuery(name = "Calificacion.findAll", query = "SELECT c FROM Calificacion c"),
+    @NamedQuery(name = "Calificacion.findByCalId", query = "SELECT c FROM Calificacion c WHERE c.calId = :calId"),
+    @NamedQuery(name = "Calificacion.findByCalPuntuacion", query = "SELECT c FROM Calificacion c WHERE c.calPuntuacion = :calPuntuacion"),
+    @NamedQuery(name = "Calificacion.findByCalUsuario", query = "SELECT c FROM Calificacion c WHERE c.calUsuario = :calUsuario")})
 public class Calificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,9 +45,9 @@ public class Calificacion implements Serializable {
     @Size(max = 250)
     @Column(name = "cal_usuario")
     private String calUsuario;
-    @JoinColumn(name = "tbl_Plato_Restaurante_plat_Id", referencedColumnName = "plat_Id")
+    @JoinColumn(name = "tbl_plato_restaurante_plat_Id", referencedColumnName = "plat_Id")
     @ManyToOne(optional = false)
-    private PlatoRestaurante tblPlatoRestauranteplatId;
+    private PlatoRestaurante tblplatorestauranteplatId;
 
     public Calificacion() {
     }
@@ -80,12 +80,12 @@ public class Calificacion implements Serializable {
         this.calUsuario = calUsuario;
     }
 
-    public PlatoRestaurante getTblPlatoRestauranteplatId() {
-        return tblPlatoRestauranteplatId;
+    public PlatoRestaurante getTblplatorestauranteplatId() {
+        return tblplatorestauranteplatId;
     }
 
-    public void setTblPlatoRestauranteplatId(PlatoRestaurante tblPlatoRestauranteplatId) {
-        this.tblPlatoRestauranteplatId = tblPlatoRestauranteplatId;
+    public void setTblplatorestauranteplatId(PlatoRestaurante tblplatorestauranteplatId) {
+        this.tblplatorestauranteplatId = tblplatorestauranteplatId;
     }
 
     @Override

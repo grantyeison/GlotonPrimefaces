@@ -26,18 +26,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_promociones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Promociones.findAll", query = "SELECT p FROM Promociones p")
-    , @NamedQuery(name = "Promociones.findByPromoId", query = "SELECT p FROM Promociones p WHERE p.promoId = :promoId")
-    , @NamedQuery(name = "Promociones.findByPromoPrecio", query = "SELECT p FROM Promociones p WHERE p.promoPrecio = :promoPrecio")
-    , @NamedQuery(name = "Promociones.findByPromoDescripcion", query = "SELECT p FROM Promociones p WHERE p.promoDescripcion = :promoDescripcion")
-    , @NamedQuery(name = "Promociones.findByPromoFecha", query = "SELECT p FROM Promociones p WHERE p.promoFecha = :promoFecha")
-    , @NamedQuery(name = "Promociones.findByPromoDuracion", query = "SELECT p FROM Promociones p WHERE p.promoDuracion = :promoDuracion")})
+    @NamedQuery(name = "Promociones.findAll", query = "SELECT p FROM Promociones p"),
+    @NamedQuery(name = "Promociones.findByPromoId", query = "SELECT p FROM Promociones p WHERE p.promoId = :promoId"),
+    @NamedQuery(name = "Promociones.findByPromoPrecio", query = "SELECT p FROM Promociones p WHERE p.promoPrecio = :promoPrecio"),
+    @NamedQuery(name = "Promociones.findByPromoDescripcion", query = "SELECT p FROM Promociones p WHERE p.promoDescripcion = :promoDescripcion"),
+    @NamedQuery(name = "Promociones.findByPromoFecha", query = "SELECT p FROM Promociones p WHERE p.promoFecha = :promoFecha"),
+    @NamedQuery(name = "Promociones.findByPromoDuracion", query = "SELECT p FROM Promociones p WHERE p.promoDuracion = :promoDuracion")})
 public class Promociones implements Serializable {
 
     private static final long serialVersionUID = 1L;

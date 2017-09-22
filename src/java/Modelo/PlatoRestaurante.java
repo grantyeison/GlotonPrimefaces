@@ -26,18 +26,18 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_plato_restaurante")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PlatoRestaurante.findAll", query = "SELECT p FROM PlatoRestaurante p")
-    , @NamedQuery(name = "PlatoRestaurante.findByPlatIngredientes", query = "SELECT p FROM PlatoRestaurante p WHERE p.platIngredientes = :platIngredientes")
-    , @NamedQuery(name = "PlatoRestaurante.findByPlatDescripcion", query = "SELECT p FROM PlatoRestaurante p WHERE p.platDescripcion = :platDescripcion")
-    , @NamedQuery(name = "PlatoRestaurante.findByPlatPrecio", query = "SELECT p FROM PlatoRestaurante p WHERE p.platPrecio = :platPrecio")
-    , @NamedQuery(name = "PlatoRestaurante.findByPlatEstado", query = "SELECT p FROM PlatoRestaurante p WHERE p.platEstado = :platEstado")
-    , @NamedQuery(name = "PlatoRestaurante.findByPlatId", query = "SELECT p FROM PlatoRestaurante p WHERE p.platId = :platId")})
+    @NamedQuery(name = "PlatoRestaurante.findAll", query = "SELECT p FROM PlatoRestaurante p"),
+    @NamedQuery(name = "PlatoRestaurante.findByPlatIngredientes", query = "SELECT p FROM PlatoRestaurante p WHERE p.platIngredientes = :platIngredientes"),
+    @NamedQuery(name = "PlatoRestaurante.findByPlatDescripcion", query = "SELECT p FROM PlatoRestaurante p WHERE p.platDescripcion = :platDescripcion"),
+    @NamedQuery(name = "PlatoRestaurante.findByPlatPrecio", query = "SELECT p FROM PlatoRestaurante p WHERE p.platPrecio = :platPrecio"),
+    @NamedQuery(name = "PlatoRestaurante.findByPlatEstado", query = "SELECT p FROM PlatoRestaurante p WHERE p.platEstado = :platEstado"),
+    @NamedQuery(name = "PlatoRestaurante.findByPlatId", query = "SELECT p FROM PlatoRestaurante p WHERE p.platId = :platId")})
 public class PlatoRestaurante implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,15 +57,15 @@ public class PlatoRestaurante implements Serializable {
     @Basic(optional = false)
     @Column(name = "plat_Id")
     private Integer platId;
-    @JoinColumn(name = "tbl_Plato_pla_Id", referencedColumnName = "pla_Id")
+    @JoinColumn(name = "tbl_plato_pla_Id", referencedColumnName = "pla_Id")
     @ManyToOne(optional = false)
-    private Plato tblPlatoplaId;
-    @JoinColumn(name = "tbl_Restaurante_res_id", referencedColumnName = "res_id")
+    private Plato tblplatoplaId;
+    @JoinColumn(name = "tbl_restaurante_res_id", referencedColumnName = "res_id")
     @ManyToOne(optional = false)
-    private Restaurante tblRestauranteresid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblPlatoRestauranteplatId")
+    private Restaurante tblRestauranteResId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblplatorestauranteplatId")
     private List<Calificacion> calificacionList;
-    @OneToMany(mappedBy = "tblPlatoRestauranteplatId")
+    @OneToMany(mappedBy = "tblplatorestauranteplatId")
     private List<PromocioneslPlatoRestaurante> promocioneslPlatoRestauranteList;
 
     public PlatoRestaurante() {
@@ -115,20 +115,20 @@ public class PlatoRestaurante implements Serializable {
         this.platId = platId;
     }
 
-    public Plato getTblPlatoplaId() {
-        return tblPlatoplaId;
+    public Plato getTblplatoplaId() {
+        return tblplatoplaId;
     }
 
-    public void setTblPlatoplaId(Plato tblPlatoplaId) {
-        this.tblPlatoplaId = tblPlatoplaId;
+    public void setTblplatoplaId(Plato tblplatoplaId) {
+        this.tblplatoplaId = tblplatoplaId;
     }
 
-    public Restaurante getTblRestauranteresid() {
-        return tblRestauranteresid;
+    public Restaurante getTblRestauranteResId() {
+        return tblRestauranteResId;
     }
 
-    public void setTblRestauranteresid(Restaurante tblRestauranteresid) {
-        this.tblRestauranteresid = tblRestauranteresid;
+    public void setTblRestauranteResId(Restaurante tblRestauranteResId) {
+        this.tblRestauranteResId = tblRestauranteResId;
     }
 
     @XmlTransient

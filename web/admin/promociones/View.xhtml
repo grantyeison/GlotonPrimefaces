@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPromocionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPromocionesLabel_promoId}"/>
+                    <h:outputText value="#{promocionesController.selected.promoId}" title="#{bundle.ViewPromocionesTitle_promoId}"/>
+                    <h:outputText value="#{bundle.ViewPromocionesLabel_promoPrecio}"/>
+                    <h:outputText value="#{promocionesController.selected.promoPrecio}" title="#{bundle.ViewPromocionesTitle_promoPrecio}"/>
+                    <h:outputText value="#{bundle.ViewPromocionesLabel_promoDescripcion}"/>
+                    <h:outputText value="#{promocionesController.selected.promoDescripcion}" title="#{bundle.ViewPromocionesTitle_promoDescripcion}"/>
+                    <h:outputText value="#{bundle.ViewPromocionesLabel_promoFecha}"/>
+                    <h:outputText value="#{promocionesController.selected.promoFecha}" title="#{bundle.ViewPromocionesTitle_promoFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPromocionesLabel_promoDuracion}"/>
+                    <h:outputText value="#{promocionesController.selected.promoDuracion}" title="#{bundle.ViewPromocionesTitle_promoDuracion}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{promocionesController.destroyAndView}" value="#{bundle.ViewPromocionesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPromocionesEditLink}"/>
+                <br />
+                <h:commandLink action="#{promocionesController.prepareCreate}" value="#{bundle.ViewPromocionesCreateLink}" />
+                <br />
+                <h:commandLink action="#{promocionesController.prepareList}" value="#{bundle.ViewPromocionesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPromocionesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

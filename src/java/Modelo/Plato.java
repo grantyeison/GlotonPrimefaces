@@ -26,17 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_plato")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Plato.findAll", query = "SELECT p FROM Plato p")
-    , @NamedQuery(name = "Plato.findByPlaNombre", query = "SELECT p FROM Plato p WHERE p.plaNombre = :plaNombre")
-    , @NamedQuery(name = "Plato.findByPlaImagen", query = "SELECT p FROM Plato p WHERE p.plaImagen = :plaImagen")
-    , @NamedQuery(name = "Plato.findByPlaEstado", query = "SELECT p FROM Plato p WHERE p.plaEstado = :plaEstado")
-    , @NamedQuery(name = "Plato.findByPlaId", query = "SELECT p FROM Plato p WHERE p.plaId = :plaId")})
+    @NamedQuery(name = "Plato.findAll", query = "SELECT p FROM Plato p"),
+    @NamedQuery(name = "Plato.findByPlaNombre", query = "SELECT p FROM Plato p WHERE p.plaNombre = :plaNombre"),
+    @NamedQuery(name = "Plato.findByPlaImagen", query = "SELECT p FROM Plato p WHERE p.plaImagen = :plaImagen"),
+    @NamedQuery(name = "Plato.findByPlaEstado", query = "SELECT p FROM Plato p WHERE p.plaEstado = :plaEstado"),
+    @NamedQuery(name = "Plato.findByPlaId", query = "SELECT p FROM Plato p WHERE p.plaId = :plaId")})
 public class Plato implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,10 +54,10 @@ public class Plato implements Serializable {
     @Basic(optional = false)
     @Column(name = "pla_Id")
     private Integer plaId;
-    @JoinColumn(name = "tbl_Categoria_cat_Id", referencedColumnName = "cat_Id")
+    @JoinColumn(name = "tbl_categoria_cat_Id", referencedColumnName = "cat_Id")
     @ManyToOne(optional = false)
-    private Categoria tblCategoriacatId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblPlatoplaId")
+    private Categoria tblcategoriacatId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblplatoplaId")
     private List<PlatoRestaurante> platoRestauranteList;
 
     public Plato() {
@@ -99,12 +99,12 @@ public class Plato implements Serializable {
         this.plaId = plaId;
     }
 
-    public Categoria getTblCategoriacatId() {
-        return tblCategoriacatId;
+    public Categoria getTblcategoriacatId() {
+        return tblcategoriacatId;
     }
 
-    public void setTblCategoriacatId(Categoria tblCategoriacatId) {
-        this.tblCategoriacatId = tblCategoriacatId;
+    public void setTblcategoriacatId(Categoria tblcategoriacatId) {
+        this.tblcategoriacatId = tblcategoriacatId;
     }
 
     @XmlTransient

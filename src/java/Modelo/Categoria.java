@@ -24,17 +24,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Apollo
+ * @author aranda
  */
 @Entity
 @Table(name = "tbl_categoria")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
-    , @NamedQuery(name = "Categoria.findByCatNombre", query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre")
-    , @NamedQuery(name = "Categoria.findByCatImagen", query = "SELECT c FROM Categoria c WHERE c.catImagen = :catImagen")
-    , @NamedQuery(name = "Categoria.findByCatEstado", query = "SELECT c FROM Categoria c WHERE c.catEstado = :catEstado")
-    , @NamedQuery(name = "Categoria.findByCatId", query = "SELECT c FROM Categoria c WHERE c.catId = :catId")})
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
+    @NamedQuery(name = "Categoria.findByCatNombre", query = "SELECT c FROM Categoria c WHERE c.catNombre = :catNombre"),
+    @NamedQuery(name = "Categoria.findByCatImagen", query = "SELECT c FROM Categoria c WHERE c.catImagen = :catImagen"),
+    @NamedQuery(name = "Categoria.findByCatEstado", query = "SELECT c FROM Categoria c WHERE c.catEstado = :catEstado"),
+    @NamedQuery(name = "Categoria.findByCatId", query = "SELECT c FROM Categoria c WHERE c.catId = :catId")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(name = "cat_Id")
     private Integer catId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblCategoriacatId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tblcategoriacatId")
     private List<Plato> platoList;
 
     public Categoria() {
