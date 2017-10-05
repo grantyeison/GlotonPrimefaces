@@ -41,6 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByDueUsuario", query = "SELECT u FROM Usuario u WHERE u.dueUsuario = :dueUsuario"),
     @NamedQuery(name = "Usuario.findByDuePass", query = "SELECT u FROM Usuario u WHERE u.duePass = :duePass"),
     @NamedQuery(name = "Usuario.findByDueEstado", query = "SELECT u FROM Usuario u WHERE u.dueEstado = :dueEstado"),
+    //@NamedQuery(name = "Usuario.findByDueRolCliente", query = "SELECT u FROM Usuario u WHERE u.usuarioGrupoList.usugrupGrupId.grupId = :usugrupDueId"),
+    //@NamedQuery(name = "Usuario.findByDueRolCliente", query = "SELECT u FROM Usuario u WHERE u.usuarioGrupoList.usugrupGrupId.grupId = :usugrupDueId."),
     @NamedQuery(name = "Usuario.findByDueFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.dueFechaRegistro = :dueFechaRegistro")})
 public class Usuario implements Serializable {
 

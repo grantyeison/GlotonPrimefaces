@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import Bean.UsuarioFacade;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -26,6 +28,9 @@ public class SessionController implements Serializable
 {
     private String nombreUsuario;
     private String contrasena;
+    @EJB
+    private UsuarioFacade usuarioEjb;
+    
     
     
     
@@ -56,8 +61,18 @@ public class SessionController implements Serializable
                 req.login(this.nombreUsuario, this.contrasena);
                 req.getServletContext().log("Autenticacion exitosa");
                 //haySesion = true;
+                String username = req.getUserPrincipal().getName();
                 
-                FacesContext.getCurrentInstance().getExternalContext().redirect("admin/principaladmin.xhtml");
+                if(usuarioEjb.findebyUserName(username).get(0).getUsuarioGrupoList().get(0).getUsugrupGrupId().getGrupId().equals("admin"))
+                {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin/principaladmin.xhtml");
+
+                }
+                else
+                {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/paginaUsuario.xhtml");
+                }
+                
                 
             } 
             catch (ServletException e) 

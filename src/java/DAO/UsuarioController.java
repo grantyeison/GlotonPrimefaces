@@ -6,6 +6,8 @@ import DAO.util.PaginationHelper;
 import Bean.UsuarioFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -191,7 +193,35 @@ public class UsuarioController implements Serializable {
     public Usuario getUsuario(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
-
+    
+    
+    /*
+    public List<Usuario> getListUsuarios()
+    {
+        return ejbFacade.findbyRolCliente("usuario");
+    }        
+    */      
+            
+    ////forma consulta db
+    
+    
+    public List<Usuario> getListUsuarios()
+    {
+        List<Usuario> listaux;
+        List<Usuario> listint = new ArrayList<Usuario>();
+        listaux = ejbFacade.findAll();
+        for(int i=0;i<listaux.size();i++)
+        {
+            if(listaux.get(i).getDueRol().equals("cliente"))
+            {
+                listint.add(listaux.get(i));
+            }
+        }
+        
+        return listint;
+    }
+    
+    
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {
 
