@@ -26,42 +26,31 @@
     </h:head>
     <h:body>
         
-        <!-- Login-->
-        
-        <h:form>            
-            
-                <p:commandButton value="Logout" action="#{sessionController.logout()}" icon="ui-icon-person"/>
-           
+        <ui:composition template="./../template.xhtml">
 
-            
-        </h:form>
-        <!-- fin Login -->
-        
-        <h1 class="page-header">GlotOn Web</h1>
-        <br />
-        <div class="btn-group">
-            <h:button outcome="platoRestaurante/List" value="Propietario" class="btn btn-primary"/>
-            <h:button outcome="categoria/List" value="Administrador" class="btn btn-primary"/>
-        </div>
+            <ui:define name="title">
+                GLOTON
+            </ui:define>
+
+            <ui:define name="body">
+                <br/>
+                <br />
                 
-        
-        <!--
-        <h:link outcome="/calificacion/List" value="Show All Calificacion Items"/>
-        <br />        
-        <h:link outcome="/categoria/List" value="Show All Categoria Items"/>
-        <br />
-        <h:link outcome="/plato/List" value="Show All Plato Items"/>
-        <br />
-        <h:link outcome="/platoRestaurante/List" value="Show All PlatoRestaurante Items"/>
-        <br />
-        <h:link outcome="/promociones/List" value="Show All Promociones Items"/>
-        <br />
-        <h:link outcome="/promocioneslPlatoRestaurante/List" value="Show All PromocioneslPlatoRestaurante Items"/>
-        <br />
-        <h:link outcome="/restaurante/List" value="Show All Restaurante Items"/>
-        <br />
-        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
-        -->
+                <h:button outcome="calificacion/GestionCalificacion" value="Gestion de Calificaciones" class="btn btn-primary"/>
+                <h:button outcome="categoria/GestionCategoria" value="Gestion de Categorias" class="btn btn-primary"/>
+                <h:button outcome="grupo/GestionGrupo" value="Gestion de Grupo" class="btn btn-primary"/>
+                <h:button outcome="platoRestaurante/GestionPlatoRestaurante" value="Gestion de Plato Restaurante" class="btn btn-primary"/>
+                <h:button outcome="restaurante/GestionRestaurante" value="Gestion de Restaurantes" class="btn btn-primary"/>
+                <h:button outcome="usuario/GestionUsuario" value="Gestion de Usuarios" class="btn btn-primary"/>
+                <h:button outcome="usuarioGrupo/GestionUsuarioGrupo" value="Gestion de Usuario Grupo" class="btn btn-primary"/>
+                <br />  
+                <h:form>            
+                <p:commandButton value="Logout" action="#{sessionController.logout()}" icon="ui-icon-person"/>           
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
     </h:body>
 
 

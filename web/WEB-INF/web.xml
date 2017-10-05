@@ -33,6 +33,18 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>paginas del usuario</display-name>
+        <web-resource-collection>
+            <web-resource-name>usuario</web-resource-name>
+            <description>paginas del usuario</description>
+            <url-pattern>/usuario/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>usuario</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>glotonwebJDBCRealm</realm-name>
@@ -44,5 +56,9 @@
     <security-role>
         <description>rol administrador</description>
         <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>rol del usuario</description>
+        <role-name>usuario</role-name>
     </security-role>
 </web-app>
