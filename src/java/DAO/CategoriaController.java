@@ -6,6 +6,7 @@ import DAO.util.PaginationHelper;
 import Bean.CategoriaFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -191,6 +192,14 @@ public class CategoriaController implements Serializable {
     public Categoria getCategoria(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public List<Categoria> getListCategorias()
+    {
+        List<Categoria> list;
+        list = ejbFacade.findAll();
+        return list;
+    }
+    
 
     @FacesConverter(forClass = Categoria.class)
     public static class CategoriaControllerConverter implements Converter {

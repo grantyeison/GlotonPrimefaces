@@ -8,6 +8,7 @@
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/appcss.css"/>
         
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"></link>
@@ -17,16 +18,38 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
-        Login
         <h:form id="formLogin">
-        <p:messages closable="true" />
-        <br />
-        <p:inputText value="#{sessionController.nombreUsuario}" id="nombreusuario" placeholder="user name" required="true" requiredMessage="nombre de usuario no puede ser vacio" /> 
-        <p:message for="nombreusuario" display="icon"/>
-        <p:password value="#{sessionController.contrasena}" id="password" placeholder="password" required="true" requiredMessage="password no puede ser vacio" /> 
-        <p:message for="password" display="icon"/>
+            <p:messages closable="true" />
+            <p:panelGrid styleClass="panelgrid">
+            <p:row>
+                <p:column>
+                    <p:inputText value="#{sessionController.nombreUsuario}" id="nombreusuario" placeholder="user name" required="true" requiredMessage="nombre de usuario no puede ser vacio" />
+                </p:column>
+                <p:column>
+                    <p:message for="nombreusuario" display="icon"/>
+                </p:column>
+            </p:row>
+            
+            <p:row>
+                <p:column>
+                   <p:password value="#{sessionController.contrasena}" id="password" placeholder="password" required="true" requiredMessage="password no puede ser vacio" /> 
+
+                </p:column>
+                <p:column>
+                    <p:message for="password" display="icon"/>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <p:commandButton style="background-color: blue;" action="#{sessionController.login()}" value="Iniciar session" update="formLogin"/>
+
+                </p:column>
+            </p:row>
+        </p:panelGrid>
         
-        <p:commandButton action="#{sessionController.login()}" value="Iniciar session" update="formLogin"/>
+      
+        
+        
         </h:form>
         
         

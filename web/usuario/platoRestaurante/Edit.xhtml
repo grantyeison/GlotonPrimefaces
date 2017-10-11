@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPlatoRestauranteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platIngredientes}" for="platIngredientes" />
+                    <h:inputText id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.EditPlatoRestauranteTitle_platIngredientes}" />
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platDescripcion}" for="platDescripcion" />
+                    <h:inputText id="platDescripcion" value="#{platoRestauranteController.selected.platDescripcion}" title="#{bundle.EditPlatoRestauranteTitle_platDescripcion}" />
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platPrecio}" for="platPrecio" />
+                    <h:inputText id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.EditPlatoRestauranteTitle_platPrecio}" />
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platEstado}" for="platEstado" />
+                    <h:inputText id="platEstado" value="#{platoRestauranteController.selected.platEstado}" title="#{bundle.EditPlatoRestauranteTitle_platEstado}" />
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_platId}" for="platId" />
+                    <h:inputText id="platId" value="#{platoRestauranteController.selected.platId}" title="#{bundle.EditPlatoRestauranteTitle_platId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_platId}"/>
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_tblplatoplaId}" for="tblplatoplaId" />
+                    <h:selectOneMenu id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.EditPlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblplatoplaId}">
+                        <f:selectItems value="#{platoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPlatoRestauranteLabel_tblRestauranteResId}" for="tblRestauranteResId" />
+                    <h:selectOneMenu id="tblRestauranteResId" value="#{platoRestauranteController.selected.tblRestauranteResId}" title="#{bundle.EditPlatoRestauranteTitle_tblRestauranteResId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblRestauranteResId}">
+                        <f:selectItems value="#{restauranteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{platoRestauranteController.update}" value="#{bundle.EditPlatoRestauranteSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPlatoRestauranteViewLink}"/>
+                <br />
+                <h:commandLink action="#{platoRestauranteController.prepareList}" value="#{bundle.EditPlatoRestauranteShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPlatoRestauranteIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

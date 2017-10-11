@@ -4,6 +4,7 @@ import Modelo.PlatoRestaurante;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.PlatoRestauranteFacade;
+import Modelo.Restaurante;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -17,6 +18,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
 
 @Named("platoRestauranteController")
 @SessionScoped
@@ -26,6 +29,8 @@ public class PlatoRestauranteController implements Serializable {
     private DataModel items = null;
     @EJB
     private Bean.PlatoRestauranteFacade ejbFacade;
+    @EJB
+    private Bean.RestauranteFacade ejbRestauranteFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -81,6 +86,17 @@ public class PlatoRestauranteController implements Serializable {
 
     public String create() {
         try {
+            
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+            
+            if (req.getUserPrincipal() != null) {
+                
+                String username = req.getUserPrincipal().getName();
+                Restaurante restaurante = ejbRestauranteFacade.findByUserName(username).get(0);
+                current.setTblRestauranteResId(restaurante);
+            }
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlatoRestauranteCreated"));
             return prepareCreate();

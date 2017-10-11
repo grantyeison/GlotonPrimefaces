@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPlatoRestauranteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPlatoRestauranteEmpty}" rendered="#{platoRestauranteController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{platoRestauranteController.items.rowCount > 0}">
+                    <h:outputText value="#{platoRestauranteController.pagination.pageFirstItem + 1}..#{platoRestauranteController.pagination.pageLastItem + 1}/#{platoRestauranteController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{platoRestauranteController.previous}" value="#{bundle.Previous} #{platoRestauranteController.pagination.pageSize}" rendered="#{platoRestauranteController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{platoRestauranteController.next}" value="#{bundle.Next} #{platoRestauranteController.pagination.pageSize}" rendered="#{platoRestauranteController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{platoRestauranteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_platIngredientes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platIngredientes}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_platDescripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platDescripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_platPrecio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platPrecio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_platEstado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platEstado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_platId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.platId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_tblplatoplaId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tblplatoplaId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlatoRestauranteTitle_tblRestauranteResId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tblRestauranteResId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{platoRestauranteController.prepareView}" value="#{bundle.ListPlatoRestauranteViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{platoRestauranteController.prepareEdit}" value="#{bundle.ListPlatoRestauranteEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{platoRestauranteController.destroy}" value="#{bundle.ListPlatoRestauranteDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{platoRestauranteController.prepareCreate}" value="#{bundle.ListPlatoRestauranteCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPlatoRestauranteIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

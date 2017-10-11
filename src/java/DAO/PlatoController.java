@@ -6,6 +6,7 @@ import DAO.util.PaginationHelper;
 import Bean.PlatoFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -192,6 +193,18 @@ public class PlatoController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    public List<Plato> getListPlatos()
+    {
+        List<Plato> list;
+        list = ejbFacade.findAll();
+        return list;
+    }
+    
+    
+    
+    
+    
     @FacesConverter(forClass = Plato.class)
     public static class PlatoControllerConverter implements Converter {
 

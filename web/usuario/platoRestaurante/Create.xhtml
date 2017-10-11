@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePlatoRestauranteTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platIngredientes}" for="platIngredientes" />
+                    <h:inputText id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.CreatePlatoRestauranteTitle_platIngredientes}" />
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platDescripcion}" for="platDescripcion" />
+                    <h:inputText id="platDescripcion" value="#{platoRestauranteController.selected.platDescripcion}" title="#{bundle.CreatePlatoRestauranteTitle_platDescripcion}" />
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platPrecio}" for="platPrecio" />
+                    <h:inputText id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.CreatePlatoRestauranteTitle_platPrecio}" />
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platEstado}" for="platEstado" />
+                    <h:inputText id="platEstado" value="#{platoRestauranteController.selected.platEstado}" title="#{bundle.CreatePlatoRestauranteTitle_platEstado}" />
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_platId}" for="platId" />
+                    <h:inputText id="platId" value="#{platoRestauranteController.selected.platId}" title="#{bundle.CreatePlatoRestauranteTitle_platId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_platId}"/>
+                    <h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_tblplatoplaId}" for="tblplatoplaId" />
+                    <h:selectOneMenu id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.CreatePlatoRestauranteTitle_tblplatoplaId}" >
+                        <f:selectItems  value="#{platoController.listPlatos}" var="plato" itemLabel="#{plato.plaNombre}"/>
+                    </h:selectOneMenu>
+                    <!--
+                    <h:selectOneMenu id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.CreatePlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_tblplatoplaId}">
+                        <f:selectItems value="#{platoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    -->
+                    <!--<h:outputLabel value="#{bundle.CreatePlatoRestauranteLabel_tblRestauranteResId}" for="tblRestauranteResId" />-->
+                    
+                   
+                    
+                    
+                   <!-- <h:selectOneMenu id="tblRestauranteResId" value="#{platoRestauranteController.selected.tblRestauranteResId}" title="#{bundle.CreatePlatoRestauranteTitle_tblRestauranteResId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_tblRestauranteResId}">
+                        <f:selectItems value="#{restauranteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>-->
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{platoRestauranteController.create}" value="#{bundle.CreatePlatoRestauranteSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{platoRestauranteController.prepareList}" value="#{bundle.CreatePlatoRestauranteShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePlatoRestauranteIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

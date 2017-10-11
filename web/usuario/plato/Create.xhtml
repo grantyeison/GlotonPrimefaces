@@ -24,9 +24,16 @@
                     <h:outputLabel value="#{bundle.CreatePlatoLabel_plaId}" for="plaId" />
                     <h:inputText id="plaId" value="#{platoController.selected.plaId}" title="#{bundle.CreatePlatoTitle_plaId}" required="true" requiredMessage="#{bundle.CreatePlatoRequiredMessage_plaId}"/>
                     <h:outputLabel value="#{bundle.CreatePlatoLabel_tblcategoriacatId}" for="tblcategoriacatId" />
+                    <h:selectOneMenu id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.CreatePlatoTitle_tblcategoriacatId}" >
+                        <f:selectItems  value="#{categoriaController.listCategorias}" var="categoria" itemLabel="#{categoria.catNombre}"/>
+                    </h:selectOneMenu>
+                    <!--
                     <h:selectOneMenu id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.CreatePlatoTitle_tblcategoriacatId}" required="true" requiredMessage="#{bundle.CreatePlatoRequiredMessage_tblcategoriacatId}">
                         <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
+                    -->
+                    
+                    
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{platoController.create}" value="#{bundle.CreatePlatoSaveLink}" />
