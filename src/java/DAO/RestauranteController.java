@@ -26,6 +26,7 @@ import org.primefaces.context.RequestContext;
 public class RestauranteController implements Serializable {
 
     private Restaurante current;
+    private Restaurante current1;
     private DataModel items = null;
     @EJB
     private Bean.RestauranteFacade ejbFacade;
@@ -110,7 +111,40 @@ public class RestauranteController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
-
+    
+    /*
+    ///////////////////////////////////////////////////////////////////////////////////
+    public String prepararEdicion()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) {
+                
+                String username = req.getUserPrincipal().getName();
+                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
+                current1.setTblUsuarioDueId(usuario);
+            }
+        current1 = (Restaurante) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "Edit";
+    }
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public String actualizar() {
+        try {
+            getFacade().edit(current1);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
+            return "View";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    */
+    
     public String update() {
         try {
             getFacade().edit(current);
