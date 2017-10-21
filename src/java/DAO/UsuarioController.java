@@ -46,6 +46,16 @@ public class UsuarioController implements Serializable {
     private int selectedItemIndex;
     private String nombregrupo;
 
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
+    }
+    
+    
+
     public UsuarioController() {
     }
 
@@ -99,17 +109,26 @@ public class UsuarioController implements Serializable {
     public String create() {
                 try { 
             getFacade().create(current);
-            System.out.println("Algo "+current);
+            System.out.println("Algo "+current.getDueId());
+            System.out.println("Algo "+current.getDueNombre());
+            System.out.println("Algo "+current.getDueEmail());
+            System.out.println("Algo "+current.getDueRol());
+            System.out.println("Algo "+current.getDueUsuario());
+            System.out.println("Algo "+current.getDuePass());
+            System.out.println("Algo "+current.getDueEmail());
+            System.out.println("Algo "+current.getDueEstado());
+            System.out.println("Algo "+current.getDueFechaRegistro());
+            System.out.println("Algo "+grupo.getGrupId());
+            
+            
             
             UsuarioGrupo usuarioGrupo = new UsuarioGrupo();
-            
-            
-            
             usuarioGrupo.setUsugrupDueId(current);
             usuarioGrupo.setUsugrupDueUsuario(current.getDueUsuario());
-            usuarioGrupo.setUsugrupGrupId(new Grupo(nombregrupo)) ;
+            usuarioGrupo.setUsugrupGrupId(grupo) ;
              System.out.println("Algo "+nombregrupo);
             ejbFacadeUsuarioGrupo.create(usuarioGrupo);
+            
                  
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
             return prepareCreate();

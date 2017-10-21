@@ -30,10 +30,11 @@
                     <h:inputText id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.CreateUsuarioTitle_dueFechaRegistro}" >
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
-                     <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="usugrupGrupId"/>
+                    
+                     <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="grupid"/>
                      
-                     <h:selectOneMenu  id="usugrupGrupId"  value="#{grupoController.selected.grupId}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
-                        <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
+                     <h:selectOneMenu  id="grupid"  value="#{usuarioController.grupo}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
+                         <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
                     </h:selectOneMenu>
                     
                     <!--
