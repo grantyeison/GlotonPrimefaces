@@ -35,7 +35,7 @@
                     <h:inputText id="resId" value="#{restauranteController.selected.resId}" title="#{bundle.CreateRestauranteTitle_resId}" required="true" requiredMessage="#{bundle.CreateRestauranteRequiredMessage_resId}"/>
                     <h:outputLabel value="#{bundle.CreateRestauranteLabel_tblUsuarioDueId}" for="tblUsuarioDueId" />
                     <h:selectOneMenu id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >
-                        <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueNombre}"/>
+                        <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
                     </h:selectOneMenu>
 
                     <!--<h:selectOneMenu id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >

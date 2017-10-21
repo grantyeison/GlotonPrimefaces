@@ -6,9 +6,11 @@
 package Bean;
 
 import Modelo.Grupo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,10 @@ public class GrupoFacade extends AbstractFacade<Grupo> {
     public GrupoFacade() {
         super(Grupo.class);
     }
-    
+    public List<Grupo> findbyidGrupo(String grupId)
+    {
+        Query query = getEntityManager().createNamedQuery("Grupo.findByGrupId");
+        query.setParameter("grupId", grupId);
+        return query.getResultList();
+    }
 }

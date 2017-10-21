@@ -6,6 +6,7 @@ import DAO.util.PaginationHelper;
 import Bean.UsuarioGrupoFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -83,6 +84,7 @@ public class UsuarioGrupoController implements Serializable {
         try {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioGrupoCreated"));
+            
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -191,6 +193,15 @@ public class UsuarioGrupoController implements Serializable {
     public UsuarioGrupo getUsuarioGrupo(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    //////////////////////////////
+    
+    public List<UsuarioGrupo> getListUsuarioGrupos()
+    {
+        List<UsuarioGrupo> list;
+        list = ejbFacade.findAll();
+        return list;
+    }
+    /////////////////////////////////
 
     @FacesConverter(forClass = UsuarioGrupo.class)
     public static class UsuarioGrupoControllerConverter implements Converter {

@@ -4,6 +4,9 @@ import Modelo.Usuario;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.UsuarioFacade;
+import Modelo.Grupo;
+import Modelo.UsuarioGrupo;
+import java.awt.Event;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,20 +19,32 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
 
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
 
     private Usuario current;
+    private Grupo grupo;
     private DataModel items = null;
     @EJB
     private Bean.UsuarioFacade ejbFacade;
+    @EJB
+    private Bean.UsuarioGrupoFacade ejbFacadeUsuarioGrupo;
+    @EJB
+    private Bean.UsuarioFacade usuarioEjb;
+    @EJB
+    private Bean.GrupoFacade grupoEjb;
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String nombregrupo;
 
     public UsuarioController() {
     }
@@ -82,8 +97,20 @@ public class UsuarioController implements Serializable {
     }
 
     public String create() {
-        try {
+                try { 
             getFacade().create(current);
+            System.out.println("Algo "+current);
+            
+            UsuarioGrupo usuarioGrupo = new UsuarioGrupo();
+            
+            
+            
+            usuarioGrupo.setUsugrupDueId(current);
+            usuarioGrupo.setUsugrupDueUsuario(current.getDueUsuario());
+            usuarioGrupo.setUsugrupGrupId(new Grupo(nombregrupo)) ;
+             System.out.println("Algo "+nombregrupo);
+            ejbFacadeUsuarioGrupo.create(usuarioGrupo);
+                 
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -91,7 +118,13 @@ public class UsuarioController implements Serializable {
             return null;
         }
     }
-
+    
+   public void changeListener(ValueChangeEvent event) {
+    
+    Grupo grupo = (Grupo) event.getNewValue();
+    // ...
+    }   
+    
     public String prepareEdit() {
         current = (Usuario) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -204,7 +237,7 @@ public class UsuarioController implements Serializable {
             
     ////forma consulta db
     
-    
+    /*
     public List<Usuario> getListUsuarios()
     {
         List<Usuario> listaux;
@@ -220,7 +253,14 @@ public class UsuarioController implements Serializable {
         
         return listint;
     }
-    
+    */
+    public List<Usuario> getListUsuarios()
+    {
+        List<Usuario> listUsuarios = new ArrayList<Usuario>();
+        listUsuarios = ejbFacade.findAll();
+        return listUsuarios;
+    }
+        
     
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {
@@ -261,5 +301,15 @@ public class UsuarioController implements Serializable {
         }
 
     }
+
+    public String getNombregrupo() {
+        return nombregrupo;
+    }
+
+    public void setNombregrupo(String nombregrupo) {
+        this.nombregrupo = nombregrupo;
+    }
+    
+    
 
 }

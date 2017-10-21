@@ -6,9 +6,12 @@
 package Bean;
 
 import Modelo.UsuarioGrupo;
+import Modelo.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,10 @@ public class UsuarioGrupoFacade extends AbstractFacade<UsuarioGrupo> {
         super(UsuarioGrupo.class);
     }
     
+    public List<UsuarioGrupo> findByIdUsuario(Usuario dueid)
+    {
+        Query query = getEntityManager().createNamedQuery("UsuarioGrupo.findByIdUsuario");
+        query.setParameter("due_id", dueid);
+        return query.getResultList();
+    }
 }

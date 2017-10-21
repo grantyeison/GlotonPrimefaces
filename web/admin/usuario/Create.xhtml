@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
         <ui:define name="title">
@@ -14,7 +15,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
+                <h:panelGrid  columns="2">
                     <h:outputLabel value="Nombre" for="dueNombre" />
                     <h:inputText id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
                     <h:outputLabel value="Email" for="dueEmail" />
@@ -29,6 +30,21 @@
                     <h:inputText id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.CreateUsuarioTitle_dueFechaRegistro}" >
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
+                     <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="usugrupGrupId"/>
+                     
+                     <h:selectOneMenu  id="usugrupGrupId"  value="#{grupoController.selected.grupId}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
+                        <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
+                    </h:selectOneMenu>
+                    
+                    <!--
+                    <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="usugrupGrupId"/>
+                    <p:selectOneMenu id="usugrupGrupId" value="#{usuarioGrupoController.selected.usugrupGrupId}" >
+                        <f:selectItems value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
+                    </p:selectOneMenu>
+                    -->
+                    
+                   
+                    
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{usuarioController.create}" value="#{bundle.CreateUsuarioSaveLink}" />
