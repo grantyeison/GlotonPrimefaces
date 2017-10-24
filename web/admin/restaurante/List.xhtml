@@ -5,11 +5,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListRestauranteTitle}"></h:outputText>
+    <ui:composition template="/plantillaMaestra.xhtml">
+        
+        <ui:define name="top">
+            <ul class="nav nav-pills">
+                <li><a href="Create.xhtml" class="btn btn-default btn-lg">Nuevo Restaurante</a></li>
+                <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
+                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
+                <li><a href="#" class="btn btn-info btn-lg">Gestion de Restaurantes</a></li>
+                <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
+            </ul>
         </ui:define>
-        <ui:define name="body">
+
+
+        <ui:define name="right">
+        </ui:define>
+        <ui:define name="content">
+            <br/><br/>       
+            <h1 class="page-header">Restaurante</h1>
+            <br/><br/> 
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -22,61 +36,49 @@
                     <h:dataTable value="#{restauranteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resNit}"/>
+                                <h:outputText value="Nit"/>
                             </f:facet>
                             <h:outputText value="#{item.resNit}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resNombre}"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.resNombre}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resDireccion}"/>
+                                <h:outputText value="Dirección"/>
                             </f:facet>
                             <h:outputText value="#{item.resDireccion}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resTelefono}"/>
+                                <h:outputText value="Teléfono"/>
                             </f:facet>
                             <h:outputText value="#{item.resTelefono}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resLogo}"/>
+                                <h:outputText value="Logo"/>
                             </f:facet>
                             <h:outputText value="#{item.resLogo}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resEstado}"/>
+                                <h:outputText value="Estado"/>
                             </f:facet>
                             <h:outputText value="#{item.resEstado}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resLatitud}"/>
+                                <h:outputText value="Posición"/>
                             </f:facet>
-                            <h:outputText value="#{item.resLatitud}"/>
+                            <h:outputText value="#{item.resLatitud},#{item.tesLongitud}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_tesLongitud}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tesLongitud}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_resId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.resId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListRestauranteTitle_tblUsuarioDueId}"/>
+                                <h:outputText value="Dueño"/>
                             </f:facet>
                             <h:outputText value="#{item.tblUsuarioDueId}"/>
                         </h:column>
@@ -84,11 +86,9 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{restauranteController.prepareView}" value="#{bundle.ListRestauranteViewLink}"/>
+                            <h:commandButton class="btn btn-info" action="#{restauranteController.prepareEdit}" value="#{bundle.ListRestauranteEditLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{restauranteController.prepareEdit}" value="#{bundle.ListRestauranteEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{restauranteController.destroy}" value="#{bundle.ListRestauranteDestroyLink}"/>
+                            <h:commandButton class="btn btn-danger" action="#{restauranteController.destroy}" value="#{bundle.ListRestauranteDestroyLink}"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>

@@ -6,11 +6,25 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="Crear un nuevo Usuario"></h:outputText>
+    <ui:composition template="/plantillaMaestra.xhtml">
+        
+        <ui:define name="top">
+            <ul class="nav nav-pills">
+                <li><a href="#" class="btn btn-info btn-lg">Nuevo Usuario</a></li>
+                <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
+                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
+                <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
+                <li><a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
+            </ul>
         </ui:define>
-        <ui:define name="body">
+
+
+        <ui:define name="right">
+        </ui:define>
+        <ui:define name="content">
+                <br/><br/>
+                <h1 class="page-header">Usuarios</h1>
+                <br/><br/>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -20,7 +34,7 @@
                     <h:inputText id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
                     <h:outputLabel value="Email" for="dueEmail" />
                     <h:inputText id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.CreateUsuarioTitle_dueEmail}" />
-                    <h:outputLabel value="Nombre de Usuario" for="dueUsuario" />
+                    <h:outputLabel value="Usuario" for="dueUsuario" />
                     <h:inputText id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.CreateUsuarioTitle_dueUsuario}" />
                     <h:outputLabel value="Contraseña" for="duePass" />
                     <h:inputText id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
@@ -37,24 +51,10 @@
                          <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
                     </h:selectOneMenu>
                     
-                    <!--
-                    <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="usugrupGrupId"/>
-                    <p:selectOneMenu id="usugrupGrupId" value="#{usuarioGrupoController.selected.usugrupGrupId}" >
-                        <f:selectItems value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
-                    </p:selectOneMenu>
-                    -->
-                    
-                   
-                    
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{usuarioController.create}" value="#{bundle.CreateUsuarioSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.CreateUsuarioShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateUsuarioIndexLink}"/>
+                <h:commandButton class="btn btn-primary" action="#{usuarioController.create}" value="Guardar" />
+                
             </h:form>
         </ui:define>
     </ui:composition>
