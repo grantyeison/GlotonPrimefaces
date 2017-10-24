@@ -3,69 +3,101 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-        <ui:composition template="/plantillaMaestra.xhtml">
-        
+    <ui:composition template="/plantillaMaestra.xhtml">
+
         <ui:define name="top">
-            <ul class="nav nav-pills">
-                <li><a href="Create.xhtml" class="btn btn-default btn-lg">Nueva Categoría</a></li>
-                <li><a href="#" class="btn btn-info btn-lg">Gestion de Categorias</a></li>
-                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
-            </ul>
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="Create.xhtml" class="btn btn-default btn-lg">Nueva Categoría</a>
+                        </p:column>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
         </ui:define>
-                
-        
+
+
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            <br/><br/>
-            <h1 class="page-header">Categorias</h1>
-            <br/><br/>
-                
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListCategoriaEmpty}" rendered="#{categoriaController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{categoriaController.items.rowCount > 0}">
-                    <h:outputText value="#{categoriaController.pagination.pageFirstItem + 1}..#{categoriaController.pagination.pageLastItem + 1}/#{categoriaController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{categoriaController.previous}" value="#{bundle.Previous} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{categoriaController.next}" value="#{bundle.Next} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{categoriaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText value="#{item.catNombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Imagen"/>
-                            </f:facet>
-                            <h:outputText value="#{item.catImagen}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Estado"/>
-                            </f:facet>
-                            <h:outputText value="#{item.catEstado}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Opciones"/>
-                            </f:facet>
-                            <h:commandButton class="btn btn-info" action="#{categoriaController.prepareEdit}" value="#{bundle.ListCategoriaEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandButton class="btn btn-danger" action="#{categoriaController.destroy}" value="#{bundle.ListCategoriaDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                
-            </h:form>
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Categorias</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 100px">
+                    </p:column>
+                    <p:column>
+                        <h:form styleClass="jsfcrud_list_form">
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
+                            <h:outputText escape="false" value="#{bundle.ListCategoriaEmpty}" rendered="#{categoriaController.items.rowCount == 0}"/>
+                            <h:panelGroup rendered="#{categoriaController.items.rowCount > 0}">
+                                <h:outputText value="#{categoriaController.pagination.pageFirstItem + 1}..#{categoriaController.pagination.pageLastItem + 1}/#{categoriaController.pagination.itemsCount}"/>&nbsp;
+                                <h:commandLink action="#{categoriaController.previous}" value="#{bundle.Previous} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{categoriaController.next}" value="#{bundle.Next} #{categoriaController.pagination.pageSize}" rendered="#{categoriaController.pagination.hasNextPage}"/>&nbsp;
+                                <h:dataTable class="tblCentfull" value="#{categoriaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.catNombre}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Imagen"/>
+                                        </f:facet>
+                                        <h:outputText value="imagen Registrada"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.catEstado}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>
+                                        <h:commandButton class="btn btn-info" action="#{categoriaController.prepareEdit}" value="#{bundle.ListCategoriaEditLink}"/>
+                                        <h:outputText value=" "/>
+                                        <h:commandButton class="btn btn-danger" action="#{categoriaController.destroy}" value="#{bundle.ListCategoriaDestroyLink}"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 100px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </ui:define>
     </ui:composition>
+
+
 
 </html>

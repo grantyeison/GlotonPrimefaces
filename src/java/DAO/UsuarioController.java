@@ -9,12 +9,15 @@ import Modelo.UsuarioGrupo;
 import java.awt.Event;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,11 +28,14 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
 
+    private Date date1;
+    
     private Usuario current;
     private Grupo grupo;
     private DataModel items = null;
@@ -329,6 +335,27 @@ public class UsuarioController implements Serializable {
         this.nombregrupo = nombregrupo;
     }
     
+    //calendar
     
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+     
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+         
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
+    }
+ 
+    public Date getDate1() {
+        return date1;
+    }
+ 
+    public void setDate1(Date date1) {
+        this.date1 = date1;
+    }
 
 }

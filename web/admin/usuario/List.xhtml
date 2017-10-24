@@ -3,98 +3,123 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/plantillaMaestra.xhtml">
-        
-            <ui:define name="top">    
-                
-                <ul class="nav nav-pills">
-                    <li><a href="Create.xhtml" class="btn btn-default btn-lg">Nuevo Usuario</a></li>
-                    <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
-                    <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                    <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                    <li><a href="#" class="btn btn-info btn-lg">Gestion de Usuarios</a></li>
-                </ul>
-            </ui:define>
-        
-        <ui:define name="content">
-        
-                <br/><br/>
-                <h1 class="page-header">Platos</h1>
-                <br/><br/>
-                
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
-                    <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueNombre}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueNombre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueEmail}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueEmail}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueRol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueRol}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_duePass}"/>
-                            </f:facet>
-                            <h:outputText value="Contraseña registrada"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueEstado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueEstado}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_dueFechaRegistro}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dueFechaRegistro}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandButton class="btn btn-info" action="#{usuarioController.prepareEdit}" value="Editar"/>
-                            <h:outputText value=" "/>
-                            <h:commandButton class="btn btn-danger" action="#{usuarioController.destroy}" value="Eliminar"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
+
+        <ui:define name="top">     
+            <h:form> 
+
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="Create.xhtml" class="btn btn-default btn-lg">Nuevo Usuario</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
             </h:form>
+        </ui:define>
+
+        <ui:define name="content">
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Usuarios</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 100px">
+                    </p:column>
+                    <p:column>
+
+                        <h:form styleClass="jsfcrud_list_form">
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
+                            <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
+                            <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
+                                <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
+                                <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
+                                <h:dataTable class="tblCentfull" value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueNombre}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Correo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueEmail}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Tipo Usuario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueRol}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueUsuario}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Password"/>
+                                        </f:facet>
+                                        <h:outputText value="Contraseña registrada"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha de Registro"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueFechaRegistro}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dueEstado}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Opciones"/>
+                                        </f:facet>
+                                        <h:commandButton class="btn btn-info" action="#{usuarioController.prepareEdit}" value="Editar"/>
+                                        <h:outputText value=" "/>
+                                        <h:commandButton class="btn btn-danger" action="#{usuarioController.destroy}" value="Eliminar"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 100px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
         </ui:define>
     </ui:composition>
 

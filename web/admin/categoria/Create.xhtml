@@ -3,42 +3,75 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/plantillaMaestra.xhtml">
-        
+
         <ui:define name="top">
-            <ul class="nav nav-pills">
-                <li><a href="#" class="btn btn-info btn-lg">Nueva Categoría</a></li>
-                <li><a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
-                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
-            </ul>
+
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Nueva Categoría</a>
+                        </p:column>
+                        <p:column>
+                            <a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
         </ui:define>
 
 
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            <br/><br/>       
-            <h1 class="page-header">Categorias</h1>
-            <br/><br/> 
-            <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Nombre" for="catNombre" />
-                    <h:inputText id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.CreateCategoriaTitle_catNombre}" />
-                    <h:outputLabel value="Imagen" for="catImagen" />
-                    <h:inputText id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />
-                    <h:outputLabel value="Estado" for="catEstado" />
-                    <h:inputText id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.CreateCategoriaTitle_catEstado}" />
-                </h:panelGrid>
-                <br />
-                <h:commandButton class="btn btn-primary" action="#{categoriaController.create}" value="Guardar" />
-            </h:form>
+
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Categorias</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 500px">
+                    </p:column>
+                    <p:column>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Nombre" for="catNombre" />
+                                <h:inputText class="form-control" id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.CreateCategoriaTitle_catNombre}" />
+                                <h:outputLabel value="Imagen" for="catImagen" />
+                                <h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />
+                                <h:outputLabel value="Estado" for="catEstado" />
+                                <h:inputText class="form-control"  id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.CreateCategoriaTitle_catEstado}" />
+                            </h:panelGrid>
+                            <br />
+                            <h:commandButton class="btn btn-primary" action="#{categoriaController.create}" value="Guardar" />
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 500px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </ui:define>
     </ui:composition>
 

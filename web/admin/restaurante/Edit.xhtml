@@ -3,56 +3,88 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/plantillaMaestra.xhtml">
-        
+
         <ui:define name="top">
-            <ul class="nav nav-pills">
-                <li><a href="#" class="btn btn-info btn-lg">Editar Restaurante</a></li>
-                <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
-                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                <li><a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
-            </ul>
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Editar Restaurante</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
         </ui:define>
 
 
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            <br/><br/>       
-            <h1 class="page-header">Restaurante</h1>
-            <br/><br/> 
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Nit" for="resNit" />
-                    <h:inputText id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
-                    <h:outputLabel value="Nombre" for="resNombre" />
-                    <h:inputText id="resNombre" value="#{restauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
-                    <h:outputLabel value="Dirección" for="resDireccion" />
-                    <h:inputText id="resDireccion" value="#{restauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
-                    <h:outputLabel value="Telefono" for="resTelefono" />
-                    <h:inputText id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
-                    <h:outputLabel value="Logo" for="resLogo" />
-                    <h:inputText id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
-                    <h:outputLabel value="Estado" for="resEstado" />
-                    <h:inputText id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
-                    <h:outputLabel value="Latitud" for="resLatitud" />
-                    <h:inputText id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
-                    <h:outputLabel value="Longitud" for="tesLongitud" />
-                    <h:inputText id="tesLongitud" value="#{restauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
-                    <h:outputLabel value="Dueño" for="tblUsuarioDueId" />
-                    <h:selectOneMenu id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >
-                        <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandButton class="btn btn-primary" action="#{restauranteController.update}" value="#{bundle.EditRestauranteSaveLink}"/>
-                
-            </h:form>
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Restaurantes</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 500px">
+                    </p:column>
+                    <p:column> 
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Nit" for="resNit" />
+                                <h:inputText  class="form-control" id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
+                                <h:outputLabel value="Nombre" for="resNombre" />
+                                <h:inputText  class="form-control" id="resNombre" value="#{restauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
+                                <h:outputLabel value="Dirección" for="resDireccion" />
+                                <h:inputText  class="form-control" id="resDireccion" value="#{restauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
+                                <h:outputLabel value="Telefono" for="resTelefono" />
+                                <h:inputText  class="form-control" id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
+                                <h:outputLabel value="Logo" for="resLogo" />
+                                <h:inputText  class="form-control" id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
+                                <h:outputLabel value="Estado" for="resEstado" />
+                                <h:inputText  class="form-control" id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
+                                <h:outputLabel value="Latitud" for="resLatitud" />
+                                <h:inputText  class="form-control" id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
+                                <h:outputLabel value="Longitud" for="tesLongitud" />
+                                <h:inputText  class="form-control" id="tesLongitud" value="#{restauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
+                                <h:outputLabel value="Dueño" for="tblUsuarioDueId" />
+                                <h:selectOneMenu  class="form-control" id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >
+                                    <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                            <h:commandButton class="btn btn-primary" action="#{restauranteController.update}" value="#{bundle.EditRestauranteSaveLink}"/>
+
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 500px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
         </ui:define>
     </ui:composition>
 

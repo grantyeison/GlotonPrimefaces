@@ -7,55 +7,92 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/plantillaMaestra.xhtml">
-        
+
         <ui:define name="top">
-            <ul class="nav nav-pills">
-                <li><a href="#" class="btn btn-info btn-lg">Nuevo Usuario</a></li>
-                <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
-                <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                <li><a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
-            </ul>
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Nuevo Usuario</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
         </ui:define>
 
 
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-                <br/><br/>
-                <h1 class="page-header">Usuarios</h1>
-                <br/><br/>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid  columns="2">
-                    <h:outputLabel value="Nombre" for="dueNombre" />
-                    <h:inputText id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
-                    <h:outputLabel value="Email" for="dueEmail" />
-                    <h:inputText id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.CreateUsuarioTitle_dueEmail}" />
-                    <h:outputLabel value="Usuario" for="dueUsuario" />
-                    <h:inputText id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.CreateUsuarioTitle_dueUsuario}" />
-                    <h:outputLabel value="Contraseña" for="duePass" />
-                    <h:inputText id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
-                    <h:outputLabel value="Estado" for="dueEstado" />
-                    <h:inputText id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" />
-                    <h:outputLabel value="Fecha de Registro" for="dueFechaRegistro" />
-                    <h:inputText id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.CreateUsuarioTitle_dueFechaRegistro}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    
-                     <h:outputLabel value="#{bundle.CreateUsuarioGrupoLabel_usugrupGrupId}" for="grupid"/>
-                     
-                     <h:selectOneMenu  id="grupid"  value="#{usuarioController.grupo}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
-                         <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
-                    </h:selectOneMenu>
-                    
-                </h:panelGrid>
-                <br />
-                <h:commandButton class="btn btn-primary" action="#{usuarioController.create}" value="Guardar" />
-                
-            </h:form>
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Usuarios</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 500px">
+                    </p:column>
+                    <p:column>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:form>
+                            <h:panelGrid  columns="2">
+                                <h:outputLabel value="Nombre" for="dueNombre" />
+                                <h:inputText class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
+                                <h:outputLabel value="E-mail" for="dueEmail" />
+                                <h:inputText class="form-control" id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.CreateUsuarioTitle_dueEmail}" />
+                                <h:outputLabel value="Usuario" for="dueUsuario" />
+                                <h:inputText class="form-control" id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.CreateUsuarioTitle_dueUsuario}" />
+                                <h:outputLabel value="Contraseña" for="duePass" />
+                                <h:inputText class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
+                                <h:outputLabel value="Estado" for="dueEstado" />
+                                <h:inputText class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" />
+                                <h:outputLabel value="Fecha de Registro" for="dueFechaRegistro"  />               
+                                <p:calendar class="form-control" id="dueFechaRegistro" value="#{usuarioController.date1}" title="#{bundle.CreateUsuarioTitle_dueFechaRegistro}" showOn="button" />
+                                <h:outputLabel value="Tipo usuario" for="grupid"/>
+                                <h:selectOneMenu  class="form-control" id="grupid"  value="Tipo" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
+                                    <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
+                                </h:selectOneMenu>
+
+                            </h:panelGrid>
+                            <br />
+                            <h:commandButton class="btn btn-primary" action="#{usuarioController.create}" value="Guardar" />
+
+
+                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                    <h:outputText value="Inline:" />
+                                    <h:outputText value="#{usuarioController.date1}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:panelGrid>
+                            </p:dialog>
+
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 500px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
         </ui:define>
     </ui:composition>
 

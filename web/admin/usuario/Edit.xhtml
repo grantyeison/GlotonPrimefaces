@@ -3,51 +3,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/plantillaMaestra.xhtml">
-        
-            <ui:define name="top">    
-                <ul class="nav nav-pills">
-                    <li><a href="#" class="btn btn-info btn-lg">Editar Usuario</a></li>
-                    <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
-                    <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
-                    <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
-                    <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
-                </ul>
-            </ui:define>
-                
-            <ui:define name="content">
-                <br/><br/>
-                <h1 class="page-header">Platos</h1>
-                <br/><br/>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueId}" for="dueId" />
-                    <h:inputText id="dueId" value="#{usuarioController.selected.dueId}" title="#{bundle.EditUsuarioTitle_dueId}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_dueId}"/>
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueNombre}" for="dueNombre" />
-                    <h:inputText id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.EditUsuarioTitle_dueNombre}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueEmail}" for="dueEmail" />
-                    <h:inputText id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.EditUsuarioTitle_dueEmail}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueRol}" for="dueRol" />
-                    <h:inputText id="dueRol" value="#{usuarioController.selected.dueRol}" title="#{bundle.EditUsuarioTitle_dueRol}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueUsuario}" for="dueUsuario" />
-                    <h:inputText id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.EditUsuarioTitle_dueUsuario}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_duePass}" for="duePass" />
-                    <h:inputText id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.EditUsuarioTitle_duePass}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueEstado}" for="dueEstado" />
-                    <h:inputText id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
-                    <h:outputLabel value="#{bundle.EditUsuarioLabel_dueFechaRegistro}" for="dueFechaRegistro" />
-                    <h:inputText id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                </h:panelGrid>
-                <h:commandButton class="btn btn-primary" action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
-                
+
+        <ui:define name="top">    
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="#" class="btn btn-info btn-lg">Editar Usuario</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
             </h:form>
+        </ui:define>
+
+        <ui:define name="content">
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Usuarios</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 500px">
+                    </p:column>
+                    <p:column>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Nombre" for="dueNombre" />
+                                <h:inputText class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.EditUsuarioTitle_dueNombre}" />
+                                <h:outputLabel value="E-Mail" for="dueEmail" />
+                                <h:inputText class="form-control" id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.EditUsuarioTitle_dueEmail}" />
+                                <h:outputLabel value="Tipo de usuario" for="dueRol" />
+                                <h:inputText class="form-control" id="dueRol" value="#{usuarioController.selected.dueRol}" title="#{bundle.EditUsuarioTitle_dueRol}" />
+                                <h:outputLabel value="Usuario" for="dueUsuario" />
+                                <h:inputText class="form-control" id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.EditUsuarioTitle_dueUsuario}" />
+                                <h:outputLabel value="Password" for="duePass" />
+                                <p:password  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.EditUsuarioTitle_duePass}" />
+                                <h:outputLabel value="Estado" for="dueEstado" />
+                                <h:inputText class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
+                                <h:outputLabel value="Fecha de registro" for="dueFechaRegistro" />
+                                <h:inputText class="form-control" id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:inputText>
+                            </h:panelGrid>
+                            <h:commandButton class="btn btn-primary" action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+
+
+                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                    <h:outputText value="Inline:" />
+                                    <h:outputText value="#{usuarioController.date1}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:panelGrid>
+                            </p:dialog>
+                        </h:form>
+                    </p:column>
+                    <p:column style="width: 500px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
         </ui:define>
     </ui:composition>
 

@@ -65,7 +65,7 @@ public class SessionController implements Serializable
                 
                 if(usuarioEjb.findebyUserName(username).get(0).getUsuarioGrupoList().get(0).getUsugrupGrupId().getGrupId().equals("admin"))
                 {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin/principaladmin.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("admin/categoria/List.xhtml");
 
                 }
                 else

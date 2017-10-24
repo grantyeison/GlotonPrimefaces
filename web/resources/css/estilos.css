@@ -1,0 +1,194 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/05/2017, 08:10:44 PM
+    Author     : GOMEZ
+*/
+/*
+body{
+    //background-image: url('../img/cielo_azul.jpg');
+}
+*/
+
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important
+}
+
+.btn-redondo{
+    width: 100px;
+    height: 100px;
+    padding-top: 20px;
+    align-content: center;
+    margin: auto;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 2px solid #f5ebf5;;
+}
+
+.modal-header-success {
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #5cb85c;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+
+.alIzq{
+    text-align: left;
+}
+
+
+#verDescPaso{
+    border-width:0; 
+    color:blue; 
+    text-decoration: underline;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+    display: inline-block;
+}
+
+.divScroll {
+    overflow-y: scroll;
+    height: 436px;
+}
+.divScrollG {
+    overflow-y: scroll;
+    height: 350px;
+}
+.divScrollG2 {
+    overflow-y: scroll;
+    height: 250px;
+}
+.divG {
+    height: 350px;
+}
+.alDer{
+    text-align: right;
+}
+
+.alCen{
+    text-align: center;
+}
+
+.ancho{
+    width: 200px;
+}
+
+.margenS{
+    padding: 8px;
+}
+
+.tblCent{
+    margin: auto;
+    width: 25%;
+    text-align: center;
+}
+
+.tblCent td, tr {
+    padding: 8px;
+}
+
+.tblCentContent{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    
+}
+
+.tblCentContent td, tr {
+    padding: 8px;
+}
+.tblCentfullP{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1px;
+}
+.tblCentfullP td, tr {
+    padding: 8px;
+}
+
+.tblCentfull{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.tblCentfull td, tr {
+    padding: 8px;
+}
+
+.title{
+    text-align: center;
+    padding-top: 50px;
+}
+
+.subtitle{
+    text-align: center;
+    padding-top: 25px;
+}
+
+.parrafo{
+    text-align: justify;
+}
+
+.bienvenida{
+    text-align: center;
+}
+
+.btn-file{
+    position: relative;
+    overflow: visible;
+}
+
+.btn-file input[type=file]{
+    position: absolute;
+    top:0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    
+    background: inherit;
+    display: block;   
+    /*outline: none;*/
+}
+
+.descripcion{
+    margin: 0px;
+    height: 169px;
+    width: 352px;
+}
+
+#divMensaje{
+    position: fixed;
+    top:30px;
+    left:0;
+    width: 100%;
+}
+
+#inner-message {
+    margin: 0 auto;
+}
