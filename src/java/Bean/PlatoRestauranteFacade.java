@@ -31,7 +31,7 @@ public class PlatoRestauranteFacade extends AbstractFacade<PlatoRestaurante> {
     public PlatoRestauranteFacade() {
         super(PlatoRestaurante.class);
     }
-    public List<PlatoRestaurante> findByRestauranteId(int resId)
+    public List<PlatoRestaurante> findByRestauranteId(int resId)//esto invoca la namedQuery y devuelve los restaurantes que tienen el id parámetro
     {
         System.out.println("el codigo que llego del restaurante: "+resId);
         Query query = getEntityManager().createNamedQuery("PlatoRestaurante.findByRestaurante");

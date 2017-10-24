@@ -13,37 +13,31 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form id="myForm">
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resNit}" for="resNit" />
-                    <h:inputText id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resNombre}" for="resNombre" />
-                    <h:inputText id="resNombre" value="#{restauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resDireccion}" for="resDireccion" />
-                    <h:inputText id="resDireccion" value="#{restauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resTelefono}" for="resTelefono" />
-                    <h:inputText id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resLogo}" for="resLogo" />
-                    <h:inputText id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resEstado}" for="resEstado" />
-                    <h:inputText id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resLatitud}" for="resLatitud" />
-                    <h:inputText id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_tesLongitud}" for="tesLongitud" />
-                    <h:inputText id="tesLongitud" value="#{restauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_resId}" for="resId" />
-                    <h:inputText id="resId" value="#{restauranteController.selected.resId}" title="#{bundle.EditRestauranteTitle_resId}" required="true" requiredMessage="#{bundle.EditRestauranteRequiredMessage_resId}"/>
-                    <h:outputLabel value="#{bundle.EditRestauranteLabel_tblUsuarioDueId}" for="tblUsuarioDueId" />
-                    <h:selectOneMenu id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.EditRestauranteTitle_tblUsuarioDueId}" >
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:outputLabel value="NIT:" for="resNit" />
+                    <h:inputText id="resNit" value="#{duenoRestauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
+                    <h:outputLabel value="Nombre:" for="resNombre" />
+                    <h:inputText id="resNombre" value="#{duenoRestauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
+                    <h:outputLabel value="Dirección:" for="resDireccion" />
+                    <h:inputText id="resDireccion" value="#{duenoRestauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
+                    <h:outputLabel value="Teléfono:" for="resTelefono" />
+                    <h:inputText id="resTelefono" value="#{duenoRestauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
+                    <h:outputLabel value="Logo:" for="resLogo" />
+                    <h:inputText id="resLogo" value="#{duenoRestauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
+                    <h:outputLabel value="Estado:" for="resEstado" />
+                    <h:inputText id="resEstado" value="#{duenoRestauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
+                    <h:outputLabel value="Latitud:" for="resLatitud" />
+                    <h:inputText id="resLatitud" value="#{duenoRestauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
+                    <h:outputLabel value="Longitud:" for="tesLongitud" />
+                    <h:inputText id="tesLongitud" value="#{duenoRestauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
                 </h:panelGrid>
-                <h:commandLink action="#{restauranteController.update}" value="#{bundle.EditRestauranteSaveLink}"/>
+                <h:commandLink action="#{duenoRestauranteController.update}" value="Editar"/>
                 <br />
                 <br />
                 <h:link outcome="View" value="#{bundle.EditRestauranteViewLink}"/>
                 <br />
-                <h:commandLink action="#{restauranteController.prepareList}" value="#{bundle.EditRestauranteShowAllLink}" immediate="true"/>
+                <h:commandLink action="#{duenoRestauranteController.prepareList}" value="#{bundle.EditRestauranteShowAllLink}" immediate="true"/>
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.EditRestauranteIndexLink}" />

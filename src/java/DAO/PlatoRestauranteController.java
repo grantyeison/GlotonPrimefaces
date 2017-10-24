@@ -110,21 +110,14 @@ public class PlatoRestauranteController implements Serializable
     {
         try 
         {
-            
             RequestContext requestContext = RequestContext.getCurrentInstance();
             FacesContext fc = FacesContext.getCurrentInstance();
-            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
-            
+            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();   
             if (req.getUserPrincipal() != null) 
             {
-                
                 String username = req.getUserPrincipal().getName();
-                System.out.println("nombre de usuario: "+username);
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
-                System.out.println("id usuario: "+usuario.getDueId().toString());
                 Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario.getDueId().toString()).get(0);
-                System.out.println("restaurante asociado: "+restaurante.getResNombre());
-                //current.setTblRestauranteResId(restaurante.get(0));
             }
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlatoRestauranteCreated"));
@@ -215,14 +208,13 @@ public class PlatoRestauranteController implements Serializable
         }
     }
 
-    public DataModel getItems() //lo que hace es lo siguiente, por lo menos en su forma básica
+    public DataModel getItems()
     {
         if (items == null) //si no lo está, simplemente lo retorna y ya
         {
-            
             items = getPagination().createPageDataModel();
         }
-        else//lo que yo he añadido es esto que está en este else
+        else
         {
             RequestContext requestContext = RequestContext.getCurrentInstance();
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -230,33 +222,11 @@ public class PlatoRestauranteController implements Serializable
             
             if (req.getUserPrincipal() != null) 
             {
-                
-                String username = req.getUserPrincipal().getName();//hasta ahí tengo el restaurante del usuario que está loguiniao
-                System.out.println("nombre de usuario: "+username);
+                String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);//obtengo el usuario completo
-                System.out.println("id usuario: "+usuario.getDueId().toString());
-                System.out.println("restaurante del usuario: "+usuario.getRestauranteList().get(0).getResId());
-                items.setWrappedData(ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId()));
-                //invocar la consulta que devuelva los PlatoRestaurante que tienen el id del restaurante de la linea anterior
-                //ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId());
-                //items.setWrappedData(ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId()));
-                
-                /*PlatoRestaurante pr=(PlatoRestaurante)items.getRowData();//esta línea me tiene el PlatoRestaurante que se está procesando
-                System.out.print("deto del item en curso: "+pr.getPlatDescripcion());
-                if(pr.getTblRestauranteResId().getResId()==usuario.getRestauranteList().get(0).getResId())//pero sería ahora invocar el método que devuelve los asociados a un restaurante
-                {
-                    //items.removeDataModelListener(ejbFacade);
-                    datos.add(items.getRowData());
-                    //System.out.println("listener: "+items.getDataModelListeners()[0].toString());
-                    //return null;
-                }
-                //Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario.getDueId().toString()).get(0);//obtengo los restaurantes de ese usuario
-                //System.out.println("restaurante asociado: "+restaurante.getResNombre());
-                //current.setTblRestauranteResId(restaurante.get(0));
-                //falta que adicione a los items solo si el id del restaurante es igual al de PlatoRestaurante
-            */}
+                items.setWrappedData(ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId()));//obtengo el restaurante del usuario loguiniao y lo meto en items
+            }
         }
-        //items.setWrappedData(datos);
         return items;
     }
 
