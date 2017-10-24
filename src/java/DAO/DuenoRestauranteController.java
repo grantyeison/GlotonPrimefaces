@@ -21,46 +21,61 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 
-@Named("restauranteController")
+@Named("duenoRestauranteController")
 @SessionScoped
-public class RestauranteController implements Serializable {
+public class DuenoRestauranteController implements Serializable 
+{
 
     private Restaurante current;
-    private Restaurante current1;
+    Usuario usuario=new Usuario();
     private DataModel items = null;
+    
     @EJB
     private Bean.RestauranteFacade ejbFacade;
     @EJB
     private Bean.UsuarioFacade usuarioEjb;
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public RestauranteController() {
+    public DuenoRestauranteController() 
+    {
     }
 
-    public Restaurante getSelected() {
-        if (current == null) {
-            current = new Restaurante();
-            selectedItemIndex = -1;
+    public Restaurante getSelected() 
+    {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) 
+        {        
+                String username = req.getUserPrincipal().getName();
+                usuario = usuarioEjb.findebyUserName(username).get(0);
+                current=usuario.getRestauranteList().get(0);
         }
         return current;
     }
 
-    private RestauranteFacade getFacade() {
+    private RestauranteFacade getFacade() 
+    {
         return ejbFacade;
     }
 
-    public PaginationHelper getPagination() {
-        if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+    public PaginationHelper getPagination() 
+    {
+        if (pagination == null) 
+        {
+            pagination = new PaginationHelper(10) 
+            {
 
                 @Override
-                public int getItemsCount() {
+                public int getItemsCount() 
+                {
                     return getFacade().count();
                 }
 
                 @Override
-                public DataModel createPageDataModel() {
+                public DataModel createPageDataModel() 
+                {
                     return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
                 }
             };
@@ -68,30 +83,36 @@ public class RestauranteController implements Serializable {
         return pagination;
     }
 
-    public String prepareList() {
+    public String prepareList() 
+    {
         recreateModel();
         return "List";
     }
 
-    public String prepareView() {
+    public String prepareView() 
+    {
         current = (Restaurante) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
-    public String prepareCreate() {
+    public String prepareCreate() 
+    {
         current = new Restaurante();
         selectedItemIndex = -1;
         return "Create";
     }
 
-    public String create() {
-        try {
+    public String create() 
+    {
+        try 
+        {
             RequestContext requestContext = RequestContext.getCurrentInstance();
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
             
-            if (req.getUserPrincipal() != null) {
+            if (req.getUserPrincipal() != null) 
+            {
                 
                 String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
@@ -100,55 +121,76 @@ public class RestauranteController implements Serializable {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteCreated"));
             return prepareCreate();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
-    public String prepareEdit() {
+    public String prepareEdit() 
+    {
         current = (Restaurante) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String prepararEdicion()
-    {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
-        if (req.getUserPrincipal() != null) {
-                
-                String username = req.getUserPrincipal().getName();
-                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
-                current1=usuario.getRestauranteList().get(0);
-        }
+    { 
         return "restaurante/EditarRestLogeado";
     }
     
-    public String actualizar() {
-        try {
-            getFacade().edit(current1);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
-            return "paginaUsuario";
-        } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-            return null;
-        }
-    }
-
-    public String update() {
-        try {
+    public String actualizar() 
+    {
+        try 
+        {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
-            return "View";
-        } catch (Exception e) {
+            return "paginaUsuario";
+        } 
+        catch (Exception e) 
+        {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+        
+    public String update() 
+    {
+        String txtProperty="";
+        try 
+        {
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            txtProperty = request.getParameter("myForm:resNit");
+            current.setResNit(txtProperty);
+            txtProperty = request.getParameter("myForm:resNombre");
+            current.setResNombre(txtProperty);
+            txtProperty = request.getParameter("myForm:resDireccion");
+            current.setResDireccion(txtProperty);
+            txtProperty = request.getParameter("myForm:resTelefono");
+            current.setResTelefono(txtProperty);
+            txtProperty = request.getParameter("myForm:resLogo");
+            current.setResLogo(txtProperty);
+            txtProperty = request.getParameter("myForm:resEstado");
+            current.setResEstado(txtProperty);
+            txtProperty = request.getParameter("myForm:resLatitud");
+            current.setResLatitud(Float.valueOf(txtProperty));
+            txtProperty = request.getParameter("myForm:tesLongitud");
+            current.setTesLongitud(Float.valueOf(txtProperty));
+            getFacade().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
+            return "EditarRestLogeado";
+        } 
+        catch (Exception e) 
+        {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
-    public String destroy() {
+    public String destroy() 
+    {
         current = (Restaurante) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -157,31 +199,41 @@ public class RestauranteController implements Serializable {
         return "List";
     }
 
-    public String destroyAndView() {
+    public String destroyAndView() 
+    {
         performDestroy();
         recreateModel();
         updateCurrentItem();
-        if (selectedItemIndex >= 0) {
+        if (selectedItemIndex >= 0) 
+        {
             return "View";
-        } else {
+        } 
+        else 
+        {
             // all items were removed - go back to list
             recreateModel();
             return "List";
         }
     }
 
-    private void performDestroy() {
-        try {
+    private void performDestroy() 
+    {
+        try 
+        {
             getFacade().remove(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteDeleted"));
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
-    private void updateCurrentItem() {
+    private void updateCurrentItem() 
+    {
         int count = getFacade().count();
-        if (selectedItemIndex >= count) {
+        if (selectedItemIndex >= count) 
+        {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
@@ -189,56 +241,68 @@ public class RestauranteController implements Serializable {
                 pagination.previousPage();
             }
         }
-        if (selectedItemIndex >= 0) {
+        if (selectedItemIndex >= 0) 
+        {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
 
-    public DataModel getItems() {
-        if (items == null) {
+    public DataModel getItems() 
+    {
+        if (items == null) 
+        {
             items = getPagination().createPageDataModel();
         }
         return items;
     }
 
-    private void recreateModel() {
+    private void recreateModel() 
+    {
         items = null;
     }
 
-    private void recreatePagination() {
+    private void recreatePagination() 
+    {
         pagination = null;
     }
 
-    public String next() {
+    public String next() 
+    {
         getPagination().nextPage();
         recreateModel();
         return "List";
     }
 
-    public String previous() {
+    public String previous() 
+    {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
 
-    public SelectItem[] getItemsAvailableSelectMany() {
+    public SelectItem[] getItemsAvailableSelectMany() 
+    {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    public SelectItem[] getItemsAvailableSelectOne() {
+    public SelectItem[] getItemsAvailableSelectOne() 
+    {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Restaurante getRestaurante(java.lang.Integer id) {
+    public Restaurante getRestaurante(java.lang.Integer id) 
+    {
         return ejbFacade.find(id);
     }
 
     @FacesConverter(forClass = Restaurante.class)
-    public static class RestauranteControllerConverter implements Converter {
+    public static class RestauranteControllerConverter implements Converter 
+    {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
+            if (value == null || value.length() == 0) 
+            {
                 return null;
             }
             RestauranteController controller = (RestauranteController) facesContext.getApplication().getELResolver().
@@ -246,31 +310,36 @@ public class RestauranteController implements Serializable {
             return controller.getRestaurante(getKey(value));
         }
 
-        java.lang.Integer getKey(String value) {
+        java.lang.Integer getKey(String value) 
+        {
             java.lang.Integer key;
             key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
+        String getStringKey(java.lang.Integer value) 
+        {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
 
         @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
+        public String getAsString(FacesContext facesContext, UIComponent component, Object object) 
+        {
+            if (object == null) 
+            {
                 return null;
             }
-            if (object instanceof Restaurante) {
+            if (object instanceof Restaurante) 
+            {
                 Restaurante o = (Restaurante) object;
                 return getStringKey(o.getResId());
-            } else {
+            } 
+            else 
+            {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Restaurante.class.getName());
             }
         }
-
     }
-
 }

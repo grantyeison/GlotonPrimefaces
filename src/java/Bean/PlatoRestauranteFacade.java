@@ -6,9 +6,12 @@
 package Bean;
 
 import Modelo.PlatoRestaurante;
+import Modelo.Restaurante;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,11 @@ public class PlatoRestauranteFacade extends AbstractFacade<PlatoRestaurante> {
     public PlatoRestauranteFacade() {
         super(PlatoRestaurante.class);
     }
-    
+    public List<PlatoRestaurante> findByRestauranteId(int resId)//esto invoca la namedQuery y devuelve los restaurantes que tienen el id parámetro
+    {
+        System.out.println("el codigo que llego del restaurante: "+resId);
+        Query query = getEntityManager().createNamedQuery("PlatoRestaurante.findByRestaurante");
+        query.setParameter("resId", resId);
+        return query.getResultList();
+    }
 }
