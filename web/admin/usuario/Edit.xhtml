@@ -5,11 +5,22 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <ui:composition template="/plantillaMaestra.xhtml">
+        
+            <ui:define name="top">    
+                <ul class="nav nav-pills">
+                    <li><a href="#" class="btn btn-info btn-lg">Editar Usuario</a></li>
+                    <li><a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a></li>
+                    <li><a href="../plato/List.xhtml" class="btn btn-default btn-lg">Gestion de Platos</a></li>
+                    <li><a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a></li>
+                    <li><a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a></li>
+                </ul>
+            </ui:define>
+                
+            <ui:define name="content">
+                <br/><br/>
+                <h1 class="page-header">Platos</h1>
+                <br/><br/>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -34,15 +45,8 @@
                         <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:inputText>
                 </h:panelGrid>
-                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditUsuarioViewLink}"/>
-                <br />
-                <h:commandLink action="#{usuarioController.prepareList}" value="#{bundle.EditUsuarioShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditUsuarioIndexLink}" />
+                <h:commandButton class="btn btn-primary" action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                
             </h:form>
         </ui:define>
     </ui:composition>
