@@ -112,10 +112,11 @@ public class RestauranteController implements Serializable {
         return "Edit";
     }
     
-    /*
+    
     ///////////////////////////////////////////////////////////////////////////////////
     public String prepararEdicion()
     {
+        /*
         RequestContext requestContext = RequestContext.getCurrentInstance();
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
@@ -123,11 +124,22 @@ public class RestauranteController implements Serializable {
                 
                 String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
-                current1.setTblUsuarioDueId(usuario);
+                
+                System.out.println("Algo "+current1.getResNombre());
             }
         current1 = (Restaurante) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "Edit";
+        */
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+        if (req.getUserPrincipal() != null) {
+                
+                String username = req.getUserPrincipal().getName();
+                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
+                current1=usuario.getRestauranteList().get(0);
+        }
+        return "restaurante/EditarRestLogeado";
     }
     ///////////////////////////////////////////////////////////////////////////
     
@@ -135,7 +147,7 @@ public class RestauranteController implements Serializable {
         try {
             getFacade().edit(current1);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
-            return "View";
+            return "paginaUsuario";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -143,7 +155,7 @@ public class RestauranteController implements Serializable {
     }
     
     ////////////////////////////////////////////////////////////////////////////////
-    */
+    
     
     public String update() {
         try {
