@@ -123,10 +123,24 @@ public class PlatoRestauranteController implements Serializable
             HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();   
             if (req.getUserPrincipal() != null) 
             {
+                
+            
                 String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
-                Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario.getDueId().toString()).get(0);
+            System.out.println("desc:   "+current.getPlatDescripcion());
+            System.out.println("ing:    "+current.getPlatIngredientes());
+            System.out.println("id:     "+current.getPlatId());
+            System.out.println("precio: "+current.getPlatPrecio());
+            Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario).get(0);
+                
+            System.out.println("nombre: "+current.getTblplatoplaId().getPlaNombre());
+            System.out.println("rest:   "+restaurante.getResNombre());
+            
+                current.setTblRestauranteResId(restaurante);
+                
             }
+            
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlatoRestauranteCreated"));
             return prepareCreate();

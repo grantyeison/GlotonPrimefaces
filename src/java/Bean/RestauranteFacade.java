@@ -6,6 +6,7 @@
 package Bean;
 
 import Modelo.Restaurante;
+import Modelo.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,10 +33,10 @@ public class RestauranteFacade extends AbstractFacade<Restaurante> {
     }
     
     
-    public List<Restaurante>findByUserName(String userName)
+    public List<Restaurante>findByUserName(Usuario userName)
     {
         Query query = getEntityManager().createNamedQuery("Restaurante.findByUserName");
-        query.setParameter("userName", userName);
+        query.setParameter("user", userName);
         return query.getResultList();
     }
             

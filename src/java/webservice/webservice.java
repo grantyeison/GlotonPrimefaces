@@ -5,7 +5,13 @@
  */
 package webservice;
 
+import Bean.CategoriaFacade;
+import Bean.PlatoFacade;
+import Bean.PlatoRestauranteFacade;
 import Bean.RestauranteFacade;
+import Modelo.Categoria;
+import Modelo.Plato;
+import Modelo.PlatoRestaurante;
 import Modelo.Restaurante;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,6 +41,13 @@ public class webservice {
     private UriInfo context;
     @EJB
     private RestauranteFacade ejRestauranteFacade;
+    @EJB
+    private PlatoFacade ejPlatoFacade;
+    @EJB
+    private CategoriaFacade ejCategFacade;
+    @EJB
+    private PlatoRestauranteFacade ejPlatoRestFacade;
+    
 
     /**
      * Creates a new instance of webservice
@@ -51,19 +64,80 @@ public class webservice {
     public String getJson() {
         //TODO return proper representation object
         JSONObject jSONObject = new JSONObject();
-        JSONArray jSONArray = new JSONArray();
+        JSONArray jSONArray;
         List<Restaurante> listaRestaurante= ejRestauranteFacade.findAll();
+        List<Plato> listaPlato = ejPlatoFacade.findAll();
+        List<Categoria> listaCateg = ejCategFacade.findAll();
+        List<PlatoRestaurante> listaPlatoRest = ejPlatoRestFacade.findAll();
         try {
-        for(Restaurante r : listaRestaurante)
-        {
-            JSONObject j = new JSONObject();
+            //llenar lista JSON con restaurantes
+            jSONArray = new JSONArray();
+            for(Restaurante r : listaRestaurante)
+            {
+                JSONObject j = new JSONObject();
+                if (r.getResEstado().equals("Activo"))
+                {
+                    j.put("Nit",r.getResNit());
+                    j.put("nombre",r.getResNombre());
+                    j.put("direccion",r.getResDireccion());
+                    j.put("telefono",r.getResTelefono());
+                    j.put("logo",r.getResLogo());
+                    j.put("latitud",r.getResLatitud());
+                    j.put("longitud",r.getTesLongitud());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("restaurante", jSONArray);
             
-                j.put("nombre",r.getResNombre());
-                jSONArray.put(j);
-           
             
-        }
-        jSONObject.put("restaurante", jSONArray);
+            //llenar lista JSON con Platos
+            jSONArray = new JSONArray();
+            for(Plato r : listaPlato)
+            {
+                JSONObject j = new JSONObject();
+                if (r.getPlaEstado().equals("Activo"))
+                {
+                    j.put("nombre",r.getPlaNombre());
+                    j.put("imagen",r.getPlaImagen());
+                    j.put("categoria",r.getTblcategoriacatId().getCatNombre());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("plato", jSONArray);
+            
+            
+            //llenar lista JSON con Categorías
+            jSONArray = new JSONArray();
+            for(Categoria r : listaCateg)
+            {
+                JSONObject j = new JSONObject();
+                if (r.getCatEstado().equals("Activo"))
+                {
+                    j.put("nombre",r.getCatNombre());
+                    j.put("imagen",r.getCatImagen());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("categoria", jSONArray);
+            
+            
+            //llenar lista JSON con PlatoRestaurante
+            jSONArray = new JSONArray();
+            for(PlatoRestaurante r : listaPlatoRest)
+            {
+                JSONObject j = new JSONObject();
+                if (r.getPlatEstado().equals("Activo"))
+                {
+                    j.put("plato",r.getTblplatoplaId().getPlaNombre());
+                    j.put("ingredientes",r.getPlatIngredientes());
+                    j.put("descripcion",r.getPlatDescripcion());
+                    j.put("restaurante",r.getTblRestauranteResId().getResNit());//se maneja el nit dado que dos restaurantes pueden tener el mismo nombre
+                    j.put("precio",r.getPlatPrecio());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("caracteristicasPlato", jSONArray);
+            
          } catch (JSONException ex) {
                 Logger.getLogger(webservice.class.getName()).log(Level.SEVERE, null, ex);
            }
