@@ -70,7 +70,7 @@ public class SessionController implements Serializable
                 }
                 else
                 {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/paginaUsuario.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/platoRestaurante/List.xhtml");
                 }
                 
                 

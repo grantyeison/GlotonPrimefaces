@@ -114,6 +114,7 @@ public class UsuarioController implements Serializable {
 
     public String create() {
                 try { 
+            current.setDueFechaRegistro(date1);
             getFacade().create(current);
             System.out.println("Algo "+current.getDueId());
             System.out.println("Algo "+current.getDueNombre());
@@ -158,9 +159,10 @@ public class UsuarioController implements Serializable {
 
     public String update() {
         try {
+            current.setDueFechaRegistro(date1);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -337,18 +339,7 @@ public class UsuarioController implements Serializable {
     
     //calendar
     
-    public void onDateSelect(SelectEvent event) {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
-    }
-     
-    public void click() {
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-         
-        requestContext.update("form:display");
-        requestContext.execute("PF('dlg').show()");
-    }
+   
  
     public Date getDate1() {
         return date1;

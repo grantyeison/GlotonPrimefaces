@@ -9,40 +9,70 @@
         <title>Glot-On</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"></link>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <h:outputStylesheet library="css" name="estilos.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     </h:head>
     <h:body>
-        <h:form id="formLogin">
-            <p:messages closable="true" />
-            <p:panelGrid>
-            <p:row>
-                <p:column>
-                    <p:inputText class="form-control" value="#{sessionController.nombreUsuario}" id="nombreusuario" placeholder="user name" required="true" requiredMessage="nombre de usuario no puede ser vacio" />
-                </p:column>
-                <p:column>
-                    <p:message for="nombreusuario" display="icon"/>
-                </p:column>
-            </p:row>
-            
-            <p:row>
-                <p:column>
-                   <p:password class="form-control" value="#{sessionController.contrasena}" id="password" placeholder="password" required="true" requiredMessage="password no puede ser vacio" /> 
 
-                </p:column>
-                <p:column>
-                    <p:message for="password" display="icon"/>
-                </p:column>
-            </p:row>
+        <p:panelGrid class="ui-panelgrid">
             <p:row>
+                
+                <p:column  style="width: 100%"> </p:column>
                 <p:column>
-                    <h:commandButton class="btn btn-primary" action="#{sessionController.login()}" value="Iniciar session" />
-
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Iniciar Sesión</button>
                 </p:column>
             </p:row>
         </p:panelGrid>
-        </h:form>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Iniciar Sesion</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h:form id="formLogin">
+                            <p:messages closable="true" />
+                            <p:panelGrid class="ui-panelgrid">
+                                <p:row>
+                                    <p:column>
+                                        <p:inputText class="form-control" value="#{sessionController.nombreUsuario}" id="nombreusuario" placeholder="user name" required="true" requiredMessage="nombre de usuario no puede ser vacio" />
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="nombreusuario" display="icon"/>
+                                    </p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column>
+                                        <p:password class="form-control" value="#{sessionController.contrasena}" id="password" placeholder="password" required="true" requiredMessage="password no puede ser vacio" /> 
+
+                                    </p:column>
+                                    <p:column>
+                                        <p:message for="password" display="icon"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:commandButton class="btn btn-primary" action="#{sessionController.login()}" value="Iniciar session" />
+
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </h:form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </h:body>
 
 

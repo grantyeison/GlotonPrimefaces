@@ -3,13 +3,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListPlatoRestauranteTitle}"></h:outputText>
+    <ui:composition template="/plantillaMaestra.xhtml">
+
+        <ui:define name="top">
+
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="Create.xhtml" class="btn btn-info btn-lg">Nuevo Platillo</a>
+                        </p:column>
+                        <p:column>
+                            <a href="#" class="btn btn-default btn-lg">Gestion de la carta</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../restaurante/EditarRestLogeado.xhtml" class="btn btn-default btn-lg">Gestion del Restaurante</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../calificacion/List.xhtml" class="btn btn-default btn-lg">Reporte de Calificaciones</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
         </ui:define>
-        <ui:define name="body">
+
+        <ui:define name="content">
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Carta</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 100px">
+                    </p:column>
+                    <p:column>
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -80,6 +115,11 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListPlatoRestauranteIndexLink}"/>
             </h:form>
+                    </p:column>
+                    <p:column style="width: 100px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </ui:define>
     </ui:composition>
 

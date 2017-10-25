@@ -54,32 +54,23 @@
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Nombre" for="dueNombre" />
                                 <h:inputText class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.EditUsuarioTitle_dueNombre}" />
-                                <h:outputLabel value="E-Mail" for="dueEmail" />
-                                <h:inputText class="form-control" id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.EditUsuarioTitle_dueEmail}" />
-                                <h:outputLabel value="Tipo de usuario" for="dueRol" />
-                                <h:inputText class="form-control" id="dueRol" value="#{usuarioController.selected.dueRol}" title="#{bundle.EditUsuarioTitle_dueRol}" />
+                                <h:outputLabel value="Correo" for="dueEmail" />
+                                <h:inputText  class="form-control" id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.EditUsuarioTitle_dueEmail}" />
+                                <h:outputLabel value="Rol" for="dueRol" />
+                                <h:selectOneMenu class="form-control" id="grupid"  value="#{usuarioController.grupo}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
+                                    <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
+                                </h:selectOneMenu>
                                 <h:outputLabel value="Usuario" for="dueUsuario" />
-                                <h:inputText class="form-control" id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.EditUsuarioTitle_dueUsuario}" />
+                                <h:inputText  class="form-control" id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.EditUsuarioTitle_dueUsuario}" />
                                 <h:outputLabel value="Password" for="duePass" />
-                                <p:password  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.EditUsuarioTitle_duePass}" />
+                                <h:inputText  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.EditUsuarioTitle_duePass}" />
                                 <h:outputLabel value="Estado" for="dueEstado" />
-                                <h:inputText class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
-                                <h:outputLabel value="Fecha de registro" for="dueFechaRegistro" />
-                                <h:inputText class="form-control" id="dueFechaRegistro" value="#{usuarioController.selected.dueFechaRegistro}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                </h:inputText>
+                                <h:inputText  class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
+                                <h:outputLabel value="Fecha Ingreso" for="dueFechaRegistro" />
+                                <p:calendar id="dueFechaRegistro" value="#{usuarioController.date1}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" />
+                                    
                             </h:panelGrid>
                             <h:commandButton class="btn btn-primary" action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
-
-
-                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
-                                <p:panelGrid id="display" columns="2" columnClasses="label,value">
-                                    <h:outputText value="Inline:" />
-                                    <h:outputText value="#{usuarioController.date1}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </p:panelGrid>
-                            </p:dialog>
                         </h:form>
                     </p:column>
                     <p:column style="width: 500px">

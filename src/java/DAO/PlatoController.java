@@ -6,6 +6,8 @@ import DAO.util.PaginationHelper;
 import Bean.PlatoFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,6 +20,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 @Named("platoController")
 @SessionScoped
@@ -29,8 +32,12 @@ public class PlatoController implements Serializable {
     private Bean.PlatoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private List<String> estado = new ArrayList<String>();
 
     public PlatoController() {
+        estado.add("Activo");
+        estado.add("Inactivo");
     }
 
     public Plato getSelected() {
@@ -99,6 +106,9 @@ public class PlatoController implements Serializable {
 
     public String update() {
         try {
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String txtProperty = request.getParameter("formEditPlato:plaEstado");
+            current.setPlaEstado(txtProperty);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlatoUpdated"));
             return "View";
@@ -115,6 +125,10 @@ public class PlatoController implements Serializable {
         recreatePagination();
         recreateModel();
         return "List";
+    }
+
+    public List<String> getEstado() {
+        return estado;
     }
 
     public String destroyAndView() {

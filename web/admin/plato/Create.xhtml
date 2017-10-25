@@ -60,7 +60,11 @@
                                 <h:outputLabel value="Imagen" for="plaImagen" />
                                 <h:inputText  class="form-control" id="plaImagen" value="#{platoController.selected.plaImagen}" title="#{bundle.CreatePlatoTitle_plaImagen}" />
                                 <h:outputLabel value="Estado" for="plaEstado" />
-                                <h:inputText  class="form-control" id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.CreatePlatoTitle_plaEstado}" />
+                                
+                                <h:selectOneMenu  class="form-control" id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.CreatePlatoTitle_plaEstado}" >
+                                    <f:selectItems  value="#{platoController.estado}" var="categoria"/>
+                                </h:selectOneMenu>
+                                
                                 <h:outputLabel value="Categoría" for="tblcategoriacatId" />
                                 <h:selectOneMenu  class="form-control" id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.CreatePlatoTitle_tblcategoriacatId}" >
                                     <f:selectItems  value="#{categoriaController.listCategorias}" var="categoria" itemLabel="#{categoria.catNombre}"/>
