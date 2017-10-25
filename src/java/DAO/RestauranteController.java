@@ -7,6 +7,8 @@ import Bean.RestauranteFacade;
 import Modelo.Usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -34,8 +36,12 @@ public class RestauranteController implements Serializable {
     private Bean.UsuarioFacade usuarioEjb;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<String> estado = new ArrayList<String>();
+
 
     public RestauranteController() {
+        estado.add("Activo");
+        estado.add("Inactivo");
     }
 
     public Restaurante getSelected() {
@@ -50,6 +56,11 @@ public class RestauranteController implements Serializable {
         return ejbFacade;
     }
 
+    
+    public List<String> getEstado() {
+        return estado;
+    }
+    
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -139,9 +150,13 @@ public class RestauranteController implements Serializable {
 
     public String update() {
         try {
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String txtProperty = request.getParameter("formEditRest:resEstado");
+            current.setResEstado(txtProperty);
+            
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

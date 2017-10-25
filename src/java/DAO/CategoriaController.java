@@ -6,6 +6,7 @@ import DAO.util.PaginationHelper;
 import Bean.CategoriaFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -18,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 @Named("categoriaController")
 @SessionScoped
@@ -30,7 +32,12 @@ public class CategoriaController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
+    private List<String> estado = new ArrayList<String>();
+
+    
     public CategoriaController() {
+        estado.add("Activo");
+        estado.add("Inactivo");
     }
 
     public Categoria getSelected() {
@@ -97,11 +104,20 @@ public class CategoriaController implements Serializable {
         return "Edit";
     }
 
+    
+    public List<String> getEstado() {
+        return estado;
+    }
+    
     public String update() {
         try {
+            
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String txtProperty = request.getParameter("formEditCateg:catEstado");
+            current.setCatEstado(txtProperty);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CategoriaUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

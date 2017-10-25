@@ -38,4 +38,22 @@ public class UsuarioGrupoFacade extends AbstractFacade<UsuarioGrupo> {
         query.setParameter("due_id", dueid);
         return query.getResultList();
     }
+    
+    public String getRolUsuario(String usugrupDueUsuario)
+    {
+        List<UsuarioGrupo> listaUsuarioGrupo;
+        Query query = getEntityManager().createNamedQuery("UsuarioGrupo.findRolByUserName");
+        query.setParameter("usugrupDueUsuario", usugrupDueUsuario);
+        listaUsuarioGrupo=query.getResultList();
+        if(listaUsuarioGrupo != null && listaUsuarioGrupo.size()>0)
+        {
+            return listaUsuarioGrupo.get(0).getUsugrupGrupId().getGrupId();
+        }
+        else
+        {
+            return "indefinido";
+        }
+    }
+        
+    
 }

@@ -35,7 +35,8 @@ import org.primefaces.event.SelectEvent;
 public class UsuarioController implements Serializable {
 
     private Date date1;
-    
+    private List<String> estado = new ArrayList<String>();
+
     private Usuario current;
     private Grupo grupo;
     private DataModel items = null;
@@ -61,8 +62,13 @@ public class UsuarioController implements Serializable {
     }
     
     
+    public List<String> getEstado() {
+        return estado;
+    }
 
     public UsuarioController() {
+        estado.add("Activo");
+        estado.add("Inactivo");
     }
 
     public Usuario getSelected() {
@@ -114,6 +120,9 @@ public class UsuarioController implements Serializable {
 
     public String create() {
                 try { 
+                    
+                 
+                    
             current.setDueFechaRegistro(date1);
             getFacade().create(current);
             System.out.println("Algo "+current.getDueId());
@@ -158,7 +167,11 @@ public class UsuarioController implements Serializable {
     }
 
     public String update() {
-        try {
+        try {   
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String txtProperty = request.getParameter("formEditUsu:dueEstado");
+            current.setDueEstado(txtProperty);
+            
             current.setDueFechaRegistro(date1);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
@@ -347,6 +360,13 @@ public class UsuarioController implements Serializable {
  
     public void setDate1(Date date1) {
         this.date1 = date1;
+    }
+    
+    public String getRolUsuario(String nombreUsuario)
+    {
+        String rol = ejbFacadeUsuarioGrupo.getRolUsuario(nombreUsuario);
+        System.out.println(rol);
+        return rol;
     }
 
 }

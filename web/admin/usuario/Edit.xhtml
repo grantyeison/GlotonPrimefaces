@@ -50,7 +50,7 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        <h:form>
+                        <h:form id="formEditUsu">
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Nombre" for="dueNombre" />
                                 <h:inputText class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.EditUsuarioTitle_dueNombre}" />
@@ -65,7 +65,11 @@
                                 <h:outputLabel value="Password" for="duePass" />
                                 <h:inputText  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.EditUsuarioTitle_duePass}" />
                                 <h:outputLabel value="Estado" for="dueEstado" />
-                                <h:inputText  class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" />
+                                
+                                <h:selectOneMenu  class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.EditUsuarioTitle_dueEstado}" >
+                                    <f:selectItems  value="#{usuarioController.estado}"/>
+                                </h:selectOneMenu>
+
                                 <h:outputLabel value="Fecha Ingreso" for="dueFechaRegistro" />
                                 <p:calendar id="dueFechaRegistro" value="#{usuarioController.date1}" title="#{bundle.EditUsuarioTitle_dueFechaRegistro}" />
                                     

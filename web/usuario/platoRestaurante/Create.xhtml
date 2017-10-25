@@ -20,7 +20,7 @@
                             <a href="List.xhtml" class="btn btn-default btn-lg">Gestion de la carta</a>
                         </p:column>
                         <p:column>
-                            <a href="../restaurante/EditarRestLogeado.xhtml.xhtml" class="btn btn-default btn-lg">Gestion del Restaurante</a>
+                            <a href="../restaurante/EditarRestLogeado.xhtml" class="btn btn-default btn-lg">Gestion del Restaurante</a>
                         </p:column>
                         <p:column>
                             <a href="../calificacion/List.xhtml" class="btn btn-default btn-lg">Reporte de Calificaciones</a>
@@ -60,7 +60,11 @@
                                 <h:outputLabel value="Precio" for="platPrecio" />
                                 <h:inputText  class="form-control" id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.CreatePlatoRestauranteTitle_platPrecio}" />
                                 <h:outputLabel value="Estado" for="platEstado" />
-                                <h:inputText  class="form-control" id="platEstado" value="#{platoRestauranteController.selected.platEstado}" title="#{bundle.CreatePlatoRestauranteTitle_platEstado}" />
+                                
+                                <h:selectOneMenu  class="form-control" id="platEstado" value="#{platoRestauranteController.selected.platEstado}" title="#{bundle.CreatePlatoRestauranteTitle_platEstado}" >
+                                    <f:selectItems  value="#{platoRestauranteController.estado}"/>
+                                </h:selectOneMenu>
+                                
                                 <!--
                                 <h:selectOneMenu id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.CreatePlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.CreatePlatoRestauranteRequiredMessage_tblplatoplaId}">
                                     <f:selectItems value="#{platoController.itemsAvailableSelectOne}"/>

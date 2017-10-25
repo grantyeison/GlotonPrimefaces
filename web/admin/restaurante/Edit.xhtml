@@ -53,7 +53,7 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        <h:form>
+                        <h:form id="formEditRest">
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Nit" for="resNit" />
                                 <h:inputText  class="form-control" id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
@@ -66,7 +66,9 @@
                                 <h:outputLabel value="Logo" for="resLogo" />
                                 <h:inputText  class="form-control" id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
                                 <h:outputLabel value="Estado" for="resEstado" />
-                                <h:inputText  class="form-control" id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
+                                <h:selectOneMenu  class="form-control" id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" >
+                                    <f:selectItems  value="#{restauranteController.estado}"/>
+                                </h:selectOneMenu>
                                 <h:outputLabel value="Latitud" for="resLatitud" />
                                 <h:inputText  class="form-control" id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
                                 <h:outputLabel value="Longitud" for="tesLongitud" />

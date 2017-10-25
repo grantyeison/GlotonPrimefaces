@@ -159,6 +159,12 @@ public class UsuarioGrupoController implements Serializable {
         if (items == null) {
             items = getPagination().createPageDataModel();
         }
+        else
+        {
+            //obtiene elusername
+            //usando el username obtiene el objeto completo del usuario
+            //hacer la consulta para saber a que grupo pertenece 
+        }
         return items;
     }
 

@@ -9,6 +9,7 @@ import Modelo.Usuario;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -39,13 +40,16 @@ public class PlatoRestauranteController implements Serializable
     @EJB
     private Bean.UsuarioFacade usuarioEjb;
     // fin de la zona de EJB
-    
+    private List<String> estado = new ArrayList<String>();
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
     ArrayList datos=new ArrayList();
 
     public PlatoRestauranteController() //método constructor del controlador de PlatoRestaurante
     {
+        estado.add("Activo");
+        estado.add("Inactivo");
     }
 
     public PlatoRestaurante getSelected() 
@@ -58,6 +62,10 @@ public class PlatoRestauranteController implements Serializable
         return current;
     }
 
+    public List<String> getEstado() {
+        return estado;
+    }
+    
     private PlatoRestauranteFacade getFacade() //retorna el session bean
     {
         return ejbFacade;
@@ -139,10 +147,14 @@ public class PlatoRestauranteController implements Serializable
     public String update() //método para actualizar un registro de PlatoRestaurante, se usa en Edit.xhtml
     {
         try 
-        {
+        {   
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String txtProperty = request.getParameter("formEditPlaRes:platEstado");
+            current.setPlatEstado(txtProperty);
+            
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PlatoRestauranteUpdated"));
-            return "View";
+            return "List";
         } catch (Exception e) 
         {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));

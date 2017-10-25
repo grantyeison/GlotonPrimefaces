@@ -3,45 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.EditRestauranteTitle}"></h:outputText>
+    <ui:composition template="/plantillaMaestra.xhtml">
+
+        <ui:define name="top">
+
+            <h:form>      
+                <p:panelGrid class="tblCentfull">
+                    <p:row>
+                        <p:column>
+                            <a href="../platoRestaurante/Create.xhtml" class="btn btn-info btn-lg">Nuevo Platillo</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../platoRestaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de la carta</a>
+                        </p:column>
+                        <p:column>
+                            <a href="#" class="btn btn-default btn-lg">Gestion del Restaurante</a>
+                        </p:column>
+                        <p:column>
+                            <a href="../calificacion/List.xhtml" class="btn btn-default btn-lg">Reporte de Calificaciones</a>
+                        </p:column>
+                        <p:column class="btn btn-success">
+                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
         </ui:define>
-        <ui:define name="body">
+
+        <ui:define name="content">
+            <p:panelGrid class="tblCentfull">
+                <p:row>
+                    <p:column colspan="3">
+                        <h1 class="page-header alCen">Gestionar Restaurante</h1>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="width: 500px">
+                    </p:column>
+                    <p:column>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form id="myForm">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="NIT:" for="resNit" />
-                    <h:inputText id="resNit" value="#{duenoRestauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
+                    <h:inputText  class="form-control" id="resNit" value="#{duenoRestauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
                     <h:outputLabel value="Nombre:" for="resNombre" />
-                    <h:inputText id="resNombre" value="#{duenoRestauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
+                    <h:inputText  class="form-control" id="resNombre" value="#{duenoRestauranteController.selected.resNombre}" title="#{bundle.EditRestauranteTitle_resNombre}" />
                     <h:outputLabel value="Dirección:" for="resDireccion" />
-                    <h:inputText id="resDireccion" value="#{duenoRestauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
+                    <h:inputText  class="form-control" id="resDireccion" value="#{duenoRestauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
                     <h:outputLabel value="Teléfono:" for="resTelefono" />
-                    <h:inputText id="resTelefono" value="#{duenoRestauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
+                    <h:inputText  class="form-control" id="resTelefono" value="#{duenoRestauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
                     <h:outputLabel value="Logo:" for="resLogo" />
-                    <h:inputText id="resLogo" value="#{duenoRestauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
+                    <h:inputText  class="form-control" id="resLogo" value="#{duenoRestauranteController.selected.resLogo}" title="#{bundle.EditRestauranteTitle_resLogo}" />
                     <h:outputLabel value="Estado:" for="resEstado" />
-                    <h:inputText id="resEstado" value="#{duenoRestauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
+                    <h:inputText  class="form-control" id="resEstado" value="#{duenoRestauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" />
                     <h:outputLabel value="Latitud:" for="resLatitud" />
-                    <h:inputText id="resLatitud" value="#{duenoRestauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
+                    <h:inputText  class="form-control" id="resLatitud" value="#{duenoRestauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
                     <h:outputLabel value="Longitud:" for="tesLongitud" />
-                    <h:inputText id="tesLongitud" value="#{duenoRestauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
+                    <h:inputText  class="form-control" id="tesLongitud" value="#{duenoRestauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
                 </h:panelGrid>
-                <h:commandLink action="#{duenoRestauranteController.update}" value="Editar"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditRestauranteViewLink}"/>
-                <br />
-                <h:commandLink action="#{duenoRestauranteController.prepareList}" value="#{bundle.EditRestauranteShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditRestauranteIndexLink}" />
+                <h:commandButton class="btn btn-primary" action="#{duenoRestauranteController.update}" value="Editar"/>
+                
             </h:form>
+                    </p:column>
+                    <p:column style="width: 500px">
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
         </ui:define>
     </ui:composition>
 

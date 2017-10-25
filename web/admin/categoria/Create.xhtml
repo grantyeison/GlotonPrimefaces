@@ -62,7 +62,9 @@
                                 <h:outputLabel value="Imagen" for="catImagen" />
                                 <h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />
                                 <h:outputLabel value="Estado" for="catEstado" />
-                                <h:inputText class="form-control"  id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.CreateCategoriaTitle_catEstado}" />
+                                <h:selectOneMenu   class="form-control"  id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.CreateCategoriaTitle_catEstado}" >
+                                    <f:selectItems  value="#{categoriaController.estado}"/>
+                                </h:selectOneMenu>
                             </h:panelGrid>
                             <br />
                             <h:commandButton class="btn btn-primary" action="#{categoriaController.create}" value="Guardar" />

@@ -54,14 +54,16 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        <h:form>
+                        <h:form id="formEditCateg">
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Nombre" for="catNombre" />
                                 <h:inputText  class="form-control" id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.EditCategoriaTitle_catNombre}" />
                                 <h:outputLabel value="Imagen" for="catImagen" />
                                 <h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.EditCategoriaTitle_catImagen}" />
                                 <h:outputLabel value="Estado" for="catEstado" />
-                                <h:inputText  class="form-control" id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.EditCategoriaTitle_catEstado}" />
+                                <h:selectOneMenu   class="form-control" id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.EditCategoriaTitle_catEstado}">
+                                    <f:selectItems  value="#{categoriaController.estado}"/>
+                                </h:selectOneMenu>
                             </h:panelGrid>
                             <h:commandButton class="btn btn-primary" action="#{categoriaController.update}" value="#{bundle.EditCategoriaSaveLink}"/>
                         </h:form>

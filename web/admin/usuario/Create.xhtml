@@ -61,7 +61,9 @@
                                 <h:outputLabel value="Contraseña" for="duePass" />
                                 <h:inputText  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
                                 <h:outputLabel value="Estado" for="dueEstado" />
-                                <h:inputText  class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" />
+                                <h:selectOneMenu    class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" >
+                                    <f:selectItems  value="#{usuarioController.estado}"/>
+                                </h:selectOneMenu>
                                 <h:outputLabel value="Fecha de Registro" for="dueFechaRegistro" />
                                 <p:calendar id="dueFechaRegistro" value="#{usuarioController.date1}"/>
                                 <h:outputLabel value="Tipo de usuario" for="grupid"/>
