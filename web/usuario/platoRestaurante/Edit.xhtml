@@ -52,7 +52,7 @@
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Plato" for="tblplatoplaId" />
                                 <h:selectOneMenu class="form-control" id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.EditPlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblplatoplaId}">
-                                    <f:selectItems value="#{platoController.itemsAvailableSelectOne}"/>
+                                    <f:selectItems  value="#{platoController.listPlatos}" var="plato" itemLabel="#{plato.plaNombre}"/>
                                 </h:selectOneMenu>
                                 <h:outputLabel value="Ingredientes" for="platIngredientes" />
                                 <h:inputText  class="form-control" id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.EditPlatoRestauranteTitle_platIngredientes}" />
@@ -66,7 +66,6 @@
                                     <f:selectItems  value="#{platoRestauranteController.estado}"/>
                                 </h:selectOneMenu>
 
-                                <h:inputText />
     <!--                            <h:outputLabel value="Restaurante" for="tblRestauranteResId" />
                                 <h:selectOneMenu class="form-control" id="tblRestauranteResId" value="#{platoRestauranteController.selected.tblRestauranteResId}" title="#{bundle.EditPlatoRestauranteTitle_tblRestauranteResId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblRestauranteResId}">
                                     <f:selectItems value="#{restauranteController.itemsAvailableSelectOne}"/>

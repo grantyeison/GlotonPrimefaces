@@ -84,7 +84,7 @@ public class SessionController implements Serializable
         else 
         {
             req.getServletContext().log("El usuario ya estaba logueado:  ");
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/GlotonPrimefaces/admin/principaladmin.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/GlotonPrimefaces/admin/categoria/List.xhtml");
         }
     }
     

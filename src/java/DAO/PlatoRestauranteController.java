@@ -127,15 +127,7 @@ public class PlatoRestauranteController implements Serializable
             
                 String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
-            System.out.println("desc:   "+current.getPlatDescripcion());
-            System.out.println("ing:    "+current.getPlatIngredientes());
-            System.out.println("id:     "+current.getPlatId());
-            System.out.println("precio: "+current.getPlatPrecio());
-            Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario).get(0);
-                
-            System.out.println("nombre: "+current.getTblplatoplaId().getPlaNombre());
-            System.out.println("rest:   "+restaurante.getResNombre());
-            
+                Restaurante restaurante = ejbRestauranteFacade.findByUserName(usuario).get(0);
                 current.setTblRestauranteResId(restaurante);
                 
             }

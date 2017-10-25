@@ -9,6 +9,9 @@ import Modelo.UsuarioGrupo;
 import java.awt.Event;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,6 +127,7 @@ public class UsuarioController implements Serializable {
                  
                     
             current.setDueFechaRegistro(date1);
+            current.setDuePass(cifrarContraseña(current.getDuePass()));
             getFacade().create(current);
             System.out.println("Algo "+current.getDueId());
             System.out.println("Algo "+current.getDueNombre());
@@ -135,7 +139,6 @@ public class UsuarioController implements Serializable {
             System.out.println("Algo "+current.getDueEstado());
             System.out.println("Algo "+current.getDueFechaRegistro());
             System.out.println("Algo "+grupo.getGrupId());
-            
             
             
             UsuarioGrupo usuarioGrupo = new UsuarioGrupo();
@@ -152,6 +155,18 @@ public class UsuarioController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
+    }
+    
+    public String cifrarContraseña(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException
+    {
+        MessageDigest sha256=MessageDigest.getInstance("SHA-256");
+        sha256.update(password.getBytes("UTF-8"));
+        byte[] digest = sha256.digest();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<digest.length;i++){
+            sb.append(String.format("%02x", digest[i]));
+        }
+        return sb.toString(); //2bb80d5...527a25b
     }
     
    public void changeListener(ValueChangeEvent event) {
@@ -171,7 +186,7 @@ public class UsuarioController implements Serializable {
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             String txtProperty = request.getParameter("formEditUsu:dueEstado");
             current.setDueEstado(txtProperty);
-            
+            current.setDuePass(cifrarContraseña(current.getDuePass()));
             current.setDueFechaRegistro(date1);
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
