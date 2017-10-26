@@ -60,7 +60,8 @@
                                         <f:facet name="header">
                                             <h:outputText value="Plato"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.tblplatoplaId}"/>
+                                        <!--<h:outputText value="#{item.tblplatoplaId}"/>-->
+                                        <h:outputText value="#{platoRestauranteController.obtenerNomPlatoRes(item.tblplatoplaId)}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">

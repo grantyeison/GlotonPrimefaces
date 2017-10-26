@@ -4,6 +4,7 @@ import Modelo.PlatoRestaurante;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.PlatoRestauranteFacade;
+import Modelo.Plato;
 import Modelo.Restaurante;
 import Modelo.Usuario;
 
@@ -335,6 +336,11 @@ public class PlatoRestauranteController implements Serializable
             }
         }
 
+    }
+    
+    public String obtenerNomPlatoRes(Plato plato)
+    {
+        return plato.getPlaNombre();
     }
 
 }

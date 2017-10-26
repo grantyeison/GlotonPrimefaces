@@ -287,5 +287,10 @@ public class RestauranteController implements Serializable {
         }
 
     }
+    
+    public String obtenerNomDUeRes(Usuario usuario)
+    {
+        return usuario.getDueNombre();
+    }
 
 }
