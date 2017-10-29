@@ -9,10 +9,13 @@ import Bean.CategoriaFacade;
 import Bean.PlatoFacade;
 import Bean.PlatoRestauranteFacade;
 import Bean.RestauranteFacade;
+import Bean.CalificacionFacade;
+import Modelo.Calificacion;
 import Modelo.Categoria;
 import Modelo.Plato;
 import Modelo.PlatoRestaurante;
 import Modelo.Restaurante;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +25,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
@@ -47,6 +51,8 @@ public class webservice {
     private CategoriaFacade ejCategFacade;
     @EJB
     private PlatoRestauranteFacade ejPlatoRestFacade;
+    @EJB
+    private CalificacionFacade ejCalificacionFacade;
     
 
     /**
@@ -69,6 +75,8 @@ public class webservice {
         List<Plato> listaPlato = ejPlatoFacade.findAll();
         List<Categoria> listaCateg = ejCategFacade.findAll();
         List<PlatoRestaurante> listaPlatoRest = ejPlatoRestFacade.findAll();
+        List<Calificacion> listaCalificaciones = ejCalificacionFacade.findAll();
+        
         try {
             //llenar lista JSON con restaurantes
             jSONArray = new JSONArray();
@@ -128,6 +136,7 @@ public class webservice {
                 JSONObject j = new JSONObject();
                 if (r.getPlatEstado().equals("Activo"))
                 {
+                    j.put("id",r.getPlatId());
                     j.put("plato",r.getTblplatoplaId().getPlaNombre());
                     j.put("ingredientes",r.getPlatIngredientes());
                     j.put("descripcion",r.getPlatDescripcion());
@@ -137,6 +146,37 @@ public class webservice {
                 }
             }
             jSONObject.put("caracteristicasPlato", jSONArray);
+            
+            //llenar lista JSON con calificaciones
+            jSONArray = new JSONArray();
+            //hacer una por cada plato y devolver los mejor calificados solamente...
+            List<Calificacion> calificacionesEnviar = new ArrayList<>();
+            for (PlatoRestaurante plar: listaPlatoRest)
+            {
+                int suma = 0;
+                int conteo = 0;
+                for(Calificacion r : listaCalificaciones)
+                {
+                    if (plar == r.getTblplatorestauranteplatId())
+                    {
+                        suma = suma+r.getCalPuntuacion();
+                        conteo++;
+                    }
+                }
+                if (conteo >0)
+                {
+                    int promedio = suma/conteo;
+                    if (promedio >3)
+                    {
+                        JSONObject j = new JSONObject();
+                        j.put("puntuacion",suma/conteo);
+                        j.put("caracteristica",plar.getPlatId());
+                        jSONArray.put(j);
+                    }
+                }
+            }
+            
+            jSONObject.put("recomendados", jSONArray);
             
          } catch (JSONException ex) {
                 Logger.getLogger(webservice.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,8 +189,18 @@ public class webservice {
      * PUT method for updating or creating an instance of webservice
      * @param content representation for the resource
      */
-    @PUT
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    public void postJson(String content) throws JSONException {
+        JSONObject jsonObject = new JSONObject(content);
+        JSONArray calificaciones = jsonObject.getJSONArray("calificaciones");
+        for (int i = 0 ; i < calificaciones.length(); i++)
+        {
+            JSONObject calificacion = calificaciones.getJSONObject(i);
+            Calificacion cal = new Calificacion();
+            PlatoRestaurante plato = ejPlatoRestFacade.buscar(Integer.parseInt(calificacion.get("plato").toString()));
+            cal.setTblplatorestauranteplatId(plato);
+            cal.setCalPuntuacion(Integer.parseInt(calificacion.get("calificacion").toString()));
+        }
     }
 }

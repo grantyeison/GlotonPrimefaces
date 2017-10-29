@@ -38,4 +38,12 @@ public class PlatoRestauranteFacade extends AbstractFacade<PlatoRestaurante> {
         query.setParameter("resId", resId);
         return query.getResultList();
     }
+    
+    public PlatoRestaurante buscar(int id)
+    {
+        Query query = getEntityManager().createNamedQuery("PlatoRestaurante.findByPlatId");
+        query.setParameter("platId", id);
+        return (PlatoRestaurante) query.getResultList().get(0);
+        
+    }
 }

@@ -41,7 +41,7 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 300px">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
@@ -54,9 +54,9 @@
                                     <f:selectItems  value="#{platoController.listPlatos}" var="plato" itemLabel="#{plato.plaNombre}"/>
                                 </h:selectOneMenu>
                                 <h:outputLabel value="Ingredientes" for="platIngredientes" />
-                                <h:inputText  class="form-control" id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.CreatePlatoRestauranteTitle_platIngredientes}" />
+                                <h:inputTextarea rows="8" class="form-control" id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" />
                                 <h:outputLabel value="Descripción" for="platDescripcion" />
-                                <h:inputText  class="form-control" id="platDescripcion" value="#{platoRestauranteController.selected.platDescripcion}" title="#{bundle.CreatePlatoRestauranteTitle_platDescripcion}" />
+                                <h:inputTextarea rows="8" class="form-control" id="platDescripcion" value="#{platoRestauranteController.selected.platDescripcion}" title="#{bundle.CreatePlatoRestauranteTitle_platDescripcion}" />
                                 <h:outputLabel value="Precio" for="platPrecio" />
                                 <h:inputText  class="form-control" id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.CreatePlatoRestauranteTitle_platPrecio}" />
                                 <h:outputLabel value="Estado" for="platEstado" />
@@ -84,7 +84,7 @@
                             
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 300px">
                     </p:column>
                 </p:row>
             </p:panelGrid>
