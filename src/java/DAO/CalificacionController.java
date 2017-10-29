@@ -4,6 +4,7 @@ import Modelo.Calificacion;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.CalificacionFacade;
+import Modelo.PlatoRestaurante;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -231,5 +232,8 @@ public class CalificacionController implements Serializable {
         }
 
     }
-
+     public String obtenerNomPlatCal(PlatoRestaurante platoRestaurante)
+    {
+        return platoRestaurante.getTblplatoplaId().getPlaNombre();
+    }
 }

@@ -65,7 +65,8 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListCalificacionTitle_tblplatorestauranteplatId}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.tblplatorestauranteplatId}"/>
+                                        <!--<h:outputText value="#{item.tblplatorestauranteplatId}"/>-->
+                                            <h:outputText value="#{calificacionController.obtenerNomPlatCal(item.tblplatorestauranteplatId)}"/>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>

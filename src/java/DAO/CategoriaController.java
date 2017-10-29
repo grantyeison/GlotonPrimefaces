@@ -20,6 +20,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("categoriaController")
 @SessionScoped
@@ -31,7 +34,33 @@ public class CategoriaController implements Serializable {
     private Bean.CategoriaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private UploadedFile foto;
+    private String rutaFoto;
+    private String rutaFotoAbsoluta;
 
+    public String getRutaFoto() {
+        return rutaFoto;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+
+    public String getRutaFotoAbsoluta() {
+        return rutaFotoAbsoluta;
+    }
+
+    public void setRutaFotoAbsoluta(String rutaFotoAbsoluta) {
+        this.rutaFotoAbsoluta = rutaFotoAbsoluta;
+    }
+
+    public UploadedFile getFoto() {
+        return foto;
+    }
+
+    public void setFoto(UploadedFile foto) {
+        this.foto = foto;
+    }
     private List<String> estado = new ArrayList<String>();
 
     
@@ -256,5 +285,13 @@ public class CategoriaController implements Serializable {
         }
 
     }
+    public void cargarFoto(FileUploadEvent event)
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance(); 
+        this.foto=event.getFile();
+        requestContext.update("formularioCategoria");        
+        
+    }
+
 
 }
