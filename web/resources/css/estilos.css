@@ -192,3 +192,140 @@ body{
 #inner-message {
     margin: 0 auto;
 }
+
+
+.btn-glotonLight { 
+  color: #521B04; 
+  background-color: #F29403; 
+  border-color: #E36B07; 
+} 
+ 
+.btn-glotonLight:hover, 
+.btn-glotonLight:focus, 
+.btn-glotonLight:active, 
+.btn-glotonLight.active, 
+.open .dropdown-toggle.btn-glotonLight { 
+  color: #521B04; 
+  background-color: #E36B07; 
+  border-color: #E36B07; 
+} 
+ 
+.btn-glotonLight:active, 
+.btn-glotonLight.active, 
+.open .dropdown-toggle.btn-glotonLight { 
+  background-image: none; 
+} 
+ 
+.btn-glotonLight.disabled, 
+.btn-glotonLight[disabled], 
+fieldset[disabled] .btn-glotonLight, 
+.btn-glotonLight.disabled:hover, 
+.btn-glotonLight[disabled]:hover, 
+fieldset[disabled] .btn-glotonLight:hover, 
+.btn-glotonLight.disabled:focus, 
+.btn-glotonLight[disabled]:focus, 
+fieldset[disabled] .btn-glotonLight:focus, 
+.btn-glotonLight.disabled:active, 
+.btn-glotonLight[disabled]:active, 
+fieldset[disabled] .btn-glotonLight:active, 
+.btn-glotonLight.disabled.active, 
+.btn-glotonLight[disabled].active, 
+fieldset[disabled] .btn-glotonLight.active { 
+  background-color: #F29403; 
+  border-color: #E36B07; 
+} 
+ 
+.btn-glotonLight .badge { 
+  color: #F29403; 
+  background-color: #521B04; 
+}
+.btn-glotonDark { 
+  color: #F29403; 
+  background-color: #C93E03; 
+  border-color: #C93E03; 
+} 
+ 
+.btn-glotonDark:hover, 
+.btn-glotonDark:focus, 
+.btn-glotonDark:active, 
+.btn-glotonDark.active, 
+.open .dropdown-toggle.btn-glotonDark { 
+  color: #F29403; 
+  background-color: #C93E03; 
+  border-color: #C93E03; 
+} 
+ 
+.btn-glotonDark:active, 
+.btn-glotonDark.active, 
+.open .dropdown-toggle.btn-glotonDark { 
+  background-image: none; 
+} 
+ 
+.btn-glotonDark.disabled, 
+.btn-glotonDark[disabled], 
+fieldset[disabled] .btn-glotonDark, 
+.btn-glotonDark.disabled:hover, 
+.btn-glotonDark[disabled]:hover, 
+fieldset[disabled] .btn-glotonDark:hover, 
+.btn-glotonDark.disabled:focus, 
+.btn-glotonDark[disabled]:focus, 
+fieldset[disabled] .btn-glotonDark:focus, 
+.btn-glotonDark.disabled:active, 
+.btn-glotonDark[disabled]:active, 
+fieldset[disabled] .btn-glotonDark:active, 
+.btn-glotonDark.disabled.active, 
+.btn-glotonDark[disabled].active, 
+fieldset[disabled] .btn-glotonDark.active { 
+  background-color: #C93E03; 
+  border-color: #C93E03; 
+} 
+ 
+.btn-glotonDark .badge { 
+  color: #C93E03; 
+  background-color: #F29403; 
+}
+.btn-glotonLogout { 
+  color: #EDA005; 
+  background-color: #6E4A00; 
+  border-color: #6E4A00; 
+} 
+ 
+.btn-glotonLogout:hover, 
+.btn-glotonLogout:focus, 
+.btn-glotonLogout:active, 
+.btn-glotonLogout.active, 
+.open .dropdown-toggle.btn-glotonLogout { 
+  color: #EDA005; 
+  background-color: #855900; 
+  border-color: #6E4A00; 
+} 
+ 
+.btn-glotonLogout:active, 
+.btn-glotonLogout.active, 
+.open .dropdown-toggle.btn-glotonLogout { 
+  background-image: none; 
+} 
+ 
+.btn-glotonLogout.disabled, 
+.btn-glotonLogout[disabled], 
+fieldset[disabled] .btn-glotonLogout, 
+.btn-glotonLogout.disabled:hover, 
+.btn-glotonLogout[disabled]:hover, 
+fieldset[disabled] .btn-glotonLogout:hover, 
+.btn-glotonLogout.disabled:focus, 
+.btn-glotonLogout[disabled]:focus, 
+fieldset[disabled] .btn-glotonLogout:focus, 
+.btn-glotonLogout.disabled:active, 
+.btn-glotonLogout[disabled]:active, 
+fieldset[disabled] .btn-glotonLogout:active, 
+.btn-glotonLogout.disabled.active, 
+.btn-glotonLogout[disabled].active, 
+fieldset[disabled] .btn-glotonLogout.active { 
+  background-color: #6E4A00; 
+  border-color: #6E4A00; 
+} 
+ 
+.btn-glotonLogout .badge { 
+  color: #6E4A00; 
+  background-color: #EDA005; 
+}

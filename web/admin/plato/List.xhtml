@@ -12,23 +12,23 @@
             <h:form>      
                 <p:panelGrid class="tblCentfull">
                     <p:row>
-                        <p:column>
-                            <a href="Create.xhtml" class="btn btn-default btn-lg">Nuevo Plato</a>
+                        <p:column class="btn-glotonLight">
+                            <a href="Create.xhtml" class="btn btn-glotonLight btn-lg">Nuevo Plato</a>
                         </p:column>
-                        <p:column>
-                            <a href="../categoria/List.xhtml" class="btn btn-default btn-lg">Gestion de Categorias</a>
+                        <p:column class="btn-glotonLight">
+                            <a href="../categoria/List.xhtml" class="btn btn-glotonLight btn-lg">Gestion de Categorias</a>
                         </p:column>
-                        <p:column>
-                            <a href="#" class="btn btn-info btn-lg">Gestion de Platos</a>
+                        <p:column class="btn-glotonDark">
+                            <a href="#" class="btn btn-glotonDark btn-lg">Gestion de Platos</a>
                         </p:column>
-                        <p:column>
-                            <a href="../restaurante/List.xhtml" class="btn btn-default btn-lg">Gestion de Restaurantes</a>
+                        <p:column class="btn-glotonLight">
+                            <a href="../restaurante/List.xhtml" class="btn btn-glotonLight btn-lg">Gestion de Restaurantes</a>
                         </p:column>
-                        <p:column>
-                            <a href="../usuario/List.xhtml" class="btn btn-default btn-lg">Gestion de Usuarios</a>
+                        <p:column class="btn-glotonLight">
+                            <a href="../usuario/List.xhtml" class="btn btn-glotonLight btn-lg">Gestion de Usuarios</a>
                         </p:column>
-                        <p:column class="btn btn-success">
-                            <h:commandButton class="btn btn-success btn-lg" value="Logout" action="#{sessionController.logout()}"/>
+                        <p:column class="btn-glotonLogout">
+                            <h:commandButton class="btn btn-glotonLogout btn-lg" value="Logout" action="#{sessionController.logout()}"/>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -86,9 +86,9 @@
                                         <f:facet name="header">
                                             <h:outputText value="Opciones"/>
                                         </f:facet>
-                                        <h:commandButton class="btn btn-info" action="#{platoController.prepareEdit}" value="#{bundle.ListPlatoEditLink}"/>
+                                        <h:commandButton class="btn btn-glotonLight" action="#{platoController.prepareEdit}" value="#{bundle.ListPlatoEditLink}"/>
                                         <h:outputText value=" "/>
-                                        <h:commandButton class="btn btn-danger" action="#{platoController.destroy}" value="#{bundle.ListPlatoDestroyLink}"/>
+                                        <h:commandButton class="btn btn-glotonDark" action="#{platoController.destroy}" value="#{bundle.ListPlatoDestroyLink}"/>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>
