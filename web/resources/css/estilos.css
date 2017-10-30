@@ -192,3 +192,14 @@ body{
 #inner-message {
     margin: 0 auto;
 }
+#principalPadre
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#principalHijo
+{
+    margin-top: 200px;
+    text-align: center;
+}
