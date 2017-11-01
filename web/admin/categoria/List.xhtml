@@ -27,7 +27,7 @@
                         <p:column class="btn-glotonLight">
                             <a href="../usuario/List.xhtml" class="btn btn-glotonLight btn-lg">Gestion de Usuarios</a>
                         </p:column>
-                        <p:column class="btn-glotonLogout">
+                        <p:column class="btn-glotonLogout" style="vertical-align:middle;">
                             <h:commandButton class="btn btn-glotonLogout btn-lg" value="Logout" action="#{sessionController.logout()}"/>
                         </p:column>
                     </p:row>
@@ -40,7 +40,7 @@
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            <p:panelGrid class="tblCentfull">
+            <p:panelGrid class="tblCentfull" style="position:relative;">
                 <p:row>
                     <p:column colspan="3">
                         <h1 class="page-header alCen">Categorias</h1>
@@ -78,14 +78,15 @@
                                         </f:facet>
                                         <h:outputText value="#{item.catEstado}"/>
                                     </h:column>
-                                    <h:column>
+                                    <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Opciones"/>
                                         </f:facet>
                                         <h:commandButton class="btn btn-glotonLight" action="#{categoriaController.prepareEdit}" value="#{bundle.ListCategoriaEditLink}"/>
                                         <h:outputText value=" "/>
                                         <h:commandButton class="btn btn-glotonDark" action="#{categoriaController.destroy}" value="#{bundle.ListCategoriaDestroyLink}"/>
-                                    </h:column>
+                                        <div style="height: 8px;"></div>
+                                    </p:column>
                                 </h:dataTable>
                             </h:panelGroup>
 

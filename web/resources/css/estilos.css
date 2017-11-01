@@ -192,7 +192,23 @@ body{
 #inner-message {
     margin: 0 auto;
 }
+#principalPadre
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#principalHijo
+{
+    margin-top: 2px;
+    background-attachment: fixed;
+}
 
+#bodyPage
+{
+    background-image: url('resources/imagenes/texturaFondo.png');
+    fill: true;
+}
 
 .btn-glotonLight { 
   color: #521B04; 
@@ -328,4 +344,24 @@ fieldset[disabled] .btn-glotonLogout.active {
 .btn-glotonLogout .badge { 
   color: #6E4A00; 
   background-color: #EDA005; 
+}
+
+<!--panelgrid con fondo transparente para el login y las imagenes -->
+.noBorder tr,
+.noBorder td { border: 0 !important; }
+
+.transparentBackground tr,
+.transparentBackground td { background: transparent !important; }
+
+.centered {
+    position: absolute;
+    height: 100px;
+    top: 0;
+    bottom: 0;
+    margin:auto;
+}
+
+.backGroundTexture {
+  background-image:  url(../imagenes/texturaFondo.png);
+  background-color: transparent;
 }
