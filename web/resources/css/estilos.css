@@ -355,7 +355,7 @@ fieldset[disabled] .btn-glotonLogout.active {
 .noBorder td { border: 0 !important; }
 
 .transparentBackground tr,
-.transparentBackground td { background: transparent !important; }
+.transparentBackground td { background: transparent; }
 
 .centered {
     position: absolute;
@@ -368,4 +368,18 @@ fieldset[disabled] .btn-glotonLogout.active {
 .backGroundTexture {
   background-image:  url(../imagenes/texturaFondo.png);
   background-color: transparent;
+}
+.Bimage
+{
+    background-image: url("#{resource['imagenes/texturaFondo.png']}");
+}
+tr.jsfcrud_odd_row {
+    background-color: #e36b07;
+    color: #444444;
+}
+
+
+tr.jsfcrud_even_row {
+    background-color: #F7F564;
+    color: #444444;
 }
