@@ -47,14 +47,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column> 
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form id="formEditRest">
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2"  class="tblCentfull">
                                 <h:outputLabel value="Nit" for="resNit" />
                                 <h:inputText  class="form-control" id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.EditRestauranteTitle_resNit}" />
                                 <h:outputLabel value="Nombre" for="resNombre" />
@@ -78,11 +78,16 @@
                                     <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
                                 </h:selectOneMenu>
                             </h:panelGrid>
-                            <h:commandButton class="btn btn-primary" action="#{restauranteController.update}" value="#{bundle.EditRestauranteSaveLink}"/>
-
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{restauranteController.update}" value="#{bundle.EditRestauranteSaveLink}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

@@ -42,14 +42,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 300px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form id="formEditPlaRes">
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Plato" for="tblplatoplaId" />
                                 <h:selectOneMenu class="form-control" id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.EditPlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblplatoplaId}">
                                     <f:selectItems  value="#{platoController.listPlatos}" var="plato" itemLabel="#{plato.plaNombre}"/>
@@ -71,11 +71,16 @@
                                     <f:selectItems value="#{restauranteController.itemsAvailableSelectOne}"/>
                                 </h:selectOneMenu>
         -->                    </h:panelGrid>
-                            <h:commandButton class="btn btn-glotonLight" action="#{platoRestauranteController.update}" value="#{bundle.EditPlatoRestauranteSaveLink}"/>
-
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{platoRestauranteController.update}" value="#{bundle.EditPlatoRestauranteSaveLink}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 300px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

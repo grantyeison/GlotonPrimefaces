@@ -40,9 +40,9 @@
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            
+
             <script src="resources/js/archivos.js" ></script>
-            
+
             <p:panelGrid class="tblCentfull">
                 <p:row>
                     <p:column colspan="3">
@@ -50,14 +50,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2"  class="tblCentfull">
                                 <h:outputLabel value="Nit" for="resNit" />
                                 <h:inputText  class="form-control" id="resNit" value="#{restauranteController.selected.resNit}" title="#{bundle.CreateRestauranteTitle_resNit}" />
                                 <h:outputLabel value="Nombre" for="resNombre" />
@@ -68,9 +68,6 @@
                                 <h:inputText  class="form-control" id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.CreateRestauranteTitle_resTelefono}" />
                                 <h:outputLabel value="Logo" for="resLogo" />
                                 <h:inputText  class="form-control" id="resLogo" value="#{restauranteController.selected.resLogo}" title="#{bundle.CreateRestauranteTitle_resLogo}" />
-                                
-                                <h:commandButton value="subir" onclick="showMessage()"/>
-                                
                                 <h:outputLabel value="Estado" for="resEstado" />
                                 <h:selectOneMenu     class="form-control"  id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.CreateRestauranteTitle_resEstado}" >
                                     <f:selectItems  value="#{restauranteController.estado}"/>
@@ -85,12 +82,16 @@
                                 </h:selectOneMenu>
 
                             </h:panelGrid>
-                            <br />
-                            <h:commandButton class="btn btn-primary" action="#{restauranteController.create}" value="Guardar" />
-
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{restauranteController.create}" value="Guardar" />
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

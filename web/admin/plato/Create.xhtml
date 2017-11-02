@@ -47,14 +47,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>    
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="plaNombre" />
                                 <h:inputText  class="form-control" id="plaNombre" value="#{platoController.selected.plaNombre}" title="#{bundle.CreatePlatoTitle_plaNombre}" />
                                 <h:outputLabel value="Imagen" for="plaImagen" />
@@ -71,12 +71,16 @@
                                 </h:selectOneMenu>
 
                             </h:panelGrid>
-                            <br />
-                            <h:commandButton class="btn btn-primary" action="#{platoController.create}" value="Guardar" />
-
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{platoController.create}" value="Guardar" />
+</p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

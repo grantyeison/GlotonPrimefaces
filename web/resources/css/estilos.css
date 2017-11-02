@@ -13,6 +13,10 @@ body{
 }
 */
 
+.iconoAdicionar {
+    background-image: url(../imagenes/adicionar.png);
+}
+
 .ui-panelgrid td, .ui-panelgrid tr
 {
     border-style: none !important

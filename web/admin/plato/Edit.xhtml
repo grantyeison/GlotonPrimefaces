@@ -44,36 +44,41 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form id="formEditPlato">    
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="plaNombre" />
                                 <h:inputText  class="form-control" id="plaNombre" value="#{platoController.selected.plaNombre}" title="#{bundle.EditPlatoTitle_plaNombre}" />
                                 <h:outputLabel value="Imagen" for="plaImagen" />
                                 <h:inputText  class="form-control" id="plaImagen" value="#{platoController.selected.plaImagen}" title="#{bundle.EditPlatoTitle_plaImagen}" />
                                 <h:outputLabel value="Estado" for="plaEstado" />
-                                
+
                                 <h:selectOneMenu  class="form-control" id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.CreatePlatoTitle_plaEstado}" >
                                     <f:selectItems  value="#{platoController.estado}"/>
                                 </h:selectOneMenu>
 
-                                
+
                                 <h:outputLabel value="Categoría" for="tblcategoriacatId" />
                                 <h:selectOneMenu  class="form-control" id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.CreatePlatoTitle_tblcategoriacatId}" >
                                     <f:selectItems  value="#{categoriaController.listCategorias}" var="categoria" itemLabel="#{categoria.catNombre}"/>
                                 </h:selectOneMenu>
 
                             </h:panelGrid>
-                            <h:commandButton class="btn btn-primary" action="#{platoController.update}" value="#{bundle.EditPlatoSaveLink}"/>
-
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{platoController.update}" value="#{bundle.EditPlatoSaveLink}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

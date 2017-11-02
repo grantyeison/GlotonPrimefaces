@@ -47,7 +47,7 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
 
@@ -55,7 +55,7 @@
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form id="formEditCateg">
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="catNombre" />
                                 <h:inputText  class="form-control" id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.EditCategoriaTitle_catNombre}" />
                                 <h:outputLabel value="Imagen" for="catImagen" />
@@ -65,10 +65,16 @@
                                     <f:selectItems  value="#{categoriaController.estado}"/>
                                 </h:selectOneMenu>
                             </h:panelGrid>
-                            <h:commandButton class="btn btn-primary" action="#{categoriaController.update}" value="#{bundle.EditCategoriaSaveLink}"/>
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{categoriaController.update}" value="#{bundle.EditCategoriaSaveLink}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

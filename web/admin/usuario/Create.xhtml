@@ -44,14 +44,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form>
-                            <p:panelGrid  columns="2">
+                            <p:panelGrid  columns="2"  class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="dueNombre" />
                                 <h:inputText  class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
                                 <h:outputLabel value="Email" for="dueEmail" />
@@ -72,12 +72,16 @@
                                 </h:selectOneMenu>
 
                             </p:panelGrid>
-                            <br />
-                            <h:commandButton class="btn btn-primary" action="#{usuarioController.create}" value="Guardar" />
- 
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{usuarioController.create}" value="Guardar" />
+ </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>

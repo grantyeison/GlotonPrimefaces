@@ -41,19 +41,19 @@
         <ui:define name="right">
         </ui:define>
         <ui:define name="content">
-            
+
             <h:form>
-                            <h:outputLabel value="Imagen" for="catImagen" />
-                                <!--<h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />-->
-                                
-                                <p:fileUpload  fileUploadListener="#{categoriaController.cargarFoto}" mode="advanced" dragDropSupport="false"
-                                                           label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                           
-                                                           />
-                                <p:outputLabel value="#{categoriaController.foto.fileName}"/>
+                <h:outputLabel value="Imagen" for="catImagen" />
+                    <!--<h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />-->
+
+                <p:fileUpload  fileUploadListener="#{categoriaController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                               label="Cargar" auto="true"  
+                               sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+
+                               />
+                <p:outputLabel value="#{categoriaController.foto.fileName}"/>
             </h:form>
-            
+
             <p:panelGrid class="tblCentfull">
                 <p:row>
                     <p:column colspan="3">
@@ -61,14 +61,14 @@
                     </p:column>
                 </p:row>
                 <p:row>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                     <p:column>
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
                         <h:form>
-                            <h:panelGrid columns="2">
+                            <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="catNombre" />
                                 <h:inputText class="form-control" id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.CreateCategoriaTitle_catNombre}" />
                                 <h:outputLabel value="Imagen" for="catImagen" />
@@ -78,11 +78,16 @@
                                     <f:selectItems  value="#{categoriaController.estado}"/>
                                 </h:selectOneMenu>
                             </h:panelGrid>
-                            <br />
-                            <h:commandButton class="btn btn-primary" action="#{categoriaController.create}" value="Guardar" />
+                            <p:panelGrid class="tblCentfull">
+                                <p:row>
+                                    <p:column class="alDer">
+                                        <h:commandButton class="btn btn-glotonLight btn-lg" action="#{categoriaController.create}" value="Guardar" />
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
                         </h:form>
                     </p:column>
-                    <p:column style="width: 500px">
+                    <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>
