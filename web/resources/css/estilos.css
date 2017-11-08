@@ -141,6 +141,15 @@ body{
     padding: 8px;
 }
 
+.anchoImagen{
+    width: 20px;
+    
+}
+
+.anchoImagenLabel{
+    margin-left: 86px;
+}
+
 .title{
     text-align: center;
     padding-top: 50px;
