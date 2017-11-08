@@ -82,7 +82,7 @@ public class PlatoRestauranteController implements Serializable
                 @Override
                 public int getItemsCount() 
                 {
-                    return getFacade().count();
+                    return items.getRowCount();
                 }
 
                 @Override
@@ -146,8 +146,8 @@ public class PlatoRestauranteController implements Serializable
 
     public String prepareEdit() //preparación para editar un item, invoca a Edit.xhtml
     {
-        current = (PlatoRestaurante) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = (PlatoRestaurante) getItems2().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems2().getRowIndex();
         return "Edit";
     }
 
@@ -171,8 +171,8 @@ public class PlatoRestauranteController implements Serializable
 
     public String destroy() //método para eliminar un registro de PlatoRestaurante, se usa en List.xhtml
     {
-        current = (PlatoRestaurante) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = (PlatoRestaurante) getItems2().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems2().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -227,7 +227,7 @@ public class PlatoRestauranteController implements Serializable
         }
     }
 
-    public DataModel getItems()
+    public DataModel getItems()//versión modificada para la consulta
     {
         if (items == null) //si no lo está, simplemente lo retorna y ya
         {
@@ -248,7 +248,14 @@ public class PlatoRestauranteController implements Serializable
         }
         return items;
     }
-
+public DataModel getItems2()//el método como se genera por defecto
+    {
+        if (items == null) //si no lo está, simplemente lo retorna y ya
+        {
+            items = getPagination().createPageDataModel();
+        }
+        return items;
+    }
     private void recreateModel() //reinicia los datos
     {
         items = null;
