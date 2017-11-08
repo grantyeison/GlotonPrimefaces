@@ -4,6 +4,11 @@ import Modelo.Categoria;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.CategoriaFacade;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,6 +24,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
@@ -67,6 +73,20 @@ public class CategoriaController implements Serializable {
     public CategoriaController() {
         estado.add("Activo");
         estado.add("Inactivo");
+        
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); 
+        if(OS.contains("nux"))
+        {
+           this.rutaFotoAbsoluta=realPath.replace("build/", "")+"resources/imagenes/categoria/"; 
+        }
+        else
+        {
+            this.rutaFotoAbsoluta=realPath.replace("build\\", "")+"resources\\imagenes\\categoria\\";
+        }
+        
+        
     }
 
     public Categoria getSelected() {
@@ -118,15 +138,63 @@ public class CategoriaController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            
+            if(foto!=null)
+            {
+                getFacade().create(current);
+                int i = this.foto.getFileName().lastIndexOf('.');            
+                String extension = this.foto.getFileName().substring(i+1);
+                System.out.println("id del creado: "+current.getCatId());
+                String nombre = current.getCatId()+"."+extension;
+               
+                current.setCatImagen(nombre);
+                getFacade().edit(current);
+                this.GuardarFoto(nombre, this.foto.getInputstream());
+                
+            
+            Thread.sleep(2000);
+            this.foto=null;  
+            }
+            
+            else
+            {
+                List<String> lista = new ArrayList<>();
+                lista.add("cargar foto");
+                JsfUtil.addErrorMessages(lista);
+            }
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CategoriaCreated"));
-            return prepareCreate();
+            
+            
+            
+            
+          return prepareCreate();  
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
+     private void GuardarFoto(String filename, InputStream in)
+    {
+       try 
+       { 
+            OutputStream out = new FileOutputStream(new File(this.rutaFotoAbsoluta + filename));              
+            int read = 0;
+            byte[] bytes = new byte[1024];              
+            while ((read = in.read(bytes)) != -1) 
+            {
+                out.write(bytes, 0, read);
+            }              
+            in.close();
+            out.flush();
+            out.close();
+       } catch (IOException e)
+       {
+            System.out.println(e.getMessage());
+       } 
+    }
+    
+    
     public String prepareEdit() {
         current = (Categoria) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -144,6 +212,40 @@ public class CategoriaController implements Serializable {
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             String txtProperty = request.getParameter("formEditCateg:catEstado");
             current.setCatEstado(txtProperty);
+            
+            if(foto!=null)
+            {
+                if(!current.getCatImagen().equals(""))
+                {
+                    System.out.println("el nombre del archivo es: "+current.getCatImagen());
+                    this.GuardarFoto(current.getCatImagen(), this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+                }
+                else
+                {
+                    int i = this.foto.getFileName().lastIndexOf('.');            
+                    String extension = this.foto.getFileName().substring(i+1);
+                    
+                    
+                    String nombre = current.getCatId()+"."+extension;
+                    System.out.println("el nombre del nuevo archivo es: "+nombre);
+                    this.GuardarFoto(nombre, this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+
+                    //current.setPlaImagen(nombre);
+                    current.setCatImagen(nombre);
+                }
+            }
+            else
+            {
+                
+                List<String> lista = new ArrayList<>();
+                lista.add("cargar foto");
+                JsfUtil.addErrorMessages(lista);
+            }
+            
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CategoriaUpdated"));
             return "List";

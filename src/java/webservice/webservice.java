@@ -151,13 +151,37 @@ public class webservice {
             jSONArray = new JSONArray();
             //hacer una por cada plato y devolver los mejor calificados solamente...
             List<Calificacion> calificacionesEnviar = new ArrayList<>();
+ /*           
+            for (PlatoRestaurante plaRes : listaPlatoRest)
+            {
+                int suma = 0;
+                int total = 0;
+                for (Calificacion cali: listaCalificaciones)
+                {
+                    if (cali.getTblplatorestauranteplatId().getPlatId() == plaRes.getPlatId())
+                    {
+                        suma += cali.getCalPuntuacion();
+                        total ++;
+                    }
+                }
+                if (total > 0)
+                {
+                    int promedio = suma / total;
+                    JSONObject j = new JSONObject();
+                    j.put("caracteristica",plaRes.getPlatId());
+                    j.put("puntuacion",promedio);
+                    jSONArray.put(j);
+                }
+            }
+ */           
+            
             for (PlatoRestaurante plar: listaPlatoRest)
             {
                 int suma = 0;
                 int conteo = 0;
                 for(Calificacion r : listaCalificaciones)
                 {
-                    if (plar == r.getTblplatorestauranteplatId())
+                    if (plar.getPlatId() == r.getTblplatorestauranteplatId().getPlatId())
                     {
                         suma = suma+r.getCalPuntuacion();
                         conteo++;
