@@ -5,6 +5,11 @@ import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.RestauranteFacade;
 import Modelo.Usuario;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,8 +25,11 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("restauranteController")
 @SessionScoped
@@ -36,12 +44,55 @@ public class RestauranteController implements Serializable {
     private Bean.UsuarioFacade usuarioEjb;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private UploadedFile foto;
+    private String rutaFoto;
+    private String rutaFotoAbsoluta;
+    
+    public String getRutaFoto() {
+        return rutaFoto;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+
+    public String getRutaFotoAbsoluta() {
+        return rutaFotoAbsoluta;
+    }
+
+    public void setRutaFotoAbsoluta(String rutaFotoAbsoluta) {
+        this.rutaFotoAbsoluta = rutaFotoAbsoluta;
+    }
+
+    public UploadedFile getFoto() {
+        return foto;
+    }
+
+    public void setFoto(UploadedFile foto) {
+        this.foto = foto;
+    }
+
+    
     private List<String> estado = new ArrayList<String>();
 
 
     public RestauranteController() {
         estado.add("Activo");
         estado.add("Inactivo");
+        
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); 
+        if(OS.contains("nux"))
+        {
+           this.rutaFotoAbsoluta=realPath.replace("build/", "")+"resources/imagenes/restaurante/"; 
+        }
+        else
+        {
+            this.rutaFotoAbsoluta=realPath.replace("build\\", "")+"resources\\imagenes\\restaurante\\";
+        }
+        
     }
 
     public Restaurante getSelected() {
@@ -108,7 +159,39 @@ public class RestauranteController implements Serializable {
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
                 current.setTblUsuarioDueId(usuario);
             }
-            getFacade().create(current);
+            //getFacade().create(current);
+            
+            
+            ///////////////////////////////////////
+            if(foto!=null)
+            {
+                getFacade().create(current);
+                int i = this.foto.getFileName().lastIndexOf('.');            
+                String extension = this.foto.getFileName().substring(i+1);
+                //System.out.println("id del creado: "+current.getCatId());
+                //String nombre = current.getPlaId()+"."+extension;
+                String nombre = current.getResId()+"."+extension;
+               
+                //current.setPlaImagen(nombre);
+                current.setResLogo(nombre);
+                getFacade().edit(current);
+                this.GuardarFoto(nombre, this.foto.getInputstream());
+                
+            
+            Thread.sleep(2000);
+            this.foto=null;  
+            }
+            
+            else
+            {
+                List<String> lista = new ArrayList<>();
+                lista.add("cargar foto");
+                JsfUtil.addErrorMessages(lista);
+            }
+            ///////////////////////////////////////////////////
+            
+            
+            
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteCreated"));
             return prepareCreate();
         } catch (Exception e) {
@@ -117,6 +200,28 @@ public class RestauranteController implements Serializable {
         }
     }
 
+    
+     private void GuardarFoto(String filename, InputStream in)
+    {
+       try 
+       { 
+            OutputStream out = new FileOutputStream(new File(this.rutaFotoAbsoluta + filename));              
+            int read = 0;
+            byte[] bytes = new byte[1024];              
+            while ((read = in.read(bytes)) != -1) 
+            {
+                out.write(bytes, 0, read);
+            }              
+            in.close();
+            out.flush();
+            out.close();
+       } catch (IOException e)
+       {
+            System.out.println(e.getMessage());
+       } 
+    }
+    
+    
     public String prepareEdit() {
         current = (Restaurante) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
@@ -291,6 +396,15 @@ public class RestauranteController implements Serializable {
     public String obtenerNomDUeRes(Usuario usuario)
     {
         return usuario.getDueNombre();
+    }
+
+    
+     public void cargarFoto(FileUploadEvent event)
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance(); 
+        this.foto=event.getFile();
+        requestContext.update("formularioCategoria");        
+        
     }
 
 }
