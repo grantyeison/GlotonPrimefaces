@@ -212,6 +212,40 @@ public class CategoriaController implements Serializable {
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             String txtProperty = request.getParameter("formEditCateg:catEstado");
             current.setCatEstado(txtProperty);
+            
+            if(foto!=null)
+            {
+                if(!current.getCatImagen().equals(""))
+                {
+                    System.out.println("el nombre del archivo es: "+current.getCatImagen());
+                    this.GuardarFoto(current.getCatImagen(), this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+                }
+                else
+                {
+                    int i = this.foto.getFileName().lastIndexOf('.');            
+                    String extension = this.foto.getFileName().substring(i+1);
+                    
+                    
+                    String nombre = current.getCatId()+"."+extension;
+                    System.out.println("el nombre del nuevo archivo es: "+nombre);
+                    this.GuardarFoto(nombre, this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+
+                    //current.setPlaImagen(nombre);
+                    current.setCatImagen(nombre);
+                }
+            }
+            else
+            {
+                
+                List<String> lista = new ArrayList<>();
+                lista.add("cargar foto");
+                JsfUtil.addErrorMessages(lista);
+            }
+            
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CategoriaUpdated"));
             return "List";
