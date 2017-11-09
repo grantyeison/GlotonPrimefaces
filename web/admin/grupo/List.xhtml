@@ -17,8 +17,8 @@
                 <h:outputText escape="false" value="#{bundle.ListGrupoEmpty}" rendered="#{grupoController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{grupoController.items.rowCount > 0}">
                     <h:outputText value="#{grupoController.pagination.pageFirstItem + 1}..#{grupoController.pagination.pageLastItem + 1}/#{grupoController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{grupoController.previous}" value="#{bundle.Previous} #{grupoController.pagination.pageSize}" rendered="#{grupoController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{grupoController.next}" value="#{bundle.Next} #{grupoController.pagination.pageSize}" rendered="#{grupoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:commandLink action="#{grupoController.previous}" value="Anterior" rendered="#{grupoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{grupoController.next}" value="Siguiente" rendered="#{grupoController.pagination.hasNextPage}"/>&nbsp;
                     <h:dataTable value="#{grupoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
@@ -36,16 +36,16 @@
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{grupoController.prepareView}" value="#{bundle.ListGrupoViewLink}"/>
+                            <h:commandLink action="#{grupoController.prepareView}" value="Ver"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{grupoController.prepareEdit}" value="#{bundle.ListGrupoEditLink}"/>
+                            <h:commandLink action="#{grupoController.prepareEdit}" value="Editar"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{grupoController.destroy}" value="#{bundle.ListGrupoDestroyLink}"/>
+                            <h:commandLink action="#{grupoController.destroy}" value="Eliminar"/>
                         </h:column>
                     </h:dataTable>
                 </h:panelGroup>
                 <br />
-                <h:commandLink action="#{grupoController.prepareCreate}" value="#{bundle.ListGrupoCreateLink}"/>
+                <h:commandLink action="#{grupoController.prepareCreate}" value="Crear"/>
                 <br />
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListGrupoIndexLink}"/>

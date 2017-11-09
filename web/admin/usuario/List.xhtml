@@ -56,8 +56,8 @@
                             <h:outputText escape="false" value="#{bundle.ListUsuarioEmpty}" rendered="#{usuarioController.items.rowCount == 0}"/>
                             <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
                                 <h:outputText value="#{usuarioController.pagination.pageFirstItem + 1}..#{usuarioController.pagination.pageLastItem + 1}/#{usuarioController.pagination.itemsCount}"/>&nbsp;
-                                <h:commandLink action="#{usuarioController.previous}" value="#{bundle.Previous} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
-                                <h:commandLink action="#{usuarioController.next}" value="#{bundle.Next} #{usuarioController.pagination.pageSize}" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
+                                <h:commandLink action="#{usuarioController.previous}" value="Anterior" rendered="#{usuarioController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{usuarioController.next}" value="Siguiente" rendered="#{usuarioController.pagination.hasNextPage}"/>&nbsp;
                                 <h:dataTable class="tblCentfull" value="#{usuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                                     <h:column>
                                         <f:facet name="header">

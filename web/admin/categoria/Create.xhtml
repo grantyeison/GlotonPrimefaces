@@ -74,8 +74,6 @@
                             <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="catNombre" />
                                 <h:inputText class="form-control" id="catNombre" value="#{categoriaController.selected.catNombre}" title="#{bundle.CreateCategoriaTitle_catNombre}" />
-                                <h:outputLabel value="Imagen" for="catImagen" />
-                                <h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />
                                 <h:outputLabel value="Estado" for="catEstado" />
                                 <h:selectOneMenu   class="form-control"  id="catEstado" value="#{categoriaController.selected.catEstado}" title="#{bundle.CreateCategoriaTitle_catEstado}" >
                                     <f:selectItems  value="#{categoriaController.estado}"/>

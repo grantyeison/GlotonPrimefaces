@@ -51,8 +51,8 @@
                             <h:outputText escape="false" value="#{bundle.ListCalificacionEmpty}" rendered="#{calificacionController.items.rowCount == 0}"/>
                             <h:panelGroup rendered="#{calificacionController.items.rowCount > 0}">
                                 <h:outputText value="#{calificacionController.pagination.pageFirstItem + 1}..#{calificacionController.pagination.pageLastItem + 1}/#{calificacionController.pagination.itemsCount}"/>&nbsp;
-                                <h:commandLink action="#{calificacionController.previous}" value="#{bundle.Previous} #{calificacionController.pagination.pageSize}" rendered="#{calificacionController.pagination.hasPreviousPage}"/>&nbsp;
-                                <h:commandLink action="#{calificacionController.next}" value="#{bundle.Next} #{calificacionController.pagination.pageSize}" rendered="#{calificacionController.pagination.hasNextPage}"/>&nbsp;
+                                <h:commandLink action="#{calificacionController.previous}" value="Anterior" rendered="#{calificacionController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{calificacionController.next}" value="Siguiente" rendered="#{calificacionController.pagination.hasNextPage}"/>&nbsp;
                                 <h:dataTable  class="tblCentfull" value="#{calificacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                                     
                                     <h:column>

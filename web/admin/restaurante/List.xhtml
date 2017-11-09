@@ -58,8 +58,8 @@
                             <h:outputText escape="false" value="#{bundle.ListRestauranteEmpty}" rendered="#{restauranteController.items.rowCount == 0}"/>
                             <h:panelGroup rendered="#{restauranteController.items.rowCount > 0}">
                                 <h:outputText value="#{restauranteController.pagination.pageFirstItem + 1}..#{restauranteController.pagination.pageLastItem + 1}/#{restauranteController.pagination.itemsCount}"/>&nbsp;
-                                <h:commandLink action="#{restauranteController.previous}" value="#{bundle.Previous} #{restauranteController.pagination.pageSize}" rendered="#{restauranteController.pagination.hasPreviousPage}"/>&nbsp;
-                                <h:commandLink action="#{restauranteController.next}" value="#{bundle.Next} #{restauranteController.pagination.pageSize}" rendered="#{restauranteController.pagination.hasNextPage}"/>&nbsp;
+                                <h:commandLink action="#{restauranteController.previous}" value="Anterior" rendered="#{restauranteController.pagination.hasPreviousPage}"/>&nbsp;
+                                <h:commandLink action="#{restauranteController.next}" value="Siguiente" rendered="#{restauranteController.pagination.hasNextPage}"/>&nbsp;
                                 <h:dataTable class="tblCentfull" value="#{restauranteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                                     <h:column>
                                         <f:facet name="header">
@@ -113,9 +113,9 @@
                                         <f:facet name="header">
                                             <h:outputText value="Opciones"/>
                                         </f:facet>
-                                        <h:commandButton class="btn btn-glotonLight" action="#{restauranteController.prepareEdit}" value="#{bundle.ListRestauranteEditLink}"/>
+                                        <h:commandButton class="btn btn-glotonLight" action="#{restauranteController.prepareEdit}" value="Editar"/>
                                         <h:outputText value=" "/>
-                                        <h:commandButton class="btn btn-glotonDark" action="#{restauranteController.destroy}" value="#{bundle.ListRestauranteDestroyLink}"/>
+                                        <h:commandButton class="btn btn-glotonDark" action="#{restauranteController.destroy}" value="Eliminar"/>
                                         <div style="height: 8px;"></div>
                                     </h:column>
                                 </h:dataTable>

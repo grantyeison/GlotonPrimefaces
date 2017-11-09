@@ -103,8 +103,8 @@ public class PlatoRestauranteController implements Serializable
 
     public String prepareView() //preparación para ver los datos de un PlatoRestaurante, invoca View.xhtml
     {
-        current = (PlatoRestaurante) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        current = (PlatoRestaurante) getItems2().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems2().getRowIndex();
         return "View";
     }
 
