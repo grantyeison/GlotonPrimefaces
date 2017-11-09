@@ -224,7 +224,23 @@ public class webservice {
             Calificacion cal = new Calificacion();
             PlatoRestaurante plato = ejPlatoRestFacade.buscar(Integer.parseInt(calificacion.get("plato").toString()));
             cal.setTblplatorestauranteplatId(plato);
+            System.out.println("plato"+plato.getPlatDescripcion());
             cal.setCalPuntuacion(Integer.parseInt(calificacion.get("calificacion").toString()));
+            cal.setCalUsuario(calificacion.get("usuario").toString());
+            List<Calificacion> cals = ejCalificacionFacade.findAll();
+            int bandera = 0;
+            for (Calificacion cali : cals)
+            {
+                if (cali.getCalUsuario().equals(cal.getCalUsuario()))
+                {
+                    if (cali.getTblplatorestauranteplatId().getPlatId() == cal.getTblplatorestauranteplatId().getPlatId())
+                        bandera = 1;
+                }
+            }
+            if (bandera == 0)
+                ejCalificacionFacade.create(cal);
+            else
+                ejCalificacionFacade.edit(cal);
         }
     }
 }
