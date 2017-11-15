@@ -82,7 +82,7 @@ public class PlatoRestauranteController implements Serializable
                 @Override
                 public int getItemsCount() 
                 {
-                    return items.getRowCount();
+                    return getItems2().getRowCount();
                 }
 
                 @Override

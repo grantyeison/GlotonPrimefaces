@@ -53,20 +53,20 @@
                                 <h:outputText value="#{calificacionController.pagination.pageFirstItem + 1}..#{calificacionController.pagination.pageLastItem + 1}/#{calificacionController.pagination.itemsCount}"/>&nbsp;
                                 <h:commandLink action="#{calificacionController.previous}" value="Anterior" rendered="#{calificacionController.pagination.hasPreviousPage}"/>&nbsp;
                                 <h:commandLink action="#{calificacionController.next}" value="Siguiente" rendered="#{calificacionController.pagination.hasNextPage}"/>&nbsp;
-                                <h:dataTable  class="tblCentfull" value="#{calificacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                                    
+                                <!--<h:dataTable  class="tblCentfull" value="#{calificacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">-->
+                                <h:dataTable  class="tblCentfull" value="#{calificacionController.r_calificaciones}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">    
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Puntuación"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.calPuntuacion}"/>
+                                        <h:outputText value="#{item.promedioCalificacion}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListCalificacionTitle_tblplatorestauranteplatId}"/>
+                                            <h:outputText value="Plato"/>
                                         </f:facet>
-                                        <!--<h:outputText value="#{item.tblplatorestauranteplatId}"/>-->
-                                            <h:outputText value="#{calificacionController.obtenerNomPlatCal(item.tblplatorestauranteplatId)}"/>
+                                            
+                                        <h:outputText value="#{calificacionController.obtenerNomPlatCal(item.calificacion.tblplatorestauranteplatId)}"/>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>
