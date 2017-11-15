@@ -4,6 +4,7 @@ import Modelo.Plato;
 import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.PlatoFacade;
+import Modelo.Categoria;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -388,6 +389,11 @@ public class PlatoController implements Serializable {
         }
 
     }
+    
+    public String ObtenerNomCategoria(Categoria categoria){
+        return categoria.getCatNombre();
+    }
+    
 
      public void cargarFoto(FileUploadEvent event)
     {

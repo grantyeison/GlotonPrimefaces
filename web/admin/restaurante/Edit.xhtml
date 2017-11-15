@@ -56,15 +56,14 @@
                         
                         
                         <h:form>
+                            <h:panelGrid columns="2"  class="tblCentfull">
                             <h:outputLabel value="Imagen" for="catImagen" />
-                                <!--<h:inputText class="form-control"  id="catImagen" value="#{categoriaController.selected.catImagen}" title="#{bundle.CreateCategoriaTitle_catImagen}" />-->
-                                
-                            <p:fileUpload  fileUploadListener="#{restauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                             <p:fileUpload  fileUploadListener="#{restauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                            label="Cargar" auto="true"  
                                                            sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                           
-                                                           />
+                                                            />
                             <p:outputLabel value="#{restauranteController.foto.fileName}"/>
+                            </h:panelGrid>
                         </h:form>
                         
                         

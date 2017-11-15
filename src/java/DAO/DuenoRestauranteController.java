@@ -5,8 +5,15 @@ import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.RestauranteFacade;
 import Modelo.Usuario;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -18,8 +25,11 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("duenoRestauranteController")
 @SessionScoped
@@ -37,9 +47,59 @@ public class DuenoRestauranteController implements Serializable
     
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private UploadedFile foto;
+    private String rutaFoto;
+    private String rutaFotoAbsoluta;
+    
+    public String getRutaFoto() {
+        return rutaFoto;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+
+    public String getRutaFotoAbsoluta() {
+        return rutaFotoAbsoluta;
+    }
+
+    public void setRutaFotoAbsoluta(String rutaFotoAbsoluta) {
+        this.rutaFotoAbsoluta = rutaFotoAbsoluta;
+    }
+
+    public UploadedFile getFoto() {
+        return foto;
+    }
+
+    public void setFoto(UploadedFile foto) {
+        this.foto = foto;
+    }
+
+    private List<String> estado = new ArrayList<String>();
+    
+    
+    
+    
+    
+    
 
     public DuenoRestauranteController() 
     {
+        estado.add("Activo");
+        estado.add("Inactivo");
+        
+        String OS = System.getProperty("os.name").toLowerCase();
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String realPath = (String) servletContext.getRealPath("/"); 
+        if(OS.contains("nux"))
+        {
+           this.rutaFotoAbsoluta=realPath.replace("build/", "")+"resources/imagenes/restaurante/"; 
+        }
+        else
+        {
+            this.rutaFotoAbsoluta=realPath.replace("build\\", "")+"resources\\imagenes\\restaurante\\";
+        }
     }
 
     public Restaurante getSelected() 
@@ -161,6 +221,7 @@ public class DuenoRestauranteController implements Serializable
         String txtProperty="";
         try 
         {
+            
             HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
             txtProperty = request.getParameter("myForm:resNit");
             current.setResNit(txtProperty);
@@ -170,14 +231,47 @@ public class DuenoRestauranteController implements Serializable
             current.setResDireccion(txtProperty);
             txtProperty = request.getParameter("myForm:resTelefono");
             current.setResTelefono(txtProperty);
-            txtProperty = request.getParameter("myForm:resLogo");
-            current.setResLogo(txtProperty);
+            //txtProperty = request.getParameter("myForm:resLogo");
+            //current.setResLogo(txtProperty);
             txtProperty = request.getParameter("myForm:resEstado");
             current.setResEstado(txtProperty);
             txtProperty = request.getParameter("myForm:resLatitud");
             current.setResLatitud(Float.valueOf(txtProperty));
             txtProperty = request.getParameter("myForm:tesLongitud");
             current.setTesLongitud(Float.valueOf(txtProperty));
+            
+            
+            if(foto!=null)
+            {
+                if(!current.getResLogo().equals(""))
+                {
+                    this.GuardarFoto(current.getResLogo(), this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+                }
+                else
+                {
+                    int i = this.foto.getFileName().lastIndexOf('.');            
+                    String extension = this.foto.getFileName().substring(i+1);
+                    
+                    //String nombre = current.getPlaId()+"."+extension;
+                    String nombre = current.getResId()+"."+extension;
+                    System.out.println("el nombre del nuevo archivo es: "+nombre);
+                    this.GuardarFoto(nombre, this.foto.getInputstream());
+                    Thread.sleep(2000);
+                    this.foto=null;
+
+                    //current.setPlaImagen(nombre);
+                    current.setResLogo(nombre);
+                }
+            }
+            else
+            {
+                
+                List<String> lista = new ArrayList<>();
+                lista.add("cargar foto");
+                JsfUtil.addErrorMessages(lista);
+            }
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RestauranteUpdated"));
             return "EditarRestLogeado";
@@ -189,6 +283,31 @@ public class DuenoRestauranteController implements Serializable
         }
     }
 
+    private void GuardarFoto(String filename, InputStream in)
+    {
+       try 
+       { 
+            OutputStream out = new FileOutputStream(new File(this.rutaFotoAbsoluta + filename));              
+            int read = 0;
+            byte[] bytes = new byte[1024];              
+            while ((read = in.read(bytes)) != -1) 
+            {
+                out.write(bytes, 0, read);
+            }              
+            in.close();
+            out.flush();
+            out.close();
+       } catch (IOException e)
+       {
+            System.out.println(e.getMessage());
+       } 
+    }
+    
+    
+    
+    
+    
+    
     public String destroy() 
     {
         current = (Restaurante) getItems().getRowData();
@@ -341,5 +460,12 @@ public class DuenoRestauranteController implements Serializable
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Restaurante.class.getName());
             }
         }
+    }
+     public void cargarFoto(FileUploadEvent event)
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance(); 
+        this.foto=event.getFile();
+        requestContext.update("formularioCategoria");        
+        
     }
 }
