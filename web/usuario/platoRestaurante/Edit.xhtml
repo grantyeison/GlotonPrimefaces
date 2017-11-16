@@ -54,10 +54,10 @@
                                 <h:selectOneMenu class="form-control" id="tblplatoplaId" value="#{platoRestauranteController.selected.tblplatoplaId}" title="#{bundle.EditPlatoRestauranteTitle_tblplatoplaId}" required="true" requiredMessage="#{bundle.EditPlatoRestauranteRequiredMessage_tblplatoplaId}">
                                     <f:selectItems  value="#{platoController.listPlatos}" var="plato" itemLabel="#{plato.plaNombre}"/>
                                 </h:selectOneMenu>
-                                <h:outputLabel value="Ingredientes" for="platIngredientes" />
-                                <h:inputText  class="form-control" id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.EditPlatoRestauranteTitle_platIngredientes}" />
-                                <h:outputLabel value="Descripción" for="platDescripcion" />
+                                <h:outputLabel value="Nombre" for="platDescripcion" />
                                 <h:inputText  class="form-control" id="platDescripcion" value="#{platoRestauranteController.selected.platDescripcion}" title="#{bundle.EditPlatoRestauranteTitle_platDescripcion}" />
+                                <h:outputLabel value="Descripción" for="platIngredientes" />
+                                <h:inputTextarea rows="8" class="form-control" id="platIngredientes" value="#{platoRestauranteController.selected.platIngredientes}" title="#{bundle.EditPlatoRestauranteTitle_platIngredientes}" />
                                 <h:outputLabel value="Precio" for="platPrecio" />
                                 <h:inputText  class="form-control" id="platPrecio" value="#{platoRestauranteController.selected.platPrecio}" title="#{bundle.EditPlatoRestauranteTitle_platPrecio}" />
                                 <h:outputLabel value="Estado" for="platEstado" />

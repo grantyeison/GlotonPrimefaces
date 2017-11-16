@@ -54,17 +54,17 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        
-                        
-                         <h:form>
-                            <h:panelGrid columns="2"  class="tblCentfull">
-                                <h:outputLabel class="anchoImagen" value="Imagen" for="fUpload" />
-                                <p:fileUpload class="anchoImagenLabel"  id="fUpload" fileUploadListener="#{categoriaController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                        <h:form>
+                            <p:outputLabel value="#{categoriaController.foto.fileName}"/>
+                            
+                            <h:graphicImage height="200" value="../../resources/imagenes/categoria/#{categoriaController.selected.catImagen}"/>
+                            <h:panelGrid columns="2" style="width: 100%; text-align: center;">
+                                <h:outputLabel class="tblCent" value="Imagen" for="fUpload" />
+                                <p:fileUpload  class="anchoImagenLabel "  id="fUpload" fileUploadListener="#{categoriaController.cargarFoto}" mode="advanced" dragDropSupport="false"
                                                        label="Cargar" auto="true"  
                                                        sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 
                                                        />
-                                        <p:outputLabel value="#{categoriaController.foto.fileName}"/>
                             </h:panelGrid>
                         </h:form> 
                         

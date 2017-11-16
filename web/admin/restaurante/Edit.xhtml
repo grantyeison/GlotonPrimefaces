@@ -53,20 +53,22 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        
+                        <h:graphicImage height="200" value="../../resources/imagenes/restaurante/#{restauranteController.selected.resLogo}"/>
                         
                         <h:form>
-                            <h:panelGrid columns="2"  class="tblCentfull">
-                            <h:outputLabel value="Imagen" for="catImagen" />
-                             <p:fileUpload  fileUploadListener="#{restauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
-                                                           label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                            />
-                            <p:outputLabel value="#{restauranteController.foto.fileName}"/>
+                            <p:outputLabel value="#{categoriaController.foto.fileName}"/>
+                            <h:panelGrid columns="2"  style="width: 100%; text-align: center;">
+                                <h:outputLabel class="tblCent" value="Imagen" for="fUpload" />
+                                <p:fileUpload  class="anchoImagenLabel "  id="fUpload" fileUploadListener="#{restauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                               label="Cargar" auto="true"  
+                                               sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+
+                                               />
                             </h:panelGrid>
-                        </h:form>
-                        
-                        
+                        </h:form> 
+
+
+
                         <h:form id="formEditRest">
                             <h:panelGrid columns="2"  class="tblCentfull">
                                 <h:outputLabel value="Nit" for="resNit" />
@@ -77,17 +79,18 @@
                                 <h:inputText  class="form-control" id="resDireccion" value="#{restauranteController.selected.resDireccion}" title="#{bundle.EditRestauranteTitle_resDireccion}" />
                                 <h:outputLabel value="Telefono" for="resTelefono" />
                                 <h:inputText  class="form-control" id="resTelefono" value="#{restauranteController.selected.resTelefono}" title="#{bundle.EditRestauranteTitle_resTelefono}" />
-                                <h:outputLabel value="Estado" for="resEstado" />
-                                <h:selectOneMenu  class="form-control" id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" >
-                                    <f:selectItems  value="#{restauranteController.estado}"/>
+                                <h:outputLabel value="Dueño" for="tblUsuarioDueId" />
+                                <h:selectOneMenu  class="form-control" id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >
+                                    <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
                                 </h:selectOneMenu>
                                 <h:outputLabel value="Latitud" for="resLatitud" />
                                 <h:inputText  class="form-control" id="resLatitud" value="#{restauranteController.selected.resLatitud}" title="#{bundle.EditRestauranteTitle_resLatitud}" />
                                 <h:outputLabel value="Longitud" for="tesLongitud" />
                                 <h:inputText  class="form-control" id="tesLongitud" value="#{restauranteController.selected.tesLongitud}" title="#{bundle.EditRestauranteTitle_tesLongitud}" />
-                                <h:outputLabel value="Dueño" for="tblUsuarioDueId" />
-                                <h:selectOneMenu  class="form-control" id="tblUsuarioDueId" value="#{restauranteController.selected.tblUsuarioDueId}" title="#{bundle.CreateRestauranteTitle_tblUsuarioDueId}" >
-                                    <f:selectItems  value="#{usuarioController.listUsuarios}" var="usuario" itemLabel="#{usuario.dueUsuario}"/>
+                                
+                                <h:outputLabel value="Estado" for="resEstado" />
+                                <h:selectOneMenu  class="form-control" id="resEstado" value="#{restauranteController.selected.resEstado}" title="#{bundle.EditRestauranteTitle_resEstado}" >
+                                    <f:selectItems  value="#{restauranteController.estado}"/>
                                 </h:selectOneMenu>
                             </h:panelGrid>
                             <p:panelGrid class="tblCentfull">

@@ -54,23 +54,23 @@
                             <p:panelGrid  columns="2"  class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="dueNombre" />
                                 <h:inputText  class="form-control" id="dueNombre" value="#{usuarioController.selected.dueNombre}" title="#{bundle.CreateUsuarioTitle_dueNombre}" />
-                                <h:outputLabel value="Email" for="dueEmail" />
-                                <h:inputText class="form-control"  id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.CreateUsuarioTitle_dueEmail}" />
                                 <h:outputLabel value="Usuario" for="dueUsuario" />
                                 <h:inputText  class="form-control" id="dueUsuario" value="#{usuarioController.selected.dueUsuario}" title="#{bundle.CreateUsuarioTitle_dueUsuario}" />
                                 <h:outputLabel value="Contraseña" for="duePass" />
-                                <h:inputText  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
-                                <h:outputLabel value="Estado" for="dueEstado" />
-                                <h:selectOneMenu    class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" >
-                                    <f:selectItems  value="#{usuarioController.estado}"/>
-                                </h:selectOneMenu>
-                                <h:outputLabel value="Fecha de Registro" for="dueFechaRegistro" />
-                                <p:calendar id="dueFechaRegistro" value="#{usuarioController.date1}"/>
+                                <h:inputSecret  class="form-control" id="duePass" value="#{usuarioController.selected.duePass}" title="#{bundle.CreateUsuarioTitle_duePass}" />
                                 <h:outputLabel value="Tipo de usuario" for="grupid"/>
                                 <h:selectOneMenu class="form-control" id="grupid"  value="#{usuarioController.grupo}" title="#{bundle.CreateUsuarioGrupoTitle_usugrupGrupId}" >
                                     <f:selectItems  value="#{grupoController.listGrupos}" var="grupo" itemLabel="#{grupo.grupId}"/>
                                 </h:selectOneMenu>
-
+                                <h:outputLabel value="Correo" for="dueEmail" />
+                                <h:inputText class="form-control"  id="dueEmail" value="#{usuarioController.selected.dueEmail}" title="#{bundle.CreateUsuarioTitle_dueEmail}" />
+                                <h:outputLabel value="Fecha de Registro" for="dueFechaRegistro" />
+                                <p:calendar id="dueFechaRegistro" value="#{usuarioController.date1}"/>
+                                <h:outputLabel value="Estado" for="dueEstado" />
+                                <h:selectOneMenu    class="form-control" id="dueEstado" value="#{usuarioController.selected.dueEstado}" title="#{bundle.CreateUsuarioTitle_dueEstado}" >
+                                    <f:selectItems  value="#{usuarioController.estado}"/>
+                                </h:selectOneMenu>
+                                
                             </p:panelGrid>
                             <p:panelGrid class="tblCentfull">
                                 <p:row>

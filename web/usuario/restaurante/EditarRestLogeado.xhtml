@@ -47,20 +47,19 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        
-                        
+
+                        <h:graphicImage height="200" value="../../resources/imagenes/restaurante/#{duenoRestauranteController.selected.resLogo}"/>
                         <h:form>
-                            <h:panelGrid columns="2"  class="tblCentfull">
-                            <h:outputLabel value="Imagen" for="catImagen" />
-                            <p:fileUpload  fileUploadListener="#{duenoRestauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
-                                                           label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                           />
                             <p:outputLabel value="#{restauranteController.foto.fileName}"/>
+                            <h:panelGrid columns="2"  style="width: 100%; text-align: center;">
+                                <h:outputLabel value="Logo" for="catImagen" />
+                                <p:fileUpload  fileUploadListener="#{duenoRestauranteController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                               label="Cargar" auto="true"  
+                                               sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                               />
                             </h:panelGrid>
                         </h:form>
-                        
-                        
+
                         <h:form id="myForm">
                             <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="NIT:" for="resNit" />

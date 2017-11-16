@@ -50,35 +50,29 @@
                         <h:panelGroup id="messagePanel" layout="block">
                             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                         </h:panelGroup>
-                        
+                        <h:graphicImage height="200" value="../../resources/imagenes/plato/#{platoController.selected.plaImagen}"/>
                         
                         <h:form>
-                            <h:panelGrid columns="2"  class="tblCentfull">
-                            <h:outputLabel value="Imagen" for="catImagen" />
-                            <p:fileUpload  fileUploadListener="#{platoController.cargarFoto}" mode="advanced" dragDropSupport="false"
-                                                           label="Cargar" auto="true"  
-                                                           sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                           
-                                                           />
-                                <p:outputLabel value="#{platoController.foto.fileName}"/>
+                            <p:outputLabel value="#{categoriaController.foto.fileName}"/>
+                            <h:panelGrid columns="2" style="width: 100%; text-align: center;">
+                                <h:outputLabel class="tblCent" value="Imagen" for="fUpload" />
+                                <p:fileUpload  class="anchoImagenLabel "  id="fUpload" fileUploadListener="#{platoController.cargarFoto}" mode="advanced" dragDropSupport="false"
+                                               label="Cargar" auto="true"  
+                                               sizeLimit="1000000" invalidSizeMessage="Máximo 1 MegaByte" invalidFileMessage="Tipo de archivo no válido" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                             </h:panelGrid>
-                        </h:form>
-                        
-                        
-                        <h:form id="formEditPlato">    
+                        </h:form><h:form id="formEditPlato">    
                             <h:panelGrid columns="2" class="tblCentfull">
                                 <h:outputLabel value="Nombre" for="plaNombre" />
                                 <h:inputText  class="form-control" id="plaNombre" value="#{platoController.selected.plaNombre}" title="#{bundle.EditPlatoTitle_plaNombre}" />
-                                <h:outputLabel value="Estado" for="plaEstado" />
-
-                                <h:selectOneMenu  class="form-control" id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.CreatePlatoTitle_plaEstado}" >
-                                    <f:selectItems  value="#{platoController.estado}"/>
-                                </h:selectOneMenu>
 
 
                                 <h:outputLabel value="Categoría" for="tblcategoriacatId" />
                                 <h:selectOneMenu  class="form-control" id="tblcategoriacatId" value="#{platoController.selected.tblcategoriacatId}" title="#{bundle.CreatePlatoTitle_tblcategoriacatId}" >
                                     <f:selectItems  value="#{categoriaController.listCategorias}" var="categoria" itemLabel="#{categoria.catNombre}"/>
+                                </h:selectOneMenu>
+                                <h:outputLabel value="Estado" for="plaEstado" />
+                                <h:selectOneMenu  class="form-control" id="plaEstado" value="#{platoController.selected.plaEstado}" title="#{bundle.CreatePlatoTitle_plaEstado}" >
+                                    <f:selectItems  value="#{platoController.estado}"/>
                                 </h:selectOneMenu>
 
                             </h:panelGrid>

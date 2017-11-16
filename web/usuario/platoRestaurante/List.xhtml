@@ -54,7 +54,7 @@
                                 <h:outputText value="#{platoRestauranteController.pagination.pageFirstItem + 1}..#{platoRestauranteController.pagination.pageLastItem + 1}/#{platoRestauranteController.pagination.itemsCount}"/>&nbsp;
                                 <h:commandLink action="#{platoRestauranteController.previous}" value="Anterior" rendered="#{platoRestauranteController.pagination.hasPreviousPage}"/>&nbsp;
                                 <h:commandLink action="#{platoRestauranteController.next}" value="Siguiente" rendered="#{platoRestauranteController.pagination.hasNextPage}"/>&nbsp;
-                                <h:dataTable  class="tblCentfull" value="#{platoRestauranteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                <h:dataTable class="tblCentfull" value="#{platoRestauranteController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all">
                                     
                                     <h:column>
                                         <f:facet name="header">
@@ -65,15 +65,15 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Ingredientes"/>
+                                            <h:outputText value="Nombre"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.platIngredientes}"/>
+                                        <h:outputText value="#{item.platDescripcion}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Descripción"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.platDescripcion}"/>
+                                        <h:outputText value="#{item.platIngredientes}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
@@ -87,7 +87,7 @@
                                         </f:facet>
                                         <h:outputText value="#{item.platEstado}" />
                                     </h:column>
-                                    <h:column>
+                                    <p:column width="20">
                                         <f:facet name="header">
                                             <h:outputText value="Opciones"/>
                                         </f:facet>
@@ -95,7 +95,7 @@
                                         <h:outputText value=" "/>
                                         <h:commandButton class="btn btn-glotonDark" action="#{platoRestauranteController.destroy}" value="Eliminar"/>
                                         <div style="height: 8px;"></div>
-                                    </h:column>
+                                    </p:column>
                                 </h:dataTable>
                             </h:panelGroup>
                         </h:form>
