@@ -76,17 +76,22 @@
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>
-                            
+                            <p:commandButton value="Ver gráficas" type="button" onclick="PF('dlg2').show();" />
                         </h:form>
                     </p:column>
                     <p:column style="width: 20%">
                     </p:column>
                 </p:row>
             </p:panelGrid>
-            <div style="display: flex; justify-content: center">
-                <p:chart type="pie" model="#{calificacionController.pieModel1}" style="width:400px;height:300px; text-align: center" />
-            </div>
-            
+            <p:dialog header="Gráfica de torta" widgetVar="dlg2" modal="true" width="700" height="400">
+                <div style="display: flex; justify-content: center">
+                    <h:dataTable  class="tblCentfull" value="#{calificacionController.tortas}" var="item" border="0" cellpadding="2" cellspacing="0" rules="all" style="display: flex; justify-content: center">
+                        <h:column>
+                          <p:chart type="pie" model="#{item}" style="width:400px;height:300px; text-align: center" />
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </p:dialog> 
         </ui:define>
     </ui:composition>
 

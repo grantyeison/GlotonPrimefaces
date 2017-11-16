@@ -41,6 +41,7 @@ public class CalificacionController implements Serializable {
     private int selectedItemIndex;
     List<Calificacion> calificaciones=new ArrayList<Calificacion>();
     List<ResultadoCalificacion> r_calificaciones=new ArrayList<ResultadoCalificacion>();
+    List<PieChartModel> tortas=new ArrayList<PieChartModel>();
     private PieChartModel pieModel1 = new PieChartModel();
 
     public CalificacionController() {
@@ -304,7 +305,7 @@ public class CalificacionController implements Serializable {
     private void createPieModel1(Calificacion c) 
     {
         int i=0, cont_1=0, cont_2=0, cont_3=0, cont_4=0, cont_5=0;
-        
+        pieModel1=new PieChartModel();
         for(i=0; i<calificaciones.size(); i++)
         {
             if(c.getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre().equals(calificaciones.get(i).getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre()))//si los nombres de los platos son iguales
@@ -360,13 +361,24 @@ public class CalificacionController implements Serializable {
         pieModel1.setShowDataLabels(true);
     }
 
-    public PieChartModel getPieModel1() 
+    public PieChartModel getPieModel1(Calificacion c) 
     {
-        Calificacion c= r_calificaciones.get(0).getCalificacion();
         createPieModel1(c);
         return pieModel1;
     }
-    
+
+    public List<PieChartModel> getTortas() 
+    {
+        tortas=new ArrayList<PieChartModel>();
+        for(int i=0; i<r_calificaciones.size(); i++)
+        {
+            Calificacion c=new Calificacion();
+            c=r_calificaciones.get(i).getCalificacion();
+            tortas.add(getPieModel1(c));
+        }
+        
+        return tortas;
+    }
     @FacesConverter(forClass = Calificacion.class)
     public static class CalificacionControllerConverter implements Converter {
 
