@@ -57,16 +57,22 @@
                                 <h:dataTable  class="tblCentfull" value="#{calificacionController.r_calificaciones}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">    
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Puntuación"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.promedioCalificacion}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
                                             <h:outputText value="Plato"/>
                                         </f:facet>
                                             
                                         <h:outputText value="#{calificacionController.obtenerNomPlatCal(item.calificacion.tblplatorestauranteplatId)}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Total de calificaciones"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.totalCalificaciones}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Puntuación"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.promedioCalificacion}"/>
                                     </h:column>
                                 </h:dataTable>
                             </h:panelGroup>
@@ -77,6 +83,10 @@
                     </p:column>
                 </p:row>
             </p:panelGrid>
+            <div style="display: flex; justify-content: center">
+                <p:chart type="pie" model="#{calificacionController.pieModel1}" style="width:400px;height:300px; text-align: center" />
+            </div>
+            
         </ui:define>
     </ui:composition>
 

@@ -8,6 +8,7 @@ public class ResultadoCalificacion
 {
     Calificacion calificacion;
     float promedioCalificacion;
+    int totalCalificaciones;
 
     public ResultadoCalificacion() 
     {
@@ -32,4 +33,15 @@ public class ResultadoCalificacion
     {
         this.promedioCalificacion = promedioCalificacion;
     }
+
+    public int getTotalCalificaciones() 
+    {
+        return totalCalificaciones;
+    }
+
+    public void setTotalCalificaciones(int totalCalificaciones) 
+    {
+        this.totalCalificaciones = totalCalificaciones;
+    }
+    
 }
