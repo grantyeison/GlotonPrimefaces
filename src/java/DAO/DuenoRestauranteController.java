@@ -52,6 +52,18 @@ public class DuenoRestauranteController implements Serializable
     private String rutaFoto;
     private String rutaFotoAbsoluta;
     
+    boolean imagen;
+
+    public boolean isImagen() {
+        if (current.getResLogo()!= null && !current.getResLogo().equals(""))
+            imagen = true;
+        else
+            imagen = false;
+        return imagen;
+    }
+    
+    
+    
     public String getRutaFoto() {
         return rutaFoto;
     }
@@ -466,6 +478,6 @@ public class DuenoRestauranteController implements Serializable
         RequestContext requestContext = RequestContext.getCurrentInstance(); 
         this.foto=event.getFile();
         requestContext.update("formularioCategoria");        
-        
+        imagen = true;
     }
 }
