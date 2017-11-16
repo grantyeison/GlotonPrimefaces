@@ -5,8 +5,12 @@ import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.CalificacionFacade;
 import Modelo.PlatoRestaurante;
+import Modelo.Usuario;
+import Modelo.ResultadoCalificacion;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -18,6 +22,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
+import org.primefaces.model.chart.PieChartModel;
 
 @Named("calificacionController")
 @SessionScoped
@@ -27,8 +34,14 @@ public class CalificacionController implements Serializable {
     private DataModel items = null;
     @EJB
     private Bean.CalificacionFacade ejbFacade;
+    @EJB
+    private Bean.UsuarioFacade usuarioEjb;
+    
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    List<Calificacion> calificaciones=new ArrayList<Calificacion>();
+    List<ResultadoCalificacion> r_calificaciones=new ArrayList<ResultadoCalificacion>();
+    private PieChartModel pieModel1 = new PieChartModel();
 
     public CalificacionController() {
     }
@@ -51,7 +64,8 @@ public class CalificacionController implements Serializable {
 
                 @Override
                 public int getItemsCount() {
-                    return getFacade().count();
+                    //return getFacade().count();
+                    return getItems2().getRowCount();
                 }
 
                 @Override
@@ -154,13 +168,108 @@ public class CalificacionController implements Serializable {
         }
     }
 
-    public DataModel getItems() {
-        if (items == null) {
+    public DataModel getItems() 
+    {
+        if (items == null) 
+        {
+            items = getPagination().createPageDataModel();
+        }
+        else
+        {
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+            
+            if (req.getUserPrincipal() != null) 
+            {
+                String username = req.getUserPrincipal().getName();
+                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);//obtengo el usuario completo
+                items.setWrappedData(ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId()));//obtengo la calificacion del plato del restaurante del usuario loguiniao y lo meto en items
+                calificaciones=ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId());
+                r_calificaciones=prepararCalificaciones(calificaciones);
+            }
+        }
+        return items;
+    }
+    public DataModel getItems2() 
+    {
+        if (items == null) 
+        {
             items = getPagination().createPageDataModel();
         }
         return items;
     }
+    public List<ResultadoCalificacion> prepararCalificaciones(List<Calificacion> lc)
+    {
+        List<ResultadoCalificacion> resultado=new ArrayList<>();
+        int contadorPlato=0;
+        float promedioCalificacion=0, sumatoriaCalificacion=0;
+        ResultadoCalificacion c=new ResultadoCalificacion();
 
+        for(int i=0; i<lc.size(); i++)
+        {
+            if(contadorPlato==0)
+            {
+                if(promedioCalificacion!=0)
+                {
+                    i--;
+                }
+                c.setCalificacion(lc.get(i));
+                sumatoriaCalificacion+=c.getCalificacion().getCalPuntuacion();
+                contadorPlato++;
+            }
+            else
+            {
+                if(c.getCalificacion().getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre().equals(lc.get(i).getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre()))//si es calificacion del mismo plato
+                {
+                    sumatoriaCalificacion+=lc.get(i).getCalPuntuacion();
+                    contadorPlato++;
+                    if(i+1==lc.size())
+                    {
+                        promedioCalificacion=sumatoriaCalificacion/contadorPlato;
+                        c=new ResultadoCalificacion();
+                        c.setCalificacion(lc.get(i));
+                        c.setPromedioCalificacion(promedioCalificacion);
+                        c.setTotalCalificaciones(contadorPlato);
+                        resultado.add(c);
+                    }
+                }
+                else
+                {
+                    promedioCalificacion=sumatoriaCalificacion/contadorPlato;
+                    ResultadoCalificacion c2=new ResultadoCalificacion();
+                    c2.setCalificacion(lc.get(i-1));
+                    c2.setPromedioCalificacion(promedioCalificacion);
+                    c2.setTotalCalificaciones(contadorPlato);
+                    resultado.add(c2);
+                    contadorPlato=0;
+                    sumatoriaCalificacion=0;
+                }
+            }
+        }
+        return resultado;
+    }
+    public List<Calificacion> getCalificaciones()
+    {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+            
+            if (req.getUserPrincipal() != null) 
+            {
+                String username = req.getUserPrincipal().getName();
+                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);//obtengo el usuario completo
+                calificaciones=ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId());
+            }
+        //calificaciones=prepararCalificaciones(calificaciones);
+        return calificaciones;
+    }
+
+    public List<ResultadoCalificacion> getR_calificaciones() 
+    {
+        return r_calificaciones;
+    }
+    
     private void recreateModel() {
         items = null;
     }
@@ -192,7 +301,72 @@ public class CalificacionController implements Serializable {
     public Calificacion getCalificacion(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    private void createPieModel1(Calificacion c) 
+    {
+        int i=0, cont_1=0, cont_2=0, cont_3=0, cont_4=0, cont_5=0;
+        
+        for(i=0; i<calificaciones.size(); i++)
+        {
+            if(c.getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre().equals(calificaciones.get(i).getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre()))//si los nombres de los platos son iguales
+            {
+                switch(calificaciones.get(i).getCalPuntuacion())
+                {
+                    case 1:
+                        cont_1++;
+                        break;
 
+                    case 2:
+                        cont_2++;
+                        break;
+
+                    case 3:
+                        cont_3++;
+                        break;
+
+                    case 4:
+                        cont_4++;
+                        break;
+
+                    case 5:
+                        cont_5++;
+                        break;
+                }
+            }
+            
+        }
+        if(cont_1!=0)
+        {
+            pieModel1.set("1 estrella", cont_1);
+        }
+        if(cont_2!=0)
+        {
+            pieModel1.set("2 estrellas", cont_2);
+        }
+        if(cont_3!=0)
+        {
+            pieModel1.set("3 estrellas", cont_3);
+        }
+        if(cont_4!=0)
+        {
+            pieModel1.set("4 estrellas", cont_4);
+        }
+        if(cont_5!=0)
+        {
+            pieModel1.set("5 estrellas", cont_5);
+        }
+         
+        pieModel1.setTitle(c.getTblplatorestauranteplatId().getTblplatoplaId().getPlaNombre());
+        pieModel1.setLegendPosition("w");
+        pieModel1.setShowDataLabels(true);
+    }
+
+    public PieChartModel getPieModel1() 
+    {
+        Calificacion c= r_calificaciones.get(0).getCalificacion();
+        createPieModel1(c);
+        return pieModel1;
+    }
+    
     @FacesConverter(forClass = Calificacion.class)
     public static class CalificacionControllerConverter implements Converter {
 
