@@ -16,6 +16,7 @@ import Modelo.Plato;
 import Modelo.PlatoRestaurante;
 import Modelo.Restaurante;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,12 +69,13 @@ public class webservice {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJson() {
-        //TODO return proper representation object
         JSONObject jSONObject = new JSONObject();
         JSONArray jSONArray;
         List<Restaurante> listaRestaurante= ejRestauranteFacade.findAll();
-        List<Plato> listaPlato = ejPlatoFacade.findAll();
-        List<Categoria> listaCateg = ejCategFacade.findAll();
+        List<Plato> listaPlato = new ArrayList<>();
+        //List<Plato> listaPlato = ejPlatoFacade.findAll();
+        List<Categoria> listaCateg = new ArrayList<>();
+        //List<Categoria> listaCateg = ejCategFacade.findAll();
         List<PlatoRestaurante> listaPlatoRest = ejPlatoRestFacade.findAll();
         List<Calificacion> listaCalificaciones = ejCalificacionFacade.findAll();
         
@@ -98,41 +100,11 @@ public class webservice {
             jSONObject.put("restaurante", jSONArray);
             
             
-            //llenar lista JSON con Platos
-            jSONArray = new JSONArray();
-            for(Plato r : listaPlato)
-            {
-                JSONObject j = new JSONObject();
-                if (r.getPlaEstado().equals("Activo"))
-                {
-                    j.put("nombre",r.getPlaNombre());
-                    j.put("imagen",r.getPlaImagen());
-                    j.put("categoria",r.getTblcategoriacatId().getCatNombre());
-                    jSONArray.put(j);
-                }
-            }
-            jSONObject.put("plato", jSONArray);
-            
-            
-            //llenar lista JSON con Categorías
-            jSONArray = new JSONArray();
-            for(Categoria r : listaCateg)
-            {
-                JSONObject j = new JSONObject();
-                if (r.getCatEstado().equals("Activo"))
-                {
-                    j.put("nombre",r.getCatNombre());
-                    j.put("imagen",r.getCatImagen());
-                    jSONArray.put(j);
-                }
-            }
-            jSONObject.put("categoria", jSONArray);
-            
-            
             //llenar lista JSON con PlatoRestaurante
             jSONArray = new JSONArray();
             for(PlatoRestaurante r : listaPlatoRest)
             {
+                listaPlato.add(r.getTblplatoplaId());
                 JSONObject j = new JSONObject();
                 if (r.getPlatEstado().equals("Activo"))
                 {
@@ -147,34 +119,49 @@ public class webservice {
             }
             jSONObject.put("caracteristicasPlato", jSONArray);
             
+            //llenar lista JSON con Platos
+            HashSet<Plato> hashSet = new HashSet<Plato>(listaPlato);
+            listaPlato.clear();
+            listaPlato.addAll(hashSet);
+            
+            jSONArray = new JSONArray();
+            for(Plato r : listaPlato)
+            {
+                listaCateg.add(r.getTblcategoriacatId());
+                JSONObject j = new JSONObject();
+                if (r.getPlaEstado().equals("Activo"))
+                {
+                    j.put("nombre",r.getPlaNombre());
+                    j.put("imagen",r.getPlaImagen());
+                    j.put("categoria",r.getTblcategoriacatId().getCatNombre());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("plato", jSONArray);
+            
+            //llenar lista JSON con Categorías
+            HashSet<Categoria> hashSetCat = new HashSet<Categoria>(listaCateg);
+            listaCateg.clear();
+            listaCateg.addAll(hashSetCat);
+            
+            jSONArray = new JSONArray();
+            for(Categoria r : listaCateg)
+            {
+                JSONObject j = new JSONObject();
+                if (r.getCatEstado().equals("Activo"))
+                {
+                    j.put("nombre",r.getCatNombre());
+                    j.put("imagen",r.getCatImagen());
+                    jSONArray.put(j);
+                }
+            }
+            jSONObject.put("categoria", jSONArray);
+            
+            
             //llenar lista JSON con calificaciones
             jSONArray = new JSONArray();
             //hacer una por cada plato y devolver los mejor calificados solamente...
             List<Calificacion> calificacionesEnviar = new ArrayList<>();
- /*           
-            for (PlatoRestaurante plaRes : listaPlatoRest)
-            {
-                int suma = 0;
-                int total = 0;
-                for (Calificacion cali: listaCalificaciones)
-                {
-                    if (cali.getTblplatorestauranteplatId().getPlatId() == plaRes.getPlatId())
-                    {
-                        suma += cali.getCalPuntuacion();
-                        total ++;
-                    }
-                }
-                if (total > 0)
-                {
-                    int promedio = suma / total;
-                    JSONObject j = new JSONObject();
-                    j.put("caracteristica",plaRes.getPlatId());
-                    j.put("puntuacion",promedio);
-                    jSONArray.put(j);
-                }
-            }
- */           
-            
             for (PlatoRestaurante plar: listaPlatoRest)
             {
                 int suma = 0;
@@ -199,6 +186,31 @@ public class webservice {
                     }
                 }
             }
+            
+ /*           
+            for (PlatoRestaurante plaRes : listaPlatoRest)
+            {
+                int suma = 0;
+                int total = 0;
+                for (Calificacion cali: listaCalificaciones)
+                {
+                    if (cali.getTblplatorestauranteplatId().getPlatId() == plaRes.getPlatId())
+                    {
+                        suma += cali.getCalPuntuacion();
+                        total ++;
+                    }
+                }
+                if (total > 0)
+                {
+                    int promedio = suma / total;
+                    JSONObject j = new JSONObject();
+                    j.put("caracteristica",plaRes.getPlatId());
+                    j.put("puntuacion",promedio);
+                    jSONArray.put(j);
+                }
+            }
+ */           
+            
             
             jSONObject.put("recomendados", jSONArray);
             
