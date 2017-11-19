@@ -16,8 +16,10 @@ import Modelo.Plato;
 import Modelo.PlatoRestaurante;
 import Modelo.Restaurante;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -72,12 +74,11 @@ public class webservice {
         JSONObject jSONObject = new JSONObject();
         JSONArray jSONArray;
         List<Restaurante> listaRestaurante= ejRestauranteFacade.findAll();
-        List<Plato> listaPlato = new ArrayList<>();
-        //List<Plato> listaPlato = ejPlatoFacade.findAll();
-        List<Categoria> listaCateg = new ArrayList<>();
-        //List<Categoria> listaCateg = ejCategFacade.findAll();
         List<PlatoRestaurante> listaPlatoRest = ejPlatoRestFacade.findAll();
         List<Calificacion> listaCalificaciones = ejCalificacionFacade.findAll();
+        
+        HashMap<Integer,Plato> mapPlato = new HashMap<>();
+        HashMap<Integer,Categoria> mapCat = new HashMap<>();
         
         try {
             //llenar lista JSON con restaurantes
@@ -104,7 +105,7 @@ public class webservice {
             jSONArray = new JSONArray();
             for(PlatoRestaurante r : listaPlatoRest)
             {
-                listaPlato.add(r.getTblplatoplaId());
+                mapPlato.put(r.getTblplatoplaId().getPlaId(), r.getTblplatoplaId());
                 JSONObject j = new JSONObject();
                 if (r.getPlatEstado().equals("Activo"))
                 {
@@ -119,15 +120,11 @@ public class webservice {
             }
             jSONObject.put("caracteristicasPlato", jSONArray);
             
-            //llenar lista JSON con Platos
-            HashSet<Plato> hashSet = new HashSet<Plato>(listaPlato);
-            listaPlato.clear();
-            listaPlato.addAll(hashSet);
-            
             jSONArray = new JSONArray();
-            for(Plato r : listaPlato)
-            {
-                listaCateg.add(r.getTblcategoriacatId());
+            
+            for (Map.Entry<Integer, Plato> entry : mapPlato.entrySet()) {
+                Plato r = entry.getValue();
+                mapCat.put(r.getTblcategoriacatId().getCatId(), r.getTblcategoriacatId());
                 JSONObject j = new JSONObject();
                 if (r.getPlaEstado().equals("Activo"))
                 {
@@ -139,14 +136,10 @@ public class webservice {
             }
             jSONObject.put("plato", jSONArray);
             
-            //llenar lista JSON con Categorías
-            HashSet<Categoria> hashSetCat = new HashSet<Categoria>(listaCateg);
-            listaCateg.clear();
-            listaCateg.addAll(hashSetCat);
             
             jSONArray = new JSONArray();
-            for(Categoria r : listaCateg)
-            {
+            for (Map.Entry<Integer, Categoria> entry : mapCat.entrySet()) {
+                Categoria r = entry.getValue();
                 JSONObject j = new JSONObject();
                 if (r.getCatEstado().equals("Activo"))
                 {
@@ -161,7 +154,7 @@ public class webservice {
             //llenar lista JSON con calificaciones
             jSONArray = new JSONArray();
             //hacer una por cada plato y devolver los mejor calificados solamente...
-            List<Calificacion> calificacionesEnviar = new ArrayList<>();
+            //List<Calificacion> calificacionesEnviar = new ArrayList<>();
             for (PlatoRestaurante plar: listaPlatoRest)
             {
                 int suma = 0;
