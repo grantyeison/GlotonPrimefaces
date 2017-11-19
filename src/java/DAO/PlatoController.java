@@ -210,13 +210,7 @@ public class PlatoController implements Serializable {
             current.setPlaEstado(txtProperty);
             if(foto!=null)
             {
-                if(!current.getPlaImagen().equals(""))
-                {
-                    this.GuardarFoto(current.getPlaImagen(), this.foto.getInputstream());
-                    Thread.sleep(2000);
-                    this.foto=null;
-                }
-                else
+                if(current.getPlaImagen().equals("") || current.getPlaImagen().equals("Imagen Registrada") )
                 {
                     int i = this.foto.getFileName().lastIndexOf('.');            
                     String extension = this.foto.getFileName().substring(i+1);
@@ -230,6 +224,46 @@ public class PlatoController implements Serializable {
 
                     //current.setPlaImagen(nombre);
                     current.setPlaImagen(nombre);
+                }
+                else
+                {
+                    String oldname = current.getPlaImagen();
+                    File file = new File(rutaFotoAbsoluta + oldname);
+                    if(file.exists())
+                    {
+                        if(file.delete())
+                        {
+                            int i = this.foto.getFileName().lastIndexOf('.');            
+                            String extension = this.foto.getFileName().substring(i+1);
+
+                        //String nombre = current.getPlaId()+"."+extension;
+                            String nombre = current.getPlaId()+"."+extension;
+                            System.out.println("el nombre del nuevo archivo es: "+nombre);
+                            this.GuardarFoto(nombre, this.foto.getInputstream());
+                            Thread.sleep(2000);
+                            this.foto=null;
+                            current.setPlaImagen(nombre);
+                        }
+                        
+
+                    //current.setPlaImagen(nombre);
+                        
+                    }
+                    else
+                    {
+                        int i = this.foto.getFileName().lastIndexOf('.');            
+                        String extension = this.foto.getFileName().substring(i+1);
+
+                        //String nombre = current.getPlaId()+"."+extension;
+                        String nombre = current.getPlaId()+"."+extension;
+                        System.out.println("el nombre del nuevo archivo es: "+nombre);
+                        this.GuardarFoto(nombre, this.foto.getInputstream());
+                        Thread.sleep(2000);
+                        this.foto=null;
+
+                        //current.setPlaImagen(nombre);
+                        current.setPlaImagen(nombre);
+                    }
                 }
             }
             else
