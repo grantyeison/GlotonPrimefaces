@@ -152,15 +152,15 @@ public class RestauranteController implements Serializable {
             RequestContext requestContext = RequestContext.getCurrentInstance();
             FacesContext fc = FacesContext.getCurrentInstance();
             HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
-            
+            /*
             if (req.getUserPrincipal() != null) {
                 
-                String username = req.getUserPrincipal().getName();
+                String username =  req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);
                 current.setTblUsuarioDueId(usuario);
             }
             //getFacade().create(current);
-            
+            */
             
             ///////////////////////////////////////
             if(foto!=null)
