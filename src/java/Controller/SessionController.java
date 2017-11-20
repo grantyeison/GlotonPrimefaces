@@ -6,8 +6,11 @@
 package Controller;
 
 import Bean.UsuarioFacade;
+import Bean.UsuarioGrupoFacade;
+import Modelo.UsuarioGrupo;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -30,6 +33,8 @@ public class SessionController implements Serializable
     private String contrasena;
     @EJB
     private UsuarioFacade usuarioEjb;
+    @EJB
+    private UsuarioGrupoFacade usuarioGrupoEJB;
     
     
     
@@ -63,7 +68,9 @@ public class SessionController implements Serializable
                 //haySesion = true;
                 String username = req.getUserPrincipal().getName();
                 
-                if(usuarioEjb.findebyUserName(username).get(0).getUsuarioGrupoList().get(0).getUsugrupGrupId().getGrupId().equals("admin"))
+                List<UsuarioGrupo> listUsuarioGrupo = usuarioGrupoEJB.findByUsuario(username);
+                
+                if(listUsuarioGrupo.get(0).getUsugrupGrupId().getGrupId().equals("admin"))
                 {
                     FacesContext.getCurrentInstance().getExternalContext().redirect("admin/categoria/List.xhtml");
 

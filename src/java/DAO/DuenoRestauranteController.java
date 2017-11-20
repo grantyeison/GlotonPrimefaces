@@ -43,6 +43,8 @@ public class DuenoRestauranteController implements Serializable
     @EJB
     private Bean.RestauranteFacade ejbFacade;
     @EJB
+    private Bean.RestauranteFacade ejbRestauranteFacade;
+    @EJB
     private Bean.UsuarioFacade usuarioEjb;
     
     private PaginationHelper pagination;
@@ -122,7 +124,8 @@ public class DuenoRestauranteController implements Serializable
         {        
                 String username = req.getUserPrincipal().getName();
                 usuario = usuarioEjb.findebyUserName(username).get(0);
-                current=usuario.getRestauranteList().get(0);
+                List<Restaurante> listRestaurante = ejbRestauranteFacade.findByUserName(usuario);
+                current = listRestaurante.get(0);
         }
         return current;
     }

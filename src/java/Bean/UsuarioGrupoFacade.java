@@ -39,6 +39,13 @@ public class UsuarioGrupoFacade extends AbstractFacade<UsuarioGrupo> {
         return query.getResultList();
     }
     
+    public List<UsuarioGrupo> findByUsuario(String usugrupDueUsuario)
+    {
+        Query query = getEntityManager().createNamedQuery("UsuarioGrupo.findRolByUserName");
+        query.setParameter("usugrupDueUsuario", usugrupDueUsuario);
+        return query.getResultList();
+    }
+    
     public String getRolUsuario(String usugrupDueUsuario)
     {
         List<UsuarioGrupo> listaUsuarioGrupo;

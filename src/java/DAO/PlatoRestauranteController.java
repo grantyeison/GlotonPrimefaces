@@ -248,6 +248,31 @@ public class PlatoRestauranteController implements Serializable
         }
         return items;
     }
+    
+    public boolean getHasItems()
+    {
+        if (items == null) //si no lo está, simplemente lo retorna y ya
+        {
+            items = getPagination().createPageDataModel();
+        }
+        else
+        {
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
+            
+            if (req.getUserPrincipal() != null) 
+            {
+                String username = req.getUserPrincipal().getName();
+                Usuario usuario = usuarioEjb.findebyUserName(username).get(0);//obtengo el usuario completo
+                List<Restaurante> listRestaurante = ejbRestauranteFacade.findByUserName(usuario);
+                Restaurante restaurante = listRestaurante.get(0);
+                items.setWrappedData(ejbFacade.findByRestauranteId(restaurante.getResId()));//obtengo el restaurante del usuario loguiniao y lo meto en items
+            }
+        }
+        return items.getRowCount() > 0;
+    }
+    
 public DataModel getItems2()//el método como se genera por defecto
     {
         if (items == null) //si no lo está, simplemente lo retorna y ya

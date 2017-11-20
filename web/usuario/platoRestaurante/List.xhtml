@@ -49,8 +49,8 @@
                             <h:panelGroup id="messagePanel" layout="block">
                                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                             </h:panelGroup>
-                            <h:outputText escape="false" value="#{bundle.ListPlatoRestauranteEmpty}" rendered="#{platoRestauranteController.items.rowCount == 0}"/>
-                            <h:panelGroup rendered="#{platoRestauranteController.items.rowCount > 0}">
+                            <h:outputText rendered="#{!platoRestauranteController.hasItems}" escape="false" value="#{bundle.ListPlatoRestauranteEmpty}" />
+                            <h:panelGroup rendered="#{platoRestauranteController.hasItems}">
                                 <h:outputText value="#{platoRestauranteController.pagination.pageFirstItem + 1}..#{platoRestauranteController.pagination.pageLastItem + 1}/#{platoRestauranteController.pagination.itemsCount}"/>&nbsp;
                                 <h:commandLink action="#{platoRestauranteController.previous}" value="Anterior" rendered="#{platoRestauranteController.pagination.hasPreviousPage}"/>&nbsp;
                                 <h:commandLink action="#{platoRestauranteController.next}" value="Siguiente" rendered="#{platoRestauranteController.pagination.hasNextPage}"/>&nbsp;

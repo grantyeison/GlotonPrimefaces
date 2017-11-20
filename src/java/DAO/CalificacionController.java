@@ -5,6 +5,7 @@ import DAO.util.JsfUtil;
 import DAO.util.PaginationHelper;
 import Bean.CalificacionFacade;
 import Modelo.PlatoRestaurante;
+import Modelo.Restaurante;
 import Modelo.Usuario;
 import Modelo.ResultadoCalificacion;
 
@@ -36,6 +37,8 @@ public class CalificacionController implements Serializable {
     private Bean.CalificacionFacade ejbFacade;
     @EJB
     private Bean.UsuarioFacade usuarioEjb;
+    @EJB
+    private Bean.RestauranteFacade ejbRestauranteFacade;
     
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -185,8 +188,10 @@ public class CalificacionController implements Serializable {
             {
                 String username = req.getUserPrincipal().getName();
                 Usuario usuario = usuarioEjb.findebyUserName(username).get(0);//obtengo el usuario completo
-                items.setWrappedData(ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId()));//obtengo la calificacion del plato del restaurante del usuario loguiniao y lo meto en items
-                calificaciones=ejbFacade.findByRestauranteId(usuario.getRestauranteList().get(0).getResId());
+                List<Restaurante> listRestaurante = ejbRestauranteFacade.findByUserName(usuario);
+                Restaurante restaurante = listRestaurante.get(0);
+                items.setWrappedData(ejbFacade.findByRestauranteId(restaurante.getResId()));//obtengo la calificacion del plato del restaurante del usuario loguiniao y lo meto en items
+                calificaciones=ejbFacade.findByRestauranteId(restaurante.getResId());
                 r_calificaciones=prepararCalificaciones(calificaciones);
             }
         }
